@@ -68,8 +68,8 @@ jobs:
               --base main \
               --head $BRANCH)
             
-            # Auto-merge PR
-            gh pr merge $PR_URL --auto --squash
+            # Immediate Merge (Open and Close as requested)
+            gh pr merge $PR_URL --squash --delete-branch
           else
             echo "No structural changes detected in this cycle."
           fi
