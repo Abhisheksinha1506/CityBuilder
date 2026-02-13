@@ -1,45 +1,147 @@
 {
   "buildings": [
     {
-      "x": -4.0,
-      "z": -4.0,
-      "width": 1.2,
-      "depth": 1.2,
-      "height": 12.46,
-      "color": "#888888",
+      "x": -6.0,
+      "z": -6.0,
+      "width": 3,
+      "height": 22.941176470588232,
+      "depth": 3,
+      "color": "#ff4444",
       "name": "generate_city",
-      "type": "function",
-      "file": "evolve.py",
-      "complexity": 9
+      "type": "Mainframe Nucleus",
+      "complexity": 13,
+      "file": "../CityBuilder/evolve.py"
     },
     {
       "x": 0.0,
-      "z": -4.0,
-      "width": 1.2,
-      "depth": 1.2,
-      "height": 4.15,
+      "z": -6.0,
+      "width": 3,
+      "height": 5.294117647058823,
+      "depth": 3,
       "color": "#888888",
       "name": "run_radon",
-      "type": "function",
-      "file": "evolve.py",
-      "complexity": 3
+      "type": "Data Unit",
+      "complexity": 3,
+      "file": "../CityBuilder/evolve.py"
     },
     {
-      "x": -4.0,
+      "x": -6.0,
       "z": 0.0,
-      "width": 1.2,
-      "depth": 1.2,
-      "height": 1.38,
+      "width": 3,
+      "height": 2.5,
+      "depth": 3,
       "color": "#888888",
       "name": "main",
-      "type": "function",
-      "file": "evolve.py",
-      "complexity": 1
+      "type": "Data Unit",
+      "complexity": 1,
+      "file": "../CityBuilder/evolve.py"
     }
   ],
-  "metrics": {
-    "avg_complexity": 4.33,
-    "total_functions": 3,
-    "generation_time": "2026-02-13T14:02:05.807713"
+  "gardens": [],
+  "roads": [
+    {
+      "x": -90,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": false
+    },
+    {
+      "x": 0,
+      "z": -90,
+      "w": 2,
+      "l": 200,
+      "vertical": true
+    },
+    {
+      "x": -60,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": false
+    },
+    {
+      "x": 0,
+      "z": -60,
+      "w": 2,
+      "l": 200,
+      "vertical": true
+    },
+    {
+      "x": -30,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": false
+    },
+    {
+      "x": 0,
+      "z": -30,
+      "w": 2,
+      "l": 200,
+      "vertical": true
+    },
+    {
+      "x": 0,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": false
+    },
+    {
+      "x": 0,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": true
+    },
+    {
+      "x": 30,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": false
+    },
+    {
+      "x": 0,
+      "z": 30,
+      "w": 2,
+      "l": 200,
+      "vertical": true
+    },
+    {
+      "x": 60,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": false
+    },
+    {
+      "x": 0,
+      "z": 60,
+      "w": 2,
+      "l": 200,
+      "vertical": true
+    },
+    {
+      "x": 90,
+      "z": 0,
+      "w": 2,
+      "l": 200,
+      "vertical": false
+    },
+    {
+      "x": 0,
+      "z": 90,
+      "w": 2,
+      "l": 200,
+      "vertical": true
+    }
+  ],
+  "stats": {
+    "urban_density": "3 structures",
+    "mainframe_health": "Stable",
+    "system_load": "56% Capacity",
+    "last_evolution": "2026-02-13 14:17"
   }
 }
