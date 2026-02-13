@@ -22,29 +22,34 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(10, 10, 20, 0.85);
+            background: rgba(5, 5, 20, 0.9);
             padding: 20px;
-            border-left: 4px solid #00ffcc;
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+            border-left: 2px solid #00ffcc;
+            border-top: 2px solid #00ffcc;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
             pointer-events: none;
             z-index: 100;
-            min-width: 250px;
-            backdrop-filter: blur(5px);
+            min-width: 280px;
+            backdrop-filter: blur(10px);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
         }
 
         .title {
             font-weight: 900;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
         }
 
         .metric {
-            margin: 8px 0;
-            font-size: 0.85rem;
+            margin: 10px 0;
+            font-size: 0.75rem;
             display: flex;
             justify-content: space-between;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .value {
@@ -53,11 +58,33 @@
         }
 
         #building-info {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(0, 255, 204, 0.2);
-            font-size: 0.8rem;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px dashed rgba(0, 255, 204, 0.3);
+            font-size: 0.75rem;
             color: #fff;
+            min-height: 80px;
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 204, 0.2);
+            top: 0;
+            left: 0;
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0;
+            }
+
+            100% {
+                top: 100%;
+            }
         }
 
         #status-bar {
@@ -65,8 +92,10 @@
             bottom: 20px;
             right: 20px;
             font-size: 0.7rem;
-            opacity: 0.6;
+            opacity: 0.8;
             text-align: right;
+            color: #00ffcc;
+            font-family: 'Courier New', Courier, monospace;
         }
     </style>
     <script type="importmap">
@@ -81,10 +110,11 @@
 
 <body>
     <div id="overlay">
+        <div class="scan-line"></div>
         <div class="title">Metropolis_Mainframe</div>
         <div class="metric">URBAN_DENSITY: <span id="urban-density" class="value">0 structures</span></div>
-        <div class="metric">MAINFRAME_HEALTH: <span id="mainframe-health" class="value">STABLE</span></div>
-        <div class="metric">SYSTEM_LOAD: <span id="system-load" class="value">0%</span></div>
+        <div class="metric">SYSTEM_HEALTH: <span id="mainframe-health" class="value">STABLE</span></div>
+        <div class="metric">LOAD_INDEX: <span id="system-load" class="value">0%</span></div>
 
         <div id="building-info">
             SYSTEM_IDLE: SELECT_NODE_TO_INSPECT
@@ -140,8 +170,8 @@
             scene.background = new THREE.Color(0x020205);
             scene.fog = new THREE.FogExp2(0x020205, 0.005);
 
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(80, 60, 80);
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.set(120, 80, 120);
 
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -152,7 +182,7 @@
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.autoRotate = true;
-            controls.autoRotateSpeed = 0.2;
+            controls.autoRotateSpeed = 0.15;
 
             // Lighting System
             ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
@@ -164,8 +194,12 @@
             sunLight = new THREE.DirectionalLight(0xffffff, 4.0);
             sunLight.position.set(50, 100, 50);
             sunLight.castShadow = true;
-            sunLight.shadow.mapSize.width = 2048;
-            sunLight.shadow.mapSize.height = 2048;
+            sunLight.shadow.mapSize.width = 4096;
+            sunLight.shadow.mapSize.height = 4096;
+            sunLight.shadow.camera.left = -500;
+            sunLight.shadow.camera.right = 500;
+            sunLight.shadow.camera.top = 500;
+            sunLight.shadow.camera.bottom = -500;
             scene.add(sunLight);
 
             moonLight = new THREE.DirectionalLight(0x4444ff, 1.0);
@@ -174,10 +208,10 @@
 
             // Ground
             const ground = new THREE.Mesh(
-                new THREE.PlaneGeometry(2000, 2000),
+                new THREE.PlaneGeometry(5000, 5000),
                 new THREE.MeshStandardMaterial({
-                    color: 0x111111,
-                    roughness: 0.4,
+                    color: 0x0a0a0f,
+                    roughness: 0.6,
                     metalness: 0.1
                 })
             );
@@ -194,18 +228,18 @@
         }
 
         function updateDayNight() {
-            time += 0.0015; // Speed of cycle
+            time += 0.001; // Slower, more cinematic cycle
             const sunY = Math.sin(time);
             const sunX = Math.cos(time);
 
-            sunLight.position.set(sunX * 200, sunY * 200, 100);
-            moonLight.position.set(-sunX * 200, -sunY * 200, -100);
+            sunLight.position.set(sunX * 300, sunY * 300, 150);
+            moonLight.position.set(-sunX * 300, -sunY * 300, -150);
 
             const isDay = sunY > 0;
             const intensity = Math.max(0, sunY);
 
             // Background & Fog Color Transition
-            const dayColor = new THREE.Color(0x87ceeb);
+            const dayColor = new THREE.Color(0x0a1a2a);
             const nightColor = new THREE.Color(0x020205);
             const activeColor = nightColor.clone().lerp(dayColor, intensity);
 
@@ -215,18 +249,18 @@
             // Intensity Management
             sunLight.intensity = intensity * 4.0;
             moonLight.intensity = Math.max(0, -sunY) * 1.5;
-            ambientLight.intensity = 0.3 + intensity * 0.7; // Brighter during day
+            ambientLight.intensity = 0.2 + intensity * 0.5;
 
             // HUD Update
             const timeSpan = document.getElementById('time-display');
             if (sunY > 0.5) timeSpan.textContent = "NOON";
-            else if (sunY > 0) timeSpan.textContent = "DAWN / DUSK";
-            else timeSpan.textContent = "NIGHT";
+            else if (sunY > 0) timeSpan.textContent = "DAWN_TRANSIT";
+            else timeSpan.textContent = "NIGHT_CYCLE";
         }
 
         async function loadCityData() {
             try {
-                const response = await fetch(CITY_DATA_URL);
+                const response = await fetch(CITY_DATA_URL + '?t=' + Date.now());
                 const data = await response.json();
 
                 renderInfrastructure(data.roads, data.gardens);
@@ -247,65 +281,147 @@
             gardens.forEach(g => {
                 const gardenGeom = new THREE.PlaneGeometry(g.size, g.size);
                 const gardenMat = new THREE.MeshStandardMaterial({
-                    color: 0x2e7d32,
-                    roughness: 0.8
+                    color: 0x1b5e20,
+                    roughness: 0.9
                 });
                 const garden = new THREE.Mesh(gardenGeom, gardenMat);
                 garden.rotation.x = -Math.PI / 2;
                 garden.position.set(g.x, 0.05, g.z);
                 garden.receiveShadow = true;
                 scene.add(garden);
+
+                // Add small "foliage" boxes for granulation
+                for (let i = 0; i < (g.foliage || 0); i++) {
+                    const bush = new THREE.Mesh(
+                        new THREE.BoxGeometry(0.5, 0.5 + Math.random(), 0.5),
+                        new THREE.MeshStandardMaterial({ color: 0x2e7d32 })
+                    );
+                    bush.position.set(
+                        g.x + (Math.random() - 0.5) * g.size * 0.8,
+                        0.3,
+                        g.z + (Math.random() - 0.5) * g.size * 0.8
+                    );
+                    bush.castShadow = true;
+                    scene.add(bush);
+                }
             });
 
             // Roads
             roads.forEach(r => {
                 const roadGeom = new THREE.PlaneGeometry(r.vertical ? r.w : r.l, r.vertical ? r.l : r.w);
-                const roadMat = new THREE.MeshStandardMaterial({ color: 0x222222 });
+                const roadMat = new THREE.MeshStandardMaterial({ color: 0x111111 });
                 const road = new THREE.Mesh(roadGeom, roadMat);
                 road.rotation.x = -Math.PI / 2;
                 road.position.set(r.x, 0.02, r.z);
                 road.receiveShadow = true;
                 scene.add(road);
 
-                // Add emissive road line
-                const lineGeom = new THREE.PlaneGeometry(r.vertical ? 0.2 : r.l, r.vertical ? r.l : 0.2);
-                const lineMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
-                const line = new THREE.Mesh(lineGeom, lineMat);
-                line.rotation.x = -Math.PI / 2;
-                line.position.set(r.x, 0.03, r.z);
-                scene.add(line);
+                // Emissive road dividers
+                const entryCount = 10;
+                for (let i = 0; i < entryCount; i++) {
+                    const pos = (i / entryCount) * r.l - r.l / 2;
+                    const dashLen = 1;
+                    const dashGeom = new THREE.PlaneGeometry(r.vertical ? 0.1 : dashLen, r.vertical ? dashLen : 0.1);
+                    const dashMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
+                    const dash = new THREE.Mesh(dashGeom, dashMat);
+                    dash.rotation.x = -Math.PI / 2;
+                    if (r.vertical) dash.position.set(r.x, 0.03, r.z + pos);
+                    else dash.position.set(r.x + pos, 0.03, r.z);
+                    scene.add(dash);
+                }
+
+                // Street Lights
+                if (r.lights) {
+                    for (let i = 0; i < 5; i++) {
+                        const l_pos = (i / 5) * r.l - r.l / 2;
+                        const pole = new THREE.Mesh(
+                            new THREE.CylinderGeometry(0.1, 0.1, 4),
+                            new THREE.MeshStandardMaterial({ color: 0x333333 })
+                        );
+                        const street_x = r.vertical ? r.x + 2 : r.x + l_pos;
+                        const street_z = r.vertical ? r.z + l_pos : r.z + 2;
+                        pole.position.set(street_x, 2, street_z);
+                        scene.add(pole);
+
+                        const lamp = new THREE.Mesh(
+                            new THREE.SphereGeometry(0.2),
+                            new THREE.MeshBasicMaterial({ color: 0x00ffcc })
+                        );
+                        lamp.position.set(street_x, 4, street_z);
+                        scene.add(lamp);
+                    }
+                }
             });
         }
 
         function renderCity(buildings) {
             buildings.forEach(b => {
-                const geometry = new THREE.BoxGeometry(b.width, b.height, b.depth);
+                const group = new THREE.Group();
+                const geometry = new THREE.BoxGeometry(b.width * 0.9, b.height, b.depth * 0.9);
 
-                // Optimized materials for all-day visibility
                 const baseMat = new THREE.MeshStandardMaterial({
                     color: b.color,
-                    roughness: 0.4,
-                    metalness: 0.1
+                    roughness: 0.3,
+                    metalness: 0.2
                 });
                 const windowMat = new THREE.MeshStandardMaterial({
                     color: b.color,
                     map: windowTexture,
                     emissive: new THREE.Color(b.color),
-                    emissiveIntensity: 0.3,
-                    roughness: 0.2,
-                    metalness: 0.5
+                    emissiveIntensity: 0.4,
+                    roughness: 0.1,
+                    metalness: 0.6
                 });
 
                 const materials = [windowMat, windowMat, baseMat, baseMat, windowMat, windowMat];
 
                 const mesh = new THREE.Mesh(geometry, materials);
-                mesh.position.set(b.x, b.height / 2, b.z);
                 mesh.castShadow = true;
                 mesh.receiveShadow = true;
-                mesh.userData = b;
+                group.add(mesh);
 
-                scene.add(mesh);
-                buildings_meshes.push(mesh);
+                // Add Rooftop Granulation
+                if (b.roof_decor) {
+                    const roofY = b.height / 2;
+                    if (b.roof_decor === "helipad") {
+                        const h_geom = new THREE.CylinderGeometry(1.5, 1.5, 0.1, 32);
+                        const h_mat = new THREE.MeshStandardMaterial({ color: 0x222222 });
+                        const h = new THREE.Mesh(h_geom, h_mat);
+                        h.position.y = roofY + 0.05;
+                        group.add(h);
+                        // H Marker
+                        const ring = new THREE.Mesh(
+                            new THREE.TorusGeometry(1.2, 0.05, 16, 100),
+                            new THREE.MeshBasicMaterial({ color: 0xffffff })
+                        );
+                        ring.rotation.x = Math.PI / 2;
+                        ring.position.y = roofY + 0.1;
+                        group.add(ring);
+                    } else if (b.roof_decor === "antenna_array") {
+                        for (let i = 0; i < 3; i++) {
+                            const antGeom = new THREE.CylinderGeometry(0.05, 0.05, 3);
+                            const ant = new THREE.Mesh(antGeom, new THREE.MeshStandardMaterial({ color: 0x555555 }));
+                            ant.position.set((i - 1) * 0.8, roofY + 1.5, 0);
+                            group.add(ant);
+                            const tip = new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+                            tip.position.set((i - 1) * 0.8, roofY + 3, 0);
+                            group.add(tip);
+                        }
+                    } else if (b.roof_decor === "hvac_unit") {
+                        const hvac = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.8, 1.5), new THREE.MeshStandardMaterial({ color: 0x444444 }));
+                        hvac.position.y = roofY + 0.4;
+                        group.add(hvac);
+                    } else if (b.roof_decor === "small_antenna") {
+                        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 2), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+                        ant.position.set(1, roofY + 1.0, 1);
+                        group.add(ant);
+                    }
+                }
+
+                group.position.set(b.x, b.height / 2, b.z);
+                group.userData = b;
+                scene.add(group);
+                buildings_meshes.push(group);
             });
         }
 
@@ -316,32 +432,49 @@
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
             raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects(buildings_meshes);
+            const intersects = raycaster.intersectObjects(buildings_meshes, true);
 
             if (intersects.length > 0) {
-                if (intersectedObject != intersects[0].object) {
+                // Find the group (building)
+                let target = intersects[0].object;
+                while (target.parent && target.parent !== scene) {
+                    target = target.parent;
+                }
+
+                if (intersectedObject != target) {
                     if (intersectedObject) {
-                        intersectedObject.material.forEach(m => m.emissiveIntensity = 0.3);
+                        setEmissive(intersectedObject, 0.4);
                     }
-                    intersectedObject = intersects[0].object;
-                    intersectedObject.material.forEach(m => {
-                        m.emissiveIntensity = 1.0;
-                    });
+                    intersectedObject = target;
+                    setEmissive(intersectedObject, 1.5);
 
                     const b = intersectedObject.userData;
                     document.getElementById('building-info').innerHTML = `
-                        <div style="font-weight:bold; color:#00ffcc">${b.name}</div>
-                        <div style="font-size:0.75rem; opacity:0.8">${b.type} // CC:${b.complexity}</div>
-                        <div style="font-size:0.7rem; color:#aaa; margin-top:5px">${b.file}</div>
+                        <div style="font-weight:900; color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #00ffcc; padding-bottom:5px; margin-bottom:8px">${b.name}</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">CLASS:</span> ${b.type}</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">COMPLEXITY:</span> CC_${b.complexity}</div>
+                        <div style="font-size:0.65rem; color:#00ffcc; margin-top:8px; font-family:monospace">[ ADDRESS ]<br>${b.address}</div>
                     `;
                 }
             } else {
                 if (intersectedObject) {
-                    intersectedObject.material.forEach(m => m.emissiveIntensity = 0.3);
+                    setEmissive(intersectedObject, 0.4);
                     intersectedObject = null;
                 }
                 document.getElementById('building-info').textContent = "SYSTEM_IDLE: SELECT_NODE_TO_INSPECT";
             }
+        }
+
+        function setEmissive(group, intensity) {
+            group.traverse(child => {
+                if (child.isMesh && child.material) {
+                    if (Array.isArray(child.material)) {
+                        child.material.forEach(m => { if (m.emissive) m.emissiveIntensity = intensity; });
+                    } else {
+                        if (child.material.emissive) child.material.emissiveIntensity = intensity;
+                    }
+                }
+            });
         }
 
         function onWindowResize() {
