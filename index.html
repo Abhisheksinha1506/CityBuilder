@@ -134,7 +134,7 @@
         let sunLight, moonLight, ambientLight, skyLight;
         const CITY_DATA_URL = 'city.json';
         const buildings_meshes = [];
-        let time = 0; // 0 to 2PI cycle
+        let time = 0; // Linked to system time
 
         // Window texture generator
         function createWindowTexture() {
@@ -228,7 +228,12 @@
         }
 
         function updateDayNight() {
-            time += 0.001; // Slower, more cinematic cycle
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            // 6 AM = 0, 12 PM = PI/2, 6 PM = PI, 12 AM = 3PI/2
+            time = ((hours + minutes / 60 - 6) % 24) * (Math.PI / 12);
+
             const sunY = Math.sin(time);
             const sunX = Math.cos(time);
 
@@ -286,7 +291,7 @@
                 });
                 const garden = new THREE.Mesh(gardenGeom, gardenMat);
                 garden.rotation.x = -Math.PI / 2;
-                garden.position.set(g.x, 0.05, g.z);
+                garden.position.set(g.x, 0.15, g.z);
                 garden.receiveShadow = true;
                 scene.add(garden);
 
@@ -298,7 +303,7 @@
                     );
                     bush.position.set(
                         g.x + (Math.random() - 0.5) * g.size * 0.8,
-                        0.3,
+                        0.4,
                         g.z + (Math.random() - 0.5) * g.size * 0.8
                     );
                     bush.castShadow = true;
@@ -312,7 +317,7 @@
                 const roadMat = new THREE.MeshStandardMaterial({ color: 0x111111 });
                 const road = new THREE.Mesh(roadGeom, roadMat);
                 road.rotation.x = -Math.PI / 2;
-                road.position.set(r.x, 0.02, r.z);
+                road.position.set(r.x, 0.1, r.z);
                 road.receiveShadow = true;
                 scene.add(road);
 
@@ -325,8 +330,8 @@
                     const dashMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
                     const dash = new THREE.Mesh(dashGeom, dashMat);
                     dash.rotation.x = -Math.PI / 2;
-                    if (r.vertical) dash.position.set(r.x, 0.03, r.z + pos);
-                    else dash.position.set(r.x + pos, 0.03, r.z);
+                    if (r.vertical) dash.position.set(r.x, 0.2, r.z + pos);
+                    else dash.position.set(r.x + pos, 0.2, r.z);
                     scene.add(dash);
                 }
 
@@ -340,14 +345,14 @@
                         );
                         const street_x = r.vertical ? r.x + 2 : r.x + l_pos;
                         const street_z = r.vertical ? r.z + l_pos : r.z + 2;
-                        pole.position.set(street_x, 2, street_z);
+                        pole.position.set(street_x, 2.1, street_z);
                         scene.add(pole);
 
                         const lamp = new THREE.Mesh(
                             new THREE.SphereGeometry(0.2),
                             new THREE.MeshBasicMaterial({ color: 0x00ffcc })
                         );
-                        lamp.position.set(street_x, 4, street_z);
+                        lamp.position.set(street_x, 4.1, street_z);
                         scene.add(lamp);
                     }
                 }
