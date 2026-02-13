@@ -28,10 +28,60 @@ jobs:
         run: pip install radon
 
       - name: Run city generator
-        run: python evolve.py
+        id: evolve
+        run: |
+          python evolve.py
+          echo "TIMESTAMP=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_ENV
+          # Extract some stats for the PR description
+          STATS=$(jq -r '.stats | "Density: \(.urban_density)\nHealth: \(.mainframe_health)\nLoad: \(.system_load)"' city.json)
+          echo "STATS<<EOF" >> $GITHUB_ENV
+          echo "$STATS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "🏙️ Update city.json [skip ci]"
-          file_pattern: 'city.json'
+      - name: Autonomous PR Flow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "Autogit Evolution Bot"
+          git config user.email "bot@autogit.local"
+          
+          # Check for changes
+          if [[ -n "$(git status --porcelain)" ]]; then
+            BRANCH="evolution/cycle-${{ github.run_id }}"
+            git checkout -b $BRANCH
+            git add city.json
+            git commit -m "🏙️ Evolution Cycle: ${{ env.TIMESTAMP }}"
+            git push origin $BRANCH
+            
+            # Create PR
+            PR_URL=$(gh pr create \
+              --title "🧬 Autonomous Evolution Cycle: ${{ env.TIMESTAMP }}" \
+              --body "### Simulation Report
+              The city has pulsed. 🏙️
+              
+              **Metrics:**
+              ${{ env.STATS }}
+              
+              *Generated autonomously by the Autogit Evolution Engine.*" \
+              --base main \
+              --head $BRANCH)
+            
+            # Auto-merge PR
+            gh pr merge $PR_URL --auto --squash
+          else
+            echo "No structural changes detected in this cycle."
+          fi
+
+      - name: Raise Issue on Failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "☢️ CRITICAL: Evolution Subsystem Failure" \
+            --body "The evolution cycle at ${{ env.TIMESTAMP }} failed to initialize.
+            
+            **Run ID**: ${{ github.run_id }}
+            **Workflow**: ${{ github.workflow }}
+            
+            Please inspect the action logs immediately to prevent mainframe degradation."

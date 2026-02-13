@@ -2,6 +2,7 @@
 import json
 import os
 import math
+import random
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -15,9 +16,6 @@ def run_radon():
         print("⚠️ Radon not found. Installing...")
         subprocess.run(["pip", "install", "radon"], check=True)
 
-    # Analyze current directory and parent (to get interesting metrics if this is in a subfolder)
-    # For Autogit, we analyze the whole ecosystem if possible, or just this project.
-    # The prompt says "repository's Python code". We'll look at the current project and its parent.
     target_dir = ".." 
     print(f"🔍 Analyzing complexity in: {target_dir}")
     
@@ -32,71 +30,93 @@ def run_radon():
     return {}
 
 def generate_city(data):
-    """Generate city.json from radon data."""
+    """Generate city.json with buildings, gardens, and infrastructure."""
     buildings = []
-    functions = []
+    gardens = []
+    roads = []
     
-    # Flatten radon data
-    for file_path, entries in data.items():
-        for entry in entries:
-            if entry.get("type") in ["function", "method", "class"]:
-                functions.append({
-                    "name": entry.get("name"),
-                    "complexity": entry.get("complexity", 1),
-                    "type": entry.get("type"),
-                    "file": Path(file_path).name
+    # Identify files/complexities
+    nodes = []
+    for file, metrics in data.items():
+        if isinstance(metrics, list):
+            for m in metrics:
+                nodes.append({
+                    "name": m.get("name", "anon"),
+                    "type": m.get("type", "func"),
+                    "complexity": m.get("complexity", 1),
+                    "file": file
                 })
     
-    # Sort by complexity
-    functions.sort(key=lambda x: x["complexity"], reverse=True)
+    if not nodes:
+        return {"buildings": [], "gardens": [], "roads": [], "stats": {}}
     
-    max_buildings = 200 # Increased limit
-    functions = functions[:max_buildings]
+    avg_complexity = sum(n["complexity"] for n in nodes) / len(nodes)
     
-    if not functions:
-        return {"buildings": [], "metrics": {"avg_complexity": 0, "total_functions": 0}}
+    # Place buildings on a grid
+    cols = int(math.ceil(math.sqrt(len(nodes))))
+    spacing = 6.0
+    
+    for i, n in enumerate(nodes):
+        row = i // cols
+        col = i % cols
         
-    avg_complexity = sum(f["complexity"] for f in functions) / len(functions)
-    
-    spacing = 4 # More space for readability
-    grid_size = int(math.ceil(math.sqrt(len(functions))))
-    
-    for i, func in enumerate(functions):
-        complexity = func["complexity"]
+        x = col * spacing - (cols * spacing) / 2
+        z = row * spacing - (cols * spacing) / 2
         
-        # Determine building dimensions based on type
-        if func["type"] == "class":
-            width, depth = 2.0, 2.0
-            height = max(1.5, (complexity / avg_complexity) * 8.0)
-            color = "#66aaff" # Blue for classes
+        complexity = n["complexity"]
+        height = max(2.5, (complexity / avg_complexity) * 10.0)
+        
+        # Sim City Aesthetics
+        if n["type"] == "class":
+            color = "#4488ff" # Tech Blue
+            b_type = "Corporate Tower"
+        elif complexity > 10:
+            color = "#ff4444" # Critical Core
+            b_type = "Mainframe Nucleus"
         else:
-            width, depth = 1.2, 1.2
-            height = max(1.0, (complexity / avg_complexity) * 6.0)
-            color = "#ff6666" if complexity > 10 else "#888888"
-        
-        x = (i % grid_size) * spacing - (grid_size * spacing / 2)
-        z = (i // grid_size) * spacing - (grid_size * spacing / 2)
-        
+            color = "#888888" # Regular Node
+            b_type = "Data Unit"
+
         buildings.append({
-            "x": round(x, 2),
-            "z": round(z, 2),
-            "width": width,
-            "depth": depth,
-            "height": round(height, 2),
+            "x": x,
+            "z": z,
+            "width": 3,
+            "height": height,
+            "depth": 3,
             "color": color,
-            "name": func["name"],
-            "type": func["type"],
-            "file": func["file"],
-            "complexity": complexity
+            "name": n["name"],
+            "type": b_type,
+            "complexity": complexity,
+            "file": n["file"]
         })
-        
+
+        # Procedural Gardens
+        if random.random() < 0.2:
+            gardens.append({
+                "x": x + 3,
+                "z": z + 3,
+                "size": random.uniform(2, 4)
+            })
+
+    # Road Grid
+    for r in range(-10, 11):
+        if r % 3 == 0:
+            roads.append({"x": r * 10, "z": 0, "w": 2, "l": 200, "vertical": False})
+            roads.append({"x": 0, "z": r * 10, "w": 2, "l": 200, "vertical": True})
+
+    # Sim City Style Stats
+    stats = {
+        "urban_density": f"{len(buildings)} structures",
+        "mainframe_health": "Stable" if avg_complexity < 7 else "Stress Detected",
+        "system_load": f"{int(avg_complexity * 10)}% Capacity",
+        "last_evolution": datetime.now().strftime("%Y-%m-%d %H:%M")
+    }
+
     return {
-        "buildings": buildings,
-        "metrics": {
-            "avg_complexity": round(avg_complexity, 2),
-            "total_functions": len(functions),
-            "generation_time": datetime.now().isoformat()
-        }
+        "buildings": buildings, 
+        "gardens": gardens, 
+        "roads": roads, 
+        "stats": stats
     }
 
 def main():
@@ -107,8 +127,9 @@ def main():
     with open("city.json", "w") as f:
         json.dump(city_data, f, indent=2)
         
-    print(f"✅ city.json generated with {city_data['metrics']['total_functions']} buildings.")
-    print(f"📊 Average Complexity: {city_data['metrics']['avg_complexity']}")
+    print(f"✅ city.json generated.")
+    print(f"📊 {city_data['stats']['urban_density']}")
+    print(f"🖥️ {city_data['stats']['mainframe_health']}")
 
 if __name__ == "__main__":
     main()

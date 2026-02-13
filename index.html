@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Procedural City Builder</title>
+    <title>Procedural City Builder - Sim City Expansion</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #111122;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #050510;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #00ffcc;
         }
 
         canvas {
@@ -21,28 +22,51 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: #00ff00;
-            padding: 15px;
-            border: 1px solid #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            background: rgba(10, 10, 20, 0.85);
+            padding: 20px;
+            border-left: 4px solid #00ffcc;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
             pointer-events: none;
             z-index: 100;
+            min-width: 250px;
+            backdrop-filter: blur(5px);
         }
 
         .title {
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #00ff00;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .metric {
-            margin: 5px 0;
+            margin: 8px 0;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
         }
 
         .value {
             color: #fff;
+            font-weight: bold;
+        }
+
+        #building-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 255, 204, 0.2);
+            font-size: 0.8rem;
+            color: #fff;
+        }
+
+        #status-bar {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            text-align: right;
         }
     </style>
     <script type="importmap">
@@ -57,13 +81,19 @@
 
 <body>
     <div id="overlay">
-        <div class="title">COMPLEXITY_CITY_METRICS</div>
-        <div id="building-info" style="margin-bottom: 10px; color: #fff; font-size: 0.8rem; height: 40px;">
-            HOVER_OVER_BUILDING_FOR_DATA
+        <div class="title">Metropolis_Mainframe</div>
+        <div class="metric">URBAN_DENSITY: <span id="urban-density" class="value">0 structures</span></div>
+        <div class="metric">MAINFRAME_HEALTH: <span id="mainframe-health" class="value">STABLE</span></div>
+        <div class="metric">SYSTEM_LOAD: <span id="system-load" class="value">0%</span></div>
+
+        <div id="building-info">
+            SYSTEM_IDLE: SELECT_NODE_TO_INSPECT
         </div>
-        <div class="metric">AVG_COMPLEXITY: <span id="avg-complexity" class="value">0.00</span></div>
-        <div class="metric">TOTAL_COMPONENTS: <span id="total-functions" class="value">0</span></div>
-        <div class="metric">STATUS: <span id="status" class="value">LOADING...</span></div>
+    </div>
+
+    <div id="status-bar">
+        AUTOGIT_EVOLUTION_ENGINE // v2.0-HYPER-AUTONOMOUS<br>
+        LAST_SYNC: <span id="last-evolution">---</span>
     </div>
 
     <script type="module">
@@ -74,55 +104,81 @@
         const CITY_DATA_URL = 'city.json';
         const buildings_meshes = [];
 
+        // Window texture generator
+        function createWindowTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#050510';
+            ctx.fillRect(0, 0, 64, 64);
+
+            ctx.fillStyle = '#ffff66';
+            for (let y = 4; y < 60; y += 8) {
+                for (let x = 4; x < 60; x += 8) {
+                    if (Math.random() > 0.3) {
+                        ctx.globalAlpha = Math.random() * 0.8 + 0.2;
+                        ctx.fillRect(x, y, 4, 4);
+                    }
+                }
+            }
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.repeat.set(1, 4);
+            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+            return texture;
+        }
+
+        const windowTexture = createWindowTexture();
+
         init();
         loadCityData();
 
         function init() {
-            // Scene setup
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x050510);
-            scene.fog = new THREE.FogExp2(0x050510, 0.015);
+            scene.background = new THREE.Color(0x020205);
+            scene.fog = new THREE.FogExp2(0x020205, 0.008);
 
-            // Camera
             camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(40, 30, 40);
+            camera.position.set(60, 50, 60);
 
-            // Renderer
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.shadowMap.enabled = true;
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             document.body.appendChild(renderer.domElement);
 
-            // Controls
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.5;
 
-            // Lights
-            const ambientLight = new THREE.AmbientLight(0x202040, 1.0);
+            // Cinematic Lighting
+            const ambientLight = new THREE.AmbientLight(0x4040a0, 0.8);
             scene.add(ambientLight);
 
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
-            directionalLight.position.set(50, 100, 50);
-            directionalLight.castShadow = true;
-            directionalLight.shadow.mapSize.width = 2048;
-            directionalLight.shadow.mapSize.height = 2048;
-            scene.add(directionalLight);
+            const moonLight = new THREE.DirectionalLight(0x8080ff, 2.0);
+            moonLight.position.set(20, 100, 20);
+            moonLight.castShadow = true;
+            moonLight.shadow.mapSize.width = 4096;
+            moonLight.shadow.mapSize.height = 4096;
+            scene.add(moonLight);
 
-            // Ground
+            const cityGlow = new THREE.PointLight(0x00ffcc, 1, 100);
+            cityGlow.position.set(0, 10, 0);
+            scene.add(cityGlow);
+
+            // Ground - Dark Polished Metal
             const ground = new THREE.Mesh(
-                new THREE.PlaneGeometry(500, 500),
-                new THREE.MeshStandardMaterial({ color: 0x0a0a0a })
+                new THREE.PlaneGeometry(1000, 1000),
+                new THREE.MeshStandardMaterial({
+                    color: 0x050505,
+                    roughness: 0.1,
+                    metalness: 0.9
+                })
             );
             ground.rotation.x = -Math.PI / 2;
             ground.receiveShadow = true;
             scene.add(ground);
-
-            // Grid helper
-            const grid = new THREE.GridHelper(500, 100, 0x00ff00, 0x111111);
-            grid.material.opacity = 0.2;
-            grid.material.transparent = true;
-            scene.add(grid);
 
             raycaster = new THREE.Raycaster();
             mouse = new THREE.Vector2();
@@ -133,40 +189,76 @@
         }
 
         async function loadCityData() {
-            const statusEl = document.getElementById('status');
             try {
                 const response = await fetch(CITY_DATA_URL);
-                if (!response.ok) throw new Error("CITY_DATA_NOT_FOUND");
-
                 const data = await response.json();
+
+                renderInfrastructure(data.roads, data.gardens);
                 renderCity(data.buildings);
 
-                document.getElementById('avg-complexity').textContent = data.metrics.avg_complexity;
-                document.getElementById('total-functions').textContent = data.metrics.total_functions;
-                statusEl.textContent = "NOMINAL";
+                document.getElementById('urban-density').textContent = data.stats.urban_density;
+                document.getElementById('mainframe-health').textContent = data.stats.mainframe_health;
+                document.getElementById('system-load').textContent = data.stats.system_load;
+                document.getElementById('last-evolution').textContent = data.stats.last_evolution;
 
             } catch (error) {
-                console.error(error);
-                statusEl.textContent = "ERROR: " + error.message;
+                console.error("City synchronization failed:", error);
             }
+        }
+
+        function renderInfrastructure(roads, gardens) {
+            // Gardens
+            gardens.forEach(g => {
+                const gardenGeom = new THREE.PlaneGeometry(g.size, g.size);
+                const gardenMat = new THREE.MeshStandardMaterial({
+                    color: 0x228822,
+                    emissive: 0x004400,
+                    emissiveIntensity: 0.5
+                });
+                const garden = new THREE.Mesh(gardenGeom, gardenMat);
+                garden.rotation.x = -Math.PI / 2;
+                garden.position.set(g.x, 0.05, g.z);
+                scene.add(garden);
+            });
+
+            // Roads
+            roads.forEach(r => {
+                const roadGeom = new THREE.PlaneGeometry(r.vertical ? r.w : r.l, r.vertical ? r.l : r.w);
+                const roadMat = new THREE.MeshStandardMaterial({ color: 0x111111 });
+                const road = new THREE.Mesh(roadGeom, roadMat);
+                road.rotation.x = -Math.PI / 2;
+                road.position.set(r.x, 0.02, r.z);
+                road.receiveShadow = true;
+                scene.add(road);
+
+                // Add emissive road line
+                const lineGeom = new THREE.PlaneGeometry(r.vertical ? 0.2 : r.l, r.vertical ? r.l : 0.2);
+                const lineMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
+                const line = new THREE.Mesh(lineGeom, lineMat);
+                line.rotation.x = -Math.PI / 2;
+                line.position.set(r.x, 0.03, r.z);
+                scene.add(line);
+            });
         }
 
         function renderCity(buildings) {
             buildings.forEach(b => {
                 const geometry = new THREE.BoxGeometry(b.width, b.height, b.depth);
-                const material = new THREE.MeshStandardMaterial({
-                    color: b.color,
-                    emissive: new THREE.Color(b.color).multiplyScalar(0.15),
-                    roughness: 0.3,
-                    metalness: 0.6
-                });
-                const mesh = new THREE.Mesh(geometry, material);
 
+                // Realistic Material with Windows
+                const materials = [
+                    new THREE.MeshStandardMaterial({ color: b.color, map: windowTexture, roughness: 0.2, metalness: 0.8 }), // right
+                    new THREE.MeshStandardMaterial({ color: b.color, map: windowTexture, roughness: 0.2, metalness: 0.8 }), // left
+                    new THREE.MeshStandardMaterial({ color: b.color, roughness: 0.1, metalness: 0.9 }), // top
+                    new THREE.MeshStandardMaterial({ color: b.color }), // bottom
+                    new THREE.MeshStandardMaterial({ color: b.color, map: windowTexture, roughness: 0.2, metalness: 0.8 }), // front
+                    new THREE.MeshStandardMaterial({ color: b.color, map: windowTexture, roughness: 0.2, metalness: 0.8 })  // back
+                ];
+
+                const mesh = new THREE.Mesh(geometry, materials);
                 mesh.position.set(b.x, b.height / 2, b.z);
                 mesh.castShadow = true;
                 mesh.receiveShadow = true;
-
-                // Add tooltip-like name (console for now)
                 mesh.userData = b;
 
                 scene.add(mesh);
@@ -186,23 +278,27 @@
             if (intersects.length > 0) {
                 if (intersectedObject != intersects[0].object) {
                     if (intersectedObject) {
-                        intersectedObject.material.emissiveIntensity = 0.15; // Reset previous
+                        intersectedObject.material.forEach(m => m.emissiveIntensity = 0);
                     }
                     intersectedObject = intersects[0].object;
-                    intersectedObject.material.emissiveIntensity = 0.8; // Highlight current
+                    intersectedObject.material.forEach(m => {
+                        m.emissive = new THREE.Color(0x00ffcc);
+                        m.emissiveIntensity = 0.5;
+                    });
 
                     const b = intersectedObject.userData;
                     document.getElementById('building-info').innerHTML = `
-                        <span style="color:#0f0">[${b.type.toUpperCase()}]</span> ${b.name}<br>
-                        COMPLEXITY: ${b.complexity} | FILE: ${b.file}
+                        <div style="font-weight:bold; color:#00ffcc">${b.name}</div>
+                        <div style="font-size:0.75rem; opacity:0.8">${b.type} // CC:${b.complexity}</div>
+                        <div style="font-size:0.7rem; color:#aaa; margin-top:5px">${b.file}</div>
                     `;
                 }
             } else {
                 if (intersectedObject) {
-                    intersectedObject.material.emissiveIntensity = 0.15; // Reset if no longer hovering
+                    intersectedObject.material.forEach(m => m.emissiveIntensity = 0);
                     intersectedObject = null;
                 }
-                document.getElementById('building-info').textContent = "HOVER_OVER_BUILDING_FOR_DATA";
+                document.getElementById('building-info').textContent = "SYSTEM_IDLE: SELECT_NODE_TO_INSPECT";
             }
         }
 
