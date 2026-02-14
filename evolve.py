@@ -222,6 +222,14 @@ def generate_city(data):
         "stats": stats
     }
 
+def save_city(city_data):
+    """Save city data to city.json."""
+    with open("city.json", "w") as f:
+        json.dump(city_data, f, indent=2)
+    print(f"✅ city.json updated.")
+    print(f"📊 Population: {city_data['stats']['urban_density']}")
+    print(f"🖥️ Status: {city_data['stats']['mainframe_health']}")
+
 def main():
     print("🏙️ Procedural City Builder - Evolution Pulse")
     token = os.getenv("GITHUB_TOKEN")
