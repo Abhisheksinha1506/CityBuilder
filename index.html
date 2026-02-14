@@ -97,6 +97,51 @@
             color: #00ffcc;
             font-family: 'Courier New', Courier, monospace;
         }
+
+        #debug-console {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            width: 320px;
+            height: 200px;
+            background: rgba(5, 5, 20, 0.95);
+            border: 1px solid #00ffcc;
+            color: #00ffcc;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.7rem;
+            padding: 10px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            pointer-events: auto;
+        }
+
+        #debug-toggle {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: #00ffcc;
+            color: #050510;
+            border: none;
+            padding: 5px 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            transition: all 0.2s;
+        }
+
+        #debug-toggle:hover {
+            background: #fff;
+            box-shadow: 0 0 10px #00ffcc;
+        }
+
+        .debug-msg {
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+        }
     </style>
     <script type="importmap">
         {
@@ -111,19 +156,24 @@
 <body>
     <div id="overlay">
         <div class="scan-line"></div>
-        <div class="title">Metropolis_Mainframe</div>
-        <div class="metric">URBAN_DENSITY: <span id="urban-density" class="value">0 structures</span></div>
-        <div class="metric">SYSTEM_HEALTH: <span id="mainframe-health" class="value">STABLE</span></div>
-        <div class="metric">LOAD_INDEX: <span id="system-load" class="value">0%</span></div>
+        <div class="title">Metropolis Overview</div>
+        <div class="metric">Total Buildings: <span id="urban-density" class="value">0 structures</span></div>
+        <div class="metric">District Health: <span id="mainframe-health" class="value">STABLE</span></div>
+        <div class="metric">Evolution Load: <span id="system-load" class="value">0%</span></div>
 
         <div id="building-info">
-            SYSTEM_IDLE: SELECT_NODE_TO_INSPECT
+            System Idle: Select a building for details
         </div>
     </div>
 
     <div id="status-bar">
-        AUTOGIT_EVOLUTION_ENGINE // v2.0-HYPER-AUTONOMOUS<br>
-        TIME_CYCLE: <span id="time-display">MIDNIGHT</span> | LAST_SYNC: <span id="last-evolution">---</span>
+        Autogit Growth Engine // v2.0-HYPER-AUTONOMOUS<br>
+        District Time: <span id="time-display">MIDNIGHT</span> | Latest Update: <span id="last-evolution">---</span>
+    </div>
+
+    <button id="debug-toggle">DEBUG_SHELL</button>
+    <div id="debug-console">
+        <div class="debug-msg">[SYSTEM] Initializing Metropolitan Core...</div>
     </div>
 
     <script type="module">
@@ -139,23 +189,26 @@
         // Window texture generator
         function createWindowTexture() {
             const canvas = document.createElement('canvas');
-            canvas.width = 64;
-            canvas.height = 64;
+            canvas.width = 128; // Increased resolution
+            canvas.height = 128;
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#050510';
-            ctx.fillRect(0, 0, 64, 64);
+            ctx.fillRect(0, 0, 128, 128);
 
             ctx.fillStyle = '#ffff66';
-            for (let y = 4; y < 60; y += 8) {
-                for (let x = 4; x < 60; x += 8) {
-                    if (Math.random() > 0.3) {
-                        ctx.globalAlpha = Math.random() * 0.8 + 0.2;
-                        ctx.fillRect(x, y, 4, 4);
+            for (let y = 10; y < 118; y += 16) {
+                for (let x = 10; x < 118; x += 16) {
+                    if (Math.random() > 0.4) {
+                        ctx.globalAlpha = Math.random() * 0.9 + 0.1;
+                        ctx.fillRect(x, y, 8, 8); // Sharper windows
+                        // Add sub-glow
+                        ctx.shadowBlur = 4;
+                        ctx.shadowColor = '#ffff66';
                     }
                 }
             }
             const texture = new THREE.CanvasTexture(canvas);
-            texture.repeat.set(1, 4);
+            texture.repeat.set(2, 8); // Better scaling for buildings
             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
             return texture;
         }
@@ -224,7 +277,24 @@
 
             window.addEventListener('resize', onWindowResize, false);
             window.addEventListener('mousemove', onMouseMove, false);
+
+            const toggle = document.getElementById('debug-toggle');
+            const consoleBox = document.getElementById('debug-console');
+            toggle.addEventListener('click', () => {
+                consoleBox.style.display = consoleBox.style.display === 'none' ? 'block' : 'none';
+                addDebugMessage("DEBUG_SHELL_" + (consoleBox.style.display === 'none' ? "DISCONNECTED" : "ACTIVE"));
+            });
+
             animate();
+        }
+
+        function addDebugMessage(msg) {
+            const consoleBox = document.getElementById('debug-console');
+            const div = document.createElement('div');
+            div.className = 'debug-msg';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            consoleBox.appendChild(div);
+            consoleBox.scrollTop = consoleBox.scrollHeight;
         }
 
         function updateDayNight() {
@@ -244,7 +314,7 @@
             const intensity = Math.max(0, sunY);
 
             // Background & Fog Color Transition
-            const dayColor = new THREE.Color(0x0a1a2a);
+            const dayColor = new THREE.Color(0x87CEEB); // Sky Blue (Brighter)
             const nightColor = new THREE.Color(0x020205);
             const activeColor = nightColor.clone().lerp(dayColor, intensity);
 
@@ -258,8 +328,12 @@
 
             // HUD Update
             const timeSpan = document.getElementById('time-display');
-            if (sunY > 0.5) timeSpan.textContent = "NOON";
-            else if (sunY > 0) timeSpan.textContent = "DAWN_TRANSIT";
+            if (sunY > 0.8) timeSpan.textContent = "PEAK_DAYLIGHT";
+            else if (sunY > 0.2) timeSpan.textContent = "DAY_CYCLE";
+            else if (sunY > -0.2) {
+                timeSpan.textContent = "TWILIGHT_TRANSIT";
+                if (Math.abs(sunY) < 0.05) addDebugMessage("Global Twilight Detected");
+            }
             else timeSpan.textContent = "NIGHT_CYCLE";
         }
 
@@ -273,11 +347,13 @@
 
                 document.getElementById('urban-density').textContent = data.stats.urban_density;
                 document.getElementById('mainframe-health').textContent = data.stats.mainframe_health;
-                document.getElementById('system-load').textContent = data.stats.system_load;
                 document.getElementById('last-evolution').textContent = data.stats.last_evolution;
+
+                addDebugMessage(`Sync successful: ${data.buildings.length} nodes loaded.`);
 
             } catch (error) {
                 console.error("City synchronization failed:", error);
+                addDebugMessage("CRITICAL: Sync Failure - Mainframe unstable");
             }
         }
 
@@ -402,23 +478,42 @@
                         ring.rotation.x = Math.PI / 2;
                         ring.position.y = roofY + 0.1;
                         group.add(ring);
-                    } else if (b.roof_decor === "antenna_array") {
-                        for (let i = 0; i < 3; i++) {
-                            const antGeom = new THREE.CylinderGeometry(0.05, 0.05, 3);
-                            const ant = new THREE.Mesh(antGeom, new THREE.MeshStandardMaterial({ color: 0x555555 }));
-                            ant.position.set((i - 1) * 0.8, roofY + 1.5, 0);
-                            group.add(ant);
-                            const tip = new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
-                            tip.position.set((i - 1) * 0.8, roofY + 3, 0);
-                            group.add(tip);
-                        }
+                    } else if (b.roof_decor === "beacon") {
+                        const beaconBase = new THREE.Mesh(new THREE.BoxGeometry(2, 0.5, 2), new THREE.MeshStandardMaterial({ color: b.color }));
+                        beaconBase.position.y = roofY + 0.25;
+                        group.add(beaconBase);
+                        const lightPoint = new THREE.Mesh(new THREE.SphereGeometry(0.5), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+                        lightPoint.position.y = roofY + 1.2;
+                        group.add(lightPoint);
+                        const beamGeom = new THREE.CylinderGeometry(0.5, 2, 50, 32, 1, true);
+                        const beamMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
+                        const beam = new THREE.Mesh(beamGeom, beamMat);
+                        beam.position.y = roofY + 25;
+                        group.add(beam);
+                    } else if (b.roof_decor === "cooling_tower") {
+                        const towerGeom = new THREE.CylinderGeometry(1.5, 2.5, 4, 32);
+                        const tower = new THREE.Mesh(towerGeom, new THREE.MeshStandardMaterial({ color: 0x666666 }));
+                        tower.position.y = roofY + 2;
+                        group.add(tower);
+                        const tip = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.2), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+                        tip.rotation.x = Math.PI / 2;
+                        tip.position.y = roofY + 4;
+                        group.add(tip);
+                    } else if (b.roof_decor === "satellite_dish") {
+                        const base = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+                        base.position.y = roofY + 0.5;
+                        group.add(base);
+                        const dish = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xcccccc }));
+                        dish.position.y = roofY + 1.5;
+                        dish.rotation.x = Math.PI / 4;
+                        group.add(dish);
                     } else if (b.roof_decor === "hvac_unit") {
                         const hvac = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.8, 1.5), new THREE.MeshStandardMaterial({ color: 0x444444 }));
                         hvac.position.y = roofY + 0.4;
                         group.add(hvac);
                     } else if (b.roof_decor === "small_antenna") {
-                        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 2), new THREE.MeshStandardMaterial({ color: 0x333333 }));
-                        ant.position.set(1, roofY + 1.0, 1);
+                        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 3), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+                        ant.position.set(1, roofY + 1.5, 1);
                         group.add(ant);
                     }
                 }
@@ -456,9 +551,9 @@
                     const b = intersectedObject.userData;
                     document.getElementById('building-info').innerHTML = `
                         <div style="font-weight:900; color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #00ffcc; padding-bottom:5px; margin-bottom:8px">${b.name}</div>
-                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">CLASS:</span> ${b.type}</div>
-                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">COMPLEXITY:</span> CC_${b.complexity}</div>
-                        <div style="font-size:0.65rem; color:#00ffcc; margin-top:8px; font-family:monospace">[ ADDRESS ]<br>${b.address}</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Building Type:</span> ${b.type}</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Growth Rating:</span> ${b.complexity}</div>
+                        <div style="font-size:0.65rem; color:#00ffcc; margin-top:8px; font-family:monospace">[ Location ]<br>${b.address}</div>
                     `;
                 }
             } else {
@@ -466,7 +561,7 @@
                     setEmissive(intersectedObject, 0.4);
                     intersectedObject = null;
                 }
-                document.getElementById('building-info').textContent = "SYSTEM_IDLE: SELECT_NODE_TO_INSPECT";
+                document.getElementById('building-info').textContent = "System Idle: Select a building for details";
             }
         }
 

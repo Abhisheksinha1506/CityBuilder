@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '*/10 * * * *' # High-frequency evolution (Every 10 mins)
+    - cron: '0 * * * *' # Standardized evolution (Every 1 hour)
   workflow_dispatch:
 
 permissions:

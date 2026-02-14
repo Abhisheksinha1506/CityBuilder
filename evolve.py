@@ -15,8 +15,12 @@ def fetch_github_data(token):
     
     print(f"🌐 Fetching ecosystems for user: {username}")
     repos_url = f"https://api.github.com/users/{username}/repos?per_page=100"
-    repos = requests.get(repos_url, headers=headers).json()
+    repos_data = requests.get(repos_url, headers=headers).json()
     
+    if isinstance(repos_data, dict) and "message" in repos_data:
+        print(f"❌ API Error: {repos_data['message']}")
+        return {}
+
     all_nodes = {}
     
     # Only analyze selected repos to keep city manageable and relevant
@@ -25,7 +29,7 @@ def fetch_github_data(token):
         "prime-spiral", "Quine-Garden", "game-of-life", "CityBuilder"
     ]
 
-    for repo in repos:
+    for repo in repos_data:
         name = repo['name']
         if name not in target_repos and len(target_repos) > 0: continue
         
@@ -55,24 +59,32 @@ def fetch_github_data(token):
 def run_radon():
     """Fallback local analysis."""
 
-def get_district_name(file_path):
-    """Map repo names to districts."""
+def get_address(file_path, x, z):
+    """Generate a specific human-readable address."""
     parts = file_path.split('/')
     project = parts[0] if len(parts) > 1 else "Mainframe"
 
     districts = {
         "autonomous-zoo": "Genome Sector",
         "autonomous-zoo-expansion": "Evolution Heights",
-        "langtons-ant": "The Colony District",
+        "langtons-ant": "The Colony",
         "prime-spiral": "Ulam Plaza",
         "Quine-Garden": "Recursive Gardens",
         "game-of-life": "Conway Commons",
-        "CityBuilder": "Core Architecture Zone",
-        "procedural-city-builder": "Core Architecture Zone"
+        "CityBuilder": "Architecture Zone",
+        "procedural-city-builder": "Architecture Zone"
     }
     
-    base_name = districts.get(project, f"{project.replace('-', ' ').title()} District")
-    return f"{base_name} // 0x{abs(hash(file_path)) % 0xFFFF:04X}"
+    district = districts.get(project, f"{project.replace('-', ' ').title()} District")
+    
+    # Street Name Generator
+    streets = ["Mainframe Ave", "Kernel Street", "Logic Lane", "Process Parkway", "Silicon Way", "Bit Blvd", "Data Drive"]
+    street = streets[abs(hash(file_path)) % len(streets)]
+    
+    # Block mapping
+    block = f"Block {chr(65 + (abs(int(x)) % 26))}"
+    
+    return f"{block}, {street}, {district}"
 
 def generate_city(data):
     """Generate city.json with buildings, gardens, and infrastructure."""
@@ -119,17 +131,36 @@ def generate_city(data):
         
         # Sim City Aesthetics & Granulation
         roof_decor = None
-        if n["type"] == "class":
+        landmark_names = {
+            "evolve.py": "Central Evolution Spire",
+            "index.html": "Metropolis Gateway",
+            "scaffold_projects.py": "The Architect's Foundry",
+            "generate_projects.py": "Expansion Pillar"
+        }
+        
+        display_name = landmark_names.get(n["file"].split('/')[-1], n["name"])
+        
+        if n["file"].split('/')[-1] in landmark_names:
+            color = "#ffffff" # Pure White Landmark
+            b_type = "Heritage Landmark"
+            style = "landmark"
+            roof_decor = "beacon"
+        elif complexity > 18:
+            color = "#ffdd44" # Gold/High Energy
+            b_type = "Power Station"
+            style = "industrial"
+            roof_decor = "cooling_tower"
+        elif n["type"] == "class":
             color = "#4488ff" # Tech Blue
             b_type = "Corporate Tower"
             style = "modernist"
             if height > 10:
                 roof_decor = "helipad"
-        elif complexity > 15:
-            color = "#ff4444" # Critical Core
-            b_type = "Mainframe Nucleus"
-            style = "industrial"
-            roof_decor = "antenna_array"
+        elif complexity < 3:
+            color = "#44ffaa" # Teal/Connectivity
+            b_type = "Transmission Tower"
+            style = "utility"
+            roof_decor = "satellite_dish"
         elif complexity > 8:
             color = "#ffaa44" # Warning Zone
             b_type = "Logic Processor"
@@ -151,11 +182,11 @@ def generate_city(data):
             "color": color,
             "style": style,
             "roof_decor": roof_decor,
-            "name": n["name"],
+            "name": display_name,
             "type": b_type,
             "complexity": complexity,
             "file": n["file"],
-            "address": get_district_name(n["file"])
+            "address": get_address(n["file"], x, z)
         })
 
         # Procedural Gardens with more detail
@@ -174,11 +205,14 @@ def generate_city(data):
             roads.append({"x": 0, "z": r * 10, "w": 3, "l": 400, "vertical": True, "lights": True})
 
     # Sim City Style Stats
+    from datetime import timedelta, timezone
+    ist_time = datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)
+    
     stats = {
         "urban_density": f"{len(buildings)} structures",
         "mainframe_health": "Stable" if avg_complexity < 7 else "Stress Detected",
-        "system_load": f"{int(avg_complexity * 10)}% Capacity",
-        "last_evolution": datetime.now().strftime("%Y-%m-%d %H:%M")
+        "system_load": f"{int((avg_complexity / 20) * 100)}% Capacity",
+        "last_evolution": ist_time.strftime("%Y-%m-%d %H:%M") + " IST"
     }
 
     return {
@@ -199,14 +233,11 @@ def main():
         print("💻 Running in Local Radon Mode...")
         data = run_radon()
         
-    city_data = generate_city(data)
-    
-    with open("city.json", "w") as f:
-        json.dump(city_data, f, indent=2)
-        
-    print(f"✅ city.json updated.")
-    print(f"📊 Population: {city_data['stats']['urban_density']}")
-    print(f"🖥️ Status: {city_data['stats']['mainframe_health']}")
+    if data:
+        city_data = generate_city(data)
+        save_city(city_data)
+    else:
+        print("⚠️ No data collected. City remains unchanged.")
 
 if __name__ == "__main__":
     main()
