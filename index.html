@@ -444,9 +444,10 @@
                 road.receiveShadow = true;
                 scene.add(road);
 
-                // Lane markings
-                for (let i = 0; i < Math.floor(r.l / 10); i++) {
-                    const pos = i * 10 - r.l / 2 + 5;
+                // Lane markings (reduced for performance)
+                const dashCount = Math.min(3, Math.floor(r.l / 20));
+                for (let i = 0; i < dashCount; i++) {
+                    const pos = i * (r.l / dashCount) - r.l / 2 + (r.l / dashCount / 2);
                     const dashGeo = new THREE.PlaneGeometry(0.5, 4);
                     const dashMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
                     const dash = new THREE.Mesh(dashGeo, dashMat);
@@ -455,8 +456,8 @@
                     scene.add(dash);
                 }
 
-                // Street lights (more granular)
-                const lightCount = Math.floor(r.l / 20);
+                // Street lights (reduced for performance)
+                const lightCount = Math.min(2, Math.floor(r.l / 50));
                 for (let i = 0; i < lightCount; i++) {
                     const pos = i / lightCount * r.l - r.l / 2;
                     const poleGeo = new THREE.CylinderGeometry(0.15, 0.15, 6);
@@ -481,15 +482,19 @@
                 garden.receiveShadow = true;
                 scene.add(garden);
 
-                // Foliage (trees/bushes)
-                for (let i = 0; i < g.foliage; i++) {
-                    const treeHeight = random.uniform(2, 5);
+                // Foliage (trees/bushes) - capped for performance
+                const maxTrees = Math.min(g.foliage, 3);
+                for (let i = 0; i < maxTrees; i++) {
+                    const treeHeight = random().uniform(2, 5);
                     const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.3, treeHeight), new THREE.MeshStandardMaterial({ color: 0x8b4513 }));
-                    trunk.position.set(g.x + random.uniform(-g.size / 2, g.size / 2), treeHeight / 2, g.z + random.uniform(-g.size / 2, g.size / 2));
+                    trunk.position.set(g.x + random().uniform(-g.size / 2, g.size / 2), treeHeight / 2, g.z + random().uniform(-g.size / 2, g.size / 2));
+                    trunk.castShadow = false;
+                    trunk.receiveShadow = false;
                     scene.add(trunk);
 
-                    const canopy = new THREE.Mesh(new THREE.SphereGeometry(1.5, 16, 16), new THREE.MeshStandardMaterial({ color: 0x228b22 }));
+                    const canopy = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), new THREE.MeshStandardMaterial({ color: 0x228b22 }));
                     canopy.position.set(trunk.position.x, treeHeight + 1, trunk.position.z);
+                    canopy.castShadow = false;
                     scene.add(canopy);
                 }
 

@@ -240,6 +240,8 @@ def generate_city(data):
         roads.append({
             "x": start["x"],
             "z": start["z"],
+            "dx": dx,  # Added for vehicle trajectory
+            "dz": dz,  # Added for vehicle trajectory
             "w": road_width,
             "l": length,
             "vertical": vertical,
