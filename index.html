@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Procedural City Builder - Sim City Expansion</title>
+    <title>Procedural City Builder - SimCity Evolution</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
             background-color: #050510;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             color: #00ffcc;
         }
 
@@ -29,7 +29,7 @@
             box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
             pointer-events: none;
             z-index: 100;
-            min-width: 280px;
+            min-width: 300px;
             backdrop-filter: blur(10px);
             clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
         }
@@ -49,7 +49,7 @@
             font-size: 0.75rem;
             display: flex;
             justify-content: space-between;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Courier New', monospace;
         }
 
         .value {
@@ -64,9 +64,10 @@
             border: 1px dashed rgba(0, 255, 204, 0.3);
             font-size: 0.75rem;
             color: #fff;
-            min-height: 80px;
+            min-height: 150px;
         }
 
+        /* Expanded for interiors */
         .scan-line {
             position: absolute;
             width: 100%;
@@ -95,7 +96,7 @@
             opacity: 0.8;
             text-align: right;
             color: #00ffcc;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Courier New', monospace;
         }
 
         #debug-console {
@@ -107,7 +108,7 @@
             background: rgba(5, 5, 20, 0.95);
             border: 1px solid #00ffcc;
             color: #00ffcc;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Courier New', monospace;
             font-size: 0.7rem;
             padding: 10px;
             overflow-y: auto;
@@ -142,14 +143,24 @@
             margin-bottom: 5px;
             border-bottom: 1px solid rgba(0, 255, 204, 0.1);
         }
+
+        #sim-stats {
+            margin-top: 15px;
+            font-size: 0.7rem;
+            color: #fff;
+        }
+
+        /* For game metrics */
+        #event-log {
+            font-size: 0.65rem;
+            color: #ffcc00;
+            margin-top: 10px;
+        }
+
+        /* New for event display */
     </style>
     <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-            }
-        }
+        { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
     </script>
 </head>
 
@@ -157,23 +168,24 @@
     <div id="overlay">
         <div class="scan-line"></div>
         <div class="title">Metropolis Overview</div>
-        <div class="metric">Total Buildings: <span id="urban-density" class="value">0 structures</span></div>
+        <div class="metric">Urban Density: <span id="urban-density" class="value">0 structures</span></div>
         <div class="metric">District Health: <span id="mainframe-health" class="value">STABLE</span></div>
-        <div class="metric">Evolution Load: <span id="system-load" class="value">0%</span></div>
-
-        <div id="building-info">
-            System Idle: Select a building for details
-        </div>
+        <div class="metric">System Load: <span id="system-load" class="value">0%</span></div>
+        <div class="metric">Population: <span id="population" class="value">0</span></div>
+        <div class="metric">Happiness: <span id="happiness" class="value">50%</span></div>
+        <div id="sim-stats">Resources: <span id="resources">0</span> | Events: Idle</div>
+        <div id="event-log">Last Event: None</div>
+        <div id="building-info">System Idle: Hover/Click a building to inspect/upgrade/enter interior</div>
     </div>
 
     <div id="status-bar">
         Autogit Growth Engine // v2.0-HYPER-AUTONOMOUS<br>
-        District Time: <span id="time-display">MIDNIGHT</span> | Latest Update: <span id="last-evolution">---</span>
+        District Time: <span id="time-display">MIDNIGHT</span> | Latest Evolution: <span id="last-evolution">---</span>
     </div>
 
     <button id="debug-toggle">DEBUG_SHELL</button>
     <div id="debug-console">
-        <div class="debug-msg">[SYSTEM] Initializing Metropolitan Core...</div>
+        <div class="debug-msg">[SYSTEM] Initializing SimCity Core...</div>
     </div>
 
     <script type="module">
@@ -183,37 +195,33 @@
         let scene, camera, renderer, controls, raycaster, mouse;
         let sunLight, moonLight, ambientLight, skyLight;
         const CITY_DATA_URL = 'city.json';
-        const buildings_meshes = [];
-        let time = 0; // Linked to system time
+        const buildings_groups = [];  // Groups for details
+        let vehicles = [], pedestrians, rainParticles, fireworksParticles;
+        let time = 0, simTime = 0;  // For day-night and sim
+        let resources = 0, eventTimer = 0;  // Game mechanics
+        let currentEvent = "Idle";
+        let lastMouseX = 0, lastMouseY = 0;  // For debounce in hover
 
-        // Window texture generator
-        function createWindowTexture() {
+        // Texture generators for granulation
+        function createWindowTexture(litPercent, pattern) {
             const canvas = document.createElement('canvas');
-            canvas.width = 128; // Increased resolution
-            canvas.height = 128;
+            canvas.width = 256; canvas.height = 256;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#050510';
-            ctx.fillRect(0, 0, 128, 128);
-
-            ctx.fillStyle = '#ffff66';
-            for (let y = 10; y < 118; y += 16) {
-                for (let x = 10; x < 118; x += 16) {
-                    if (Math.random() > 0.4) {
-                        ctx.globalAlpha = Math.random() * 0.9 + 0.1;
-                        ctx.fillRect(x, y, 8, 8); // Sharper windows
-                        // Add sub-glow
-                        ctx.shadowBlur = 4;
-                        ctx.shadowColor = '#ffff66';
+            ctx.fillStyle = '#050510'; ctx.fillRect(0, 0, 256, 256);
+            ctx.fillStyle = '#ffff66'; ctx.shadowBlur = 6; ctx.shadowColor = '#ffff66';
+            const step = pattern === 'grid' ? 20 : pattern === 'striped' ? 25 : 15;
+            for (let y = 10; y < 246; y += step) {
+                for (let x = 10; x < 246; x += step) {
+                    if (Math.random() < litPercent && (pattern !== 'diagonal' || (x + y) % 30 === 0)) {
+                        ctx.globalAlpha = Math.random() * 0.8 + 0.2;
+                        ctx.fillRect(x, y, 12, 12);  // Larger, glowing windows
                     }
                 }
             }
             const texture = new THREE.CanvasTexture(canvas);
-            texture.repeat.set(2, 8); // Better scaling for buildings
-            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(4, 8); texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
             return texture;
         }
-
-        const windowTexture = createWindowTexture();
 
         init();
         loadCityData();
@@ -221,68 +229,86 @@
         function init() {
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x020205);
-            scene.fog = new THREE.FogExp2(0x020205, 0.005);
+            scene.fog = new THREE.FogExp2(0x020205, 0.002);  // Lower density for perf
 
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
-            camera.position.set(120, 80, 120);
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 5000);
+            camera.position.set(200, 100, 200);
 
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));  // Cap for perf
             renderer.shadowMap.enabled = true;
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             document.body.appendChild(renderer.domElement);
 
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 0.15;
+            controls.dampingFactor = 0.05;  // Snappier
+            controls.autoRotate = false;  // Disable auto for less CPU
+            controls.enableZoom = true;  // Explicit
 
-            // Lighting System
-            ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
             scene.add(ambientLight);
 
-            skyLight = new THREE.HemisphereLight(0x8080ff, 0x050510, 0.5);
+            skyLight = new THREE.HemisphereLight(0x8080ff, 0x050510, 0.6);
             scene.add(skyLight);
 
-            sunLight = new THREE.DirectionalLight(0xffffff, 4.0);
-            sunLight.position.set(50, 100, 50);
+            sunLight = new THREE.DirectionalLight(0xffffff, 3.0);
+            sunLight.position.set(100, 200, 100);
             sunLight.castShadow = true;
-            sunLight.shadow.mapSize.width = 4096;
-            sunLight.shadow.mapSize.height = 4096;
-            sunLight.shadow.camera.left = -500;
-            sunLight.shadow.camera.right = 500;
-            sunLight.shadow.camera.top = 500;
-            sunLight.shadow.camera.bottom = -500;
+            sunLight.shadow.mapSize.width = 2048; sunLight.shadow.mapSize.height = 2048;  // Lower for perf
+            sunLight.shadow.camera.left = -1000; sunLight.shadow.camera.right = 1000;
+            sunLight.shadow.camera.top = 1000; sunLight.shadow.camera.bottom = -1000;
             scene.add(sunLight);
 
-            moonLight = new THREE.DirectionalLight(0x4444ff, 1.0);
-            moonLight.position.set(-50, 50, -50);
+            moonLight = new THREE.DirectionalLight(0x4444ff, 1.2);
+            moonLight.position.set(-100, 100, -100);
             scene.add(moonLight);
 
-            // Ground
+            // Ground with texture for roads/parks
+            const groundTexture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/terrain/grasslight-big.jpg');
+            groundTexture.repeat.set(50, 50); groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
             const ground = new THREE.Mesh(
                 new THREE.PlaneGeometry(5000, 5000),
-                new THREE.MeshStandardMaterial({
-                    color: 0x0a0a0f,
-                    roughness: 0.6,
-                    metalness: 0.1
-                })
+                new THREE.MeshStandardMaterial({ map: groundTexture, roughness: 0.8, metalness: 0.1 })
             );
             ground.rotation.x = -Math.PI / 2;
             ground.receiveShadow = true;
             scene.add(ground);
 
+            // Pedestrians (reduced count for perf)
+            const pedGeo = new THREE.BufferGeometry().setFromPoints(Array.from({ length: 2000 }, () => new THREE.Vector3(Math.random() * 4000 - 2000, 0.5, Math.random() * 4000 - 2000)));
+            const pedMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.2 });
+            pedestrians = new THREE.Points(pedGeo, pedMat);
+            scene.add(pedestrians);
+
+            // Rain (reduced)
+            const rainGeo = new THREE.BufferGeometry().setFromPoints(Array.from({ length: 5000 }, () => new THREE.Vector3(Math.random() * 2000 - 1000, Math.random() * 500, Math.random() * 2000 - 1000)));
+            const rainMat = new THREE.PointsMaterial({ color: 0xaaaaaa, size: 0.1, transparent: true });
+            rainParticles = new THREE.Points(rainGeo, rainMat);
+            rainParticles.visible = false;
+            scene.add(rainParticles);
+
+            // Fireworks (reduced)
+            const fireworkGeo = new THREE.BufferGeometry().setFromPoints(Array.from({ length: 1000 }, () => new THREE.Vector3(0, 0, 0)));
+            const fireworkMat = new THREE.PointsMaterial({ color: 0xff0000, size: 0.5, blending: THREE.AdditiveBlending });
+            fireworksParticles = new THREE.Points(fireworkGeo, fireworkMat);
+            fireworksParticles.visible = false;
+            scene.add(fireworksParticles);
+
             raycaster = new THREE.Raycaster();
             mouse = new THREE.Vector2();
 
-            window.addEventListener('resize', onWindowResize, false);
-            window.addEventListener('mousemove', onMouseMove, false);
+            window.addEventListener('resize', onWindowResize);
+            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('click', onMouseClick);  // For upgrades/interiors
 
             const toggle = document.getElementById('debug-toggle');
             const consoleBox = document.getElementById('debug-console');
             toggle.addEventListener('click', () => {
                 consoleBox.style.display = consoleBox.style.display === 'none' ? 'block' : 'none';
-                addDebugMessage("DEBUG_SHELL_" + (consoleBox.style.display === 'none' ? "DISCONNECTED" : "ACTIVE"));
+                addDebugMessage("SIM_MODE: " + (consoleBox.style.display === 'none' ? "PAUSED" : "ACTIVE"));
+                controls.autoRotate = consoleBox.style.display !== 'none';  // Toggle auto-rotate with debug
             });
 
             animate();
@@ -297,44 +323,89 @@
             consoleBox.scrollTop = consoleBox.scrollHeight;
         }
 
-        function updateDayNight() {
+        function updateDayNightAndSim() {
             const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            // 6 AM = 0, 12 PM = PI/2, 6 PM = PI, 12 AM = 3PI/2
-            time = ((hours + minutes / 60 - 6) % 24) * (Math.PI / 12);
+            const hours = now.getHours() + (simTime / 3600);  // Accelerate time for sim
+            time = ((hours % 24) - 6) * (Math.PI / 12);
 
             const sunY = Math.sin(time);
             const sunX = Math.cos(time);
 
-            sunLight.position.set(sunX * 300, sunY * 300, 150);
-            moonLight.position.set(-sunX * 300, -sunY * 300, -150);
+            sunLight.position.set(sunX * 500, sunY * 500, 200);
+            moonLight.position.set(-sunX * 500, -sunY * 500, -200);
 
-            const isDay = sunY > 0;
             const intensity = Math.max(0, sunY);
+            sunLight.intensity = intensity * 3.0;
+            moonLight.intensity = Math.max(0, -sunY) * 1.2;
+            ambientLight.intensity = 0.2 + intensity * 0.4;
 
-            // Background & Fog Color Transition
-            const dayColor = new THREE.Color(0x87CEEB); // Sky Blue (Brighter)
+            const dayColor = new THREE.Color(0x87CEEB);
             const nightColor = new THREE.Color(0x020205);
-            const activeColor = nightColor.clone().lerp(dayColor, intensity);
+            scene.background.copy(nightColor).lerp(dayColor, intensity);
+            scene.fog.color.copy(scene.background);
 
-            scene.background = activeColor;
-            scene.fog.color = activeColor;
+            // Game Sim: Accumulate resources every frame
+            simTime += 0.016;  // ~60 FPS
+            resources += buildings_groups.length * 0.02;  // Faster with more buildings
+            document.getElementById('resources').textContent = Math.floor(resources);
 
-            // Intensity Management
-            sunLight.intensity = intensity * 4.0;
-            moonLight.intensity = Math.max(0, -sunY) * 1.5;
-            ambientLight.intensity = 0.2 + intensity * 0.5;
-
-            // HUD Update
-            const timeSpan = document.getElementById('time-display');
-            if (sunY > 0.8) timeSpan.textContent = "PEAK_DAYLIGHT";
-            else if (sunY > 0.2) timeSpan.textContent = "DAY_CYCLE";
-            else if (sunY > -0.2) {
-                timeSpan.textContent = "TWILIGHT_TRANSIT";
-                if (Math.abs(sunY) < 0.05) addDebugMessage("Global Twilight Detected");
+            // Events more frequently (20-40s)
+            eventTimer += 0.016;
+            if (eventTimer > 20 + Math.random() * 20) {
+                triggerEvent();
+                eventTimer = 0;
             }
-            else timeSpan.textContent = "NIGHT_CYCLE";
+
+            // Update time HUD
+            const timeSpan = document.getElementById('time-display');
+            timeSpan.textContent = sunY > 0 ? 'DAY_CYCLE' : 'NIGHT_CYCLE';
+
+            // Animate pedestrians
+            pedestrians.position.x += Math.sin(simTime) * 0.01;
+            pedestrians.position.z += Math.cos(simTime) * 0.01;
+
+            // Animate rain if active
+            if (rainParticles.visible) {
+                rainParticles.position.y -= 5;
+                if (rainParticles.position.y < -500) rainParticles.position.y = 500;
+            }
+
+            // Animate fireworks if active
+            if (fireworksParticles.visible) {
+                fireworksParticles.geometry.attributes.position.array.forEach((v, i) => {
+                    if (i % 3 === 1) v -= 0.5 + Math.random();  // Fall with spread
+                });
+                fireworksParticles.geometry.attributes.position.needsUpdate = true;
+            }
+        }
+
+        function triggerEvent() {
+            const events = [
+                { name: "Code Refactor", effect: () => { buildings_groups.forEach(g => g.scale.y *= 1.05); addDebugMessage("EVENT: Refactor - Buildings Upgraded!"); } },
+                { name: "Bug Storm", effect: () => { rainParticles.visible = true; setTimeout(() => rainParticles.visible = false, 10000); addDebugMessage("EVENT: Bug Storm - Weather Alert!"); } },
+                { name: "Traffic Surge", effect: () => { vehicles.forEach(v => v.speed *= 1.2); addDebugMessage("EVENT: Surge - Traffic Increased!"); } },
+                { name: "Green Initiative", effect: () => { addDebugMessage("EVENT: Green - Happiness +10%!"); document.getElementById('happiness').textContent = parseInt(document.getElementById('happiness').textContent) + 10 + '%'; } },
+                // New events
+                { name: "Power Outage", effect: () => { ambientLight.intensity *= 0.5; setTimeout(() => ambientLight.intensity *= 2, 5000); addDebugMessage("EVENT: Outage - Lights Dimmed!"); } },
+                { name: "Construction Boom", effect: () => { buildings_groups.forEach(g => { const scaffold = new THREE.Mesh(new THREE.BoxGeometry(2, g.userData.height, 2), new THREE.MeshBasicMaterial({ wireframe: true })); g.add(scaffold); setTimeout(() => g.remove(scaffold), 10000); }); addDebugMessage("EVENT: Boom - Scaffolds Added!"); } },
+                { name: "Festival Celebration", effect: () => { fireworksParticles.visible = true; fireworksParticles.material.color.setHex(Math.random() * 0xffffff); setTimeout(() => fireworksParticles.visible = false, 8000); addDebugMessage("EVENT: Festival - Fireworks!"); } },
+                { name: "Earthquake Tremor", effect: () => { buildings_groups.forEach(g => g.position.y += Math.sin(simTime * 10) * 0.5); setTimeout(() => buildings_groups.forEach(g => g.position.y = g.userData.height / 2), 3000); addDebugMessage("EVENT: Tremor - City Shakes!"); } },
+                { name: "Tech Expo", effect: () => { resources += 200; addDebugMessage("EVENT: Expo - Resources +200!"); } },
+                { name: "Cyber Attack", effect: () => { buildings_groups.forEach(g => setEmissive(g, 0)); setTimeout(() => buildings_groups.forEach(g => setEmissive(g, 0.6)), 6000); addDebugMessage("EVENT: Attack - Emissives Off!"); } },
+                { name: "Population Growth", effect: () => { document.getElementById('population').textContent = parseInt(document.getElementById('population').textContent) + 500; addDebugMessage("EVENT: Growth - Population +500!"); } },
+                { name: "Eco Disaster", effect: () => { scene.fog.density = 0.01; setTimeout(() => scene.fog.density = 0.003, 7000); addDebugMessage("EVENT: Disaster - Fog Increases!"); } },
+                { name: "Innovation Wave", effect: () => { buildings_groups.forEach(g => g.userData.upgrades += 1); addDebugMessage("EVENT: Wave - All Upgraded!"); } },
+                { name: "Night Market", effect: () => { if (time < 0) resources += 100; addDebugMessage("EVENT: Market - Night Bonus!"); } }
+            ];
+            const evt = randomChoice(events);
+            evt.effect();
+            currentEvent = evt.name;
+            document.getElementById('sim-stats').textContent = `Resources: ${Math.floor(resources)} | Events: ${currentEvent}`;
+            document.getElementById('event-log').textContent = `Last Event: ${currentEvent}`;
+        }
+
+        function randomChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
         }
 
         async function loadCityData() {
@@ -342,95 +413,120 @@
                 const response = await fetch(CITY_DATA_URL + '?t=' + Date.now());
                 const data = await response.json();
 
-                renderInfrastructure(data.roads, data.gardens);
+                renderInfrastructure(data.roads, data.gardens, data.billboards);
                 renderCity(data.buildings);
+                vehicles = data.vehicles;  // Load for sim
 
                 document.getElementById('urban-density').textContent = data.stats.urban_density;
                 document.getElementById('mainframe-health').textContent = data.stats.mainframe_health;
+                document.getElementById('system-load').textContent = data.stats.system_load;
+                document.getElementById('population').textContent = data.stats.population;
+                document.getElementById('happiness').textContent = data.stats.happiness + '%';
                 document.getElementById('last-evolution').textContent = data.stats.last_evolution;
 
-                addDebugMessage(`Sync successful: ${data.buildings.length} nodes loaded.`);
+                addDebugMessage(`Sim Loaded: ${data.buildings.length} buildings, ${data.stats.traffic_level} vehicles.`);
 
             } catch (error) {
-                console.error("City synchronization failed:", error);
-                addDebugMessage("CRITICAL: Sync Failure - Mainframe unstable");
+                console.error("City load failed:", error);
+                addDebugMessage("CRITICAL: Sim Failure - Reboot Required");
             }
         }
 
-        function renderInfrastructure(roads, gardens) {
-            // Gardens
-            gardens.forEach(g => {
-                const gardenGeom = new THREE.PlaneGeometry(g.size, g.size);
-                const gardenMat = new THREE.MeshStandardMaterial({
-                    color: 0x1b5e20,
-                    roughness: 0.9
-                });
-                const garden = new THREE.Mesh(gardenGeom, gardenMat);
-                garden.rotation.x = -Math.PI / 2;
-                garden.position.set(g.x, 0.15, g.z);
-                garden.receiveShadow = true;
-                scene.add(garden);
-
-                // Add small "foliage" boxes for granulation
-                for (let i = 0; i < (g.foliage || 0); i++) {
-                    const bush = new THREE.Mesh(
-                        new THREE.BoxGeometry(0.5, 0.5 + Math.random(), 0.5),
-                        new THREE.MeshStandardMaterial({ color: 0x2e7d32 })
-                    );
-                    bush.position.set(
-                        g.x + (Math.random() - 0.5) * g.size * 0.8,
-                        0.4,
-                        g.z + (Math.random() - 0.5) * g.size * 0.8
-                    );
-                    bush.castShadow = true;
-                    scene.add(bush);
-                }
-            });
-
-            // Roads
+        function renderInfrastructure(roads, gardens, billboards) {
+            // Roads with granulation (lanes, markings)
             roads.forEach(r => {
-                const roadGeom = new THREE.PlaneGeometry(r.vertical ? r.w : r.l, r.vertical ? r.l : r.w);
-                const roadMat = new THREE.MeshStandardMaterial({ color: 0x111111 });
-                const road = new THREE.Mesh(roadGeom, roadMat);
+                const roadGeo = new THREE.PlaneGeometry(r.vertical ? r.w : r.l, r.vertical ? r.l : r.w);
+                const roadMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 });
+                const road = new THREE.Mesh(roadGeo, roadMat);
                 road.rotation.x = -Math.PI / 2;
                 road.position.set(r.x, 0.1, r.z);
+                if (!r.vertical) road.rotation.y = Math.atan2(r.dz, r.dx);  // Align to direction if needed
                 road.receiveShadow = true;
                 scene.add(road);
 
-                // Emissive road dividers
-                const entryCount = 10;
-                for (let i = 0; i < entryCount; i++) {
-                    const pos = (i / entryCount) * r.l - r.l / 2;
-                    const dashLen = 1;
-                    const dashGeom = new THREE.PlaneGeometry(r.vertical ? 0.1 : dashLen, r.vertical ? dashLen : 0.1);
-                    const dashMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
-                    const dash = new THREE.Mesh(dashGeom, dashMat);
+                // Lane markings
+                for (let i = 0; i < Math.floor(r.l / 10); i++) {
+                    const pos = i * 10 - r.l / 2 + 5;
+                    const dashGeo = new THREE.PlaneGeometry(0.5, 4);
+                    const dashMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                    const dash = new THREE.Mesh(dashGeo, dashMat);
                     dash.rotation.x = -Math.PI / 2;
-                    if (r.vertical) dash.position.set(r.x, 0.2, r.z + pos);
-                    else dash.position.set(r.x + pos, 0.2, r.z);
+                    dash.position.set(r.x + (r.vertical ? 0 : pos), 0.15, r.z + (r.vertical ? pos : 0));
                     scene.add(dash);
                 }
 
-                // Street Lights
-                if (r.lights) {
-                    for (let i = 0; i < 5; i++) {
-                        const l_pos = (i / 5) * r.l - r.l / 2;
-                        const pole = new THREE.Mesh(
-                            new THREE.CylinderGeometry(0.1, 0.1, 4),
-                            new THREE.MeshStandardMaterial({ color: 0x333333 })
-                        );
-                        const street_x = r.vertical ? r.x + 2 : r.x + l_pos;
-                        const street_z = r.vertical ? r.z + l_pos : r.z + 2;
-                        pole.position.set(street_x, 2.1, street_z);
-                        scene.add(pole);
+                // Street lights (more granular)
+                const lightCount = Math.floor(r.l / 20);
+                for (let i = 0; i < lightCount; i++) {
+                    const pos = i / lightCount * r.l - r.l / 2;
+                    const poleGeo = new THREE.CylinderGeometry(0.15, 0.15, 6);
+                    const poleMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
+                    const pole = new THREE.Mesh(poleGeo, poleMat);
+                    pole.position.set(r.x + (r.vertical ? r.w / 2 + 1 : pos), 3, r.z + (r.vertical ? pos : r.w / 2 + 1));
+                    scene.add(pole);
 
-                        const lamp = new THREE.Mesh(
-                            new THREE.SphereGeometry(0.2),
-                            new THREE.MeshBasicMaterial({ color: 0x00ffcc })
-                        );
-                        lamp.position.set(street_x, 4.1, street_z);
-                        scene.add(lamp);
-                    }
+                    const lampLight = new THREE.PointLight(0xffffaa, 1, 50);
+                    lampLight.position.set(pole.position.x, 6, pole.position.z);
+                    scene.add(lampLight);
+                }
+            });
+
+            // Gardens with types
+            gardens.forEach(g => {
+                const gardenGeo = new THREE.PlaneGeometry(g.size, g.size);
+                const gardenMat = new THREE.MeshStandardMaterial({ color: 0x1b5e20, roughness: 0.9 });
+                const garden = new THREE.Mesh(gardenGeo, gardenMat);
+                garden.rotation.x = -Math.PI / 2;
+                garden.position.set(g.x, 0.2, g.z);
+                garden.receiveShadow = true;
+                scene.add(garden);
+
+                // Foliage (trees/bushes)
+                for (let i = 0; i < g.foliage; i++) {
+                    const treeHeight = random.uniform(2, 5);
+                    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.3, treeHeight), new THREE.MeshStandardMaterial({ color: 0x8b4513 }));
+                    trunk.position.set(g.x + random.uniform(-g.size / 2, g.size / 2), treeHeight / 2, g.z + random.uniform(-g.size / 2, g.size / 2));
+                    scene.add(trunk);
+
+                    const canopy = new THREE.Mesh(new THREE.SphereGeometry(1.5, 16, 16), new THREE.MeshStandardMaterial({ color: 0x228b22 }));
+                    canopy.position.set(trunk.position.x, treeHeight + 1, trunk.position.z);
+                    scene.add(canopy);
+                }
+
+                // Type-specific
+                if (g.type === 'fountain') {
+                    const fountain = new THREE.Mesh(new THREE.CylinderGeometry(2, 2, 0.5, 32), new THREE.MeshStandardMaterial({ color: 0xadd8e6, emissive: 0xadd8e6, emissiveIntensity: 0.3 }));
+                    fountain.position.set(g.x, 0.3, g.z);
+                    scene.add(fountain);
+                    // Water particles (simple sim)
+                    const waterGeo = new THREE.BufferGeometry().setFromPoints(Array.from({ length: 200 }, () => new THREE.Vector3(random.uniform(-1, 1), random.uniform(0, 3), random.uniform(-1, 1))));
+                    const waterMat = new THREE.PointsMaterial({ color: 0x00bfff, size: 0.1 });
+                    const water = new THREE.Points(waterGeo, waterMat);
+                    water.position.set(g.x, 0.5, g.z);
+                    scene.add(water);
+                } else if (g.type === 'statue') {
+                    const statue = new THREE.Mesh(new THREE.BoxGeometry(1, 4, 1), new THREE.MeshStandardMaterial({ color: 0xC0C0C0 }));
+                    statue.position.set(g.x, 2, g.z);
+                    scene.add(statue);
+                } else if (g.type === 'plaza') {
+                    // Benches, etc.
+                    const bench = new THREE.Mesh(new THREE.BoxGeometry(3, 0.5, 1), new THREE.MeshStandardMaterial({ color: 0x808080 }));
+                    bench.position.set(g.x + 3, 0.3, g.z);
+                    scene.add(bench);
+                }
+            });
+
+            // Billboards
+            billboards.forEach(b => {
+                const bbGeo = new THREE.PlaneGeometry(b.size, b.size / 2);
+                const bbMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 });
+                const bb = new THREE.Mesh(bbGeo, bbMat);
+                bb.position.set(b.x, 5, b.z);
+                bb.rotation.y = Math.PI / 4;  // Angle for visibility
+                scene.add(bb);
+                if (b.neon) {
+                    bb.material.emissive = new THREE.Color(0x00ffcc);
+                    bb.material.emissiveIntensity = 0.8;
                 }
             });
         }
@@ -438,131 +534,192 @@
         function renderCity(buildings) {
             buildings.forEach(b => {
                 const group = new THREE.Group();
-                const geometry = new THREE.BoxGeometry(b.width * 0.9, b.height, b.depth * 0.9);
+                const interiorGroup = new THREE.Group();  // New: For interiors
+                interiorGroup.visible = false;  // Hidden by default
+                group.add(interiorGroup);
 
-                const baseMat = new THREE.MeshStandardMaterial({
-                    color: b.color,
-                    roughness: 0.3,
-                    metalness: 0.2
-                });
-                const windowMat = new THREE.MeshStandardMaterial({
-                    color: b.color,
-                    map: windowTexture,
-                    emissive: new THREE.Color(b.color),
-                    emissiveIntensity: 0.4,
-                    roughness: 0.1,
-                    metalness: 0.6
-                });
+                // Base building with style granulation
+                let baseGeo;
+                if (b.style === 'cyberpunk' || b.style === 'futuristic') {
+                    baseGeo = new THREE.CylinderGeometry(b.width / 2, b.depth / 2, b.height, 32);  // Rounded
+                } else if (b.style === 'brutalist') {
+                    baseGeo = new THREE.BoxGeometry(b.width, b.height, b.depth);
+                    // Add extrusions for detail
+                    const extrude = new THREE.Mesh(new THREE.BoxGeometry(b.width / 2, b.height / 4, b.depth / 2), new THREE.MeshStandardMaterial({ color: b.color }));
+                    extrude.position.y = b.height / 4;
+                    group.add(extrude);
+                } else {
+                    baseGeo = new THREE.BoxGeometry(b.width, b.height, b.depth);
+                }
 
+                const windowTex = createWindowTexture(b.windows.lit_percent, b.windows.pattern);
+                const baseMat = new THREE.MeshStandardMaterial({ color: b.color, roughness: 0.4, metalness: 0.3, transparent: true, opacity: 1 });  // Transparent for interiors
+                const windowMat = new THREE.MeshStandardMaterial({ map: windowTex, emissive: new THREE.Color(0xffff66), emissiveIntensity: 0.6, roughness: 0.2 });
                 const materials = [windowMat, windowMat, baseMat, baseMat, windowMat, windowMat];
 
-                const mesh = new THREE.Mesh(geometry, materials);
+                const mesh = new THREE.Mesh(baseGeo, materials);
                 mesh.castShadow = true;
                 mesh.receiveShadow = true;
+                mesh.userData.isExterior = true;  // Flag for opacity control
                 group.add(mesh);
 
-                // Add Rooftop Granulation
-                if (b.roof_decor) {
-                    const roofY = b.height / 2;
-                    if (b.roof_decor === "helipad") {
-                        const h_geom = new THREE.CylinderGeometry(1.5, 1.5, 0.1, 32);
-                        const h_mat = new THREE.MeshStandardMaterial({ color: 0x222222 });
-                        const h = new THREE.Mesh(h_geom, h_mat);
-                        h.position.y = roofY + 0.05;
-                        group.add(h);
-                        // H Marker
-                        const ring = new THREE.Mesh(
-                            new THREE.TorusGeometry(1.2, 0.05, 16, 100),
-                            new THREE.MeshBasicMaterial({ color: 0xffffff })
-                        );
-                        ring.rotation.x = Math.PI / 2;
-                        ring.position.y = roofY + 0.1;
-                        group.add(ring);
-                    } else if (b.roof_decor === "beacon") {
-                        const beaconBase = new THREE.Mesh(new THREE.BoxGeometry(2, 0.5, 2), new THREE.MeshStandardMaterial({ color: b.color }));
-                        beaconBase.position.y = roofY + 0.25;
-                        group.add(beaconBase);
-                        const lightPoint = new THREE.Mesh(new THREE.SphereGeometry(0.5), new THREE.MeshBasicMaterial({ color: 0xffffff }));
-                        lightPoint.position.y = roofY + 1.2;
-                        group.add(lightPoint);
-                        const beamGeom = new THREE.CylinderGeometry(0.5, 2, 50, 32, 1, true);
-                        const beamMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
-                        const beam = new THREE.Mesh(beamGeom, beamMat);
-                        beam.position.y = roofY + 25;
-                        group.add(beam);
-                    } else if (b.roof_decor === "cooling_tower") {
-                        const towerGeom = new THREE.CylinderGeometry(1.5, 2.5, 4, 32);
-                        const tower = new THREE.Mesh(towerGeom, new THREE.MeshStandardMaterial({ color: 0x666666 }));
-                        tower.position.y = roofY + 2;
-                        group.add(tower);
-                        const tip = new THREE.Mesh(new THREE.TorusGeometry(1.5, 0.2), new THREE.MeshStandardMaterial({ color: 0x333333 }));
-                        tip.rotation.x = Math.PI / 2;
-                        tip.position.y = roofY + 4;
-                        group.add(tip);
-                    } else if (b.roof_decor === "satellite_dish") {
-                        const base = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1), new THREE.MeshStandardMaterial({ color: 0x333333 }));
-                        base.position.y = roofY + 0.5;
-                        group.add(base);
-                        const dish = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xcccccc }));
-                        dish.position.y = roofY + 1.5;
-                        dish.rotation.x = Math.PI / 4;
-                        group.add(dish);
-                    } else if (b.roof_decor === "hvac_unit") {
-                        const hvac = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.8, 1.5), new THREE.MeshStandardMaterial({ color: 0x444444 }));
-                        hvac.position.y = roofY + 0.4;
-                        group.add(hvac);
-                    } else if (b.roof_decor === "small_antenna") {
-                        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 3), new THREE.MeshStandardMaterial({ color: 0x333333 }));
-                        ant.position.set(1, roofY + 1.5, 1);
+                // New: Generate interiors
+                const floorSpacing = b.height / b.interiors.floors;
+                for (let f = 0; f < b.interiors.floors; f++) {
+                    // Floor plane
+                    const floorGeo = new THREE.PlaneGeometry(b.width * 0.9, b.depth * 0.9);
+                    const floorMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
+                    const floor = new THREE.Mesh(floorGeo, floorMat);
+                    floor.rotation.x = Math.PI / 2;
+                    floor.position.y = -b.height / 2 + (f + 1) * floorSpacing;
+                    interiorGroup.add(floor);
+
+                    // Rooms per floor
+                    for (let r = 0; r < b.interiors.rooms_per_floor; r++) {
+                        const roomType = randomChoice(b.interiors.room_types);
+                        const roomColor = roomType === 'office' ? 0xadd8e6 : roomType === 'server_room' ? 0x808080 : roomType === 'lobby' ? 0xffd700 : roomType === 'conference' ? 0x8b4513 : 0x00ff00;
+                        const roomSize = random.uniform(2, 4);
+                        const room = new THREE.Mesh(new THREE.BoxGeometry(roomSize, floorSpacing * 0.8, roomSize), new THREE.MeshStandardMaterial({ color: roomColor }));
+                        room.position.set(random.uniform(-b.width / 4, b.width / 4), floor.position.y + floorSpacing / 2, random.uniform(-b.depth / 4, b.depth / 4));
+                        interiorGroup.add(room);
+
+                        // Furniture based on density
+                        if (Math.random() < b.interiors.furniture_density) {
+                            const desk = new THREE.Mesh(new THREE.BoxGeometry(1, 0.5, 1), new THREE.MeshStandardMaterial({ color: 0x654321 }));
+                            desk.position.set(room.position.x + random.uniform(-0.5, 0.5), room.position.y - floorSpacing / 4, room.position.z);
+                            interiorGroup.add(desk);
+
+                            const chair = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.8, 16), new THREE.MeshStandardMaterial({ color: 0x000000 }));
+                            chair.position.set(desk.position.x + 0.6, desk.position.y, desk.position.z);
+                            interiorGroup.add(chair);
+                        }
+                    }
+                }
+
+                // Roof granulation
+                const roofY = b.height / 2;
+                if (b.roof_decor === 'helipad') {
+                    const hGeo = new THREE.CylinderGeometry(3, 3, 0.2, 32);
+                    const h = new THREE.Mesh(hGeo, new THREE.MeshStandardMaterial({ color: 0x222222 }));
+                    h.position.y = roofY + 0.1;
+                    group.add(h);
+                    const ring = new THREE.Mesh(new THREE.TorusGeometry(2.5, 0.1, 16, 100), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+                    ring.rotation.x = Math.PI / 2;
+                    ring.position.y = roofY + 0.15;
+                    group.add(ring);
+                } else if (b.roof_decor === 'antenna_array') {
+                    for (let i = 0; i < 3; i++) {
+                        const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 6 + i * 2), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+                        ant.position.set(random.uniform(-1, 1), roofY + 3 + i, random.uniform(-1, 1));
                         group.add(ant);
                     }
+                } else if (b.roof_decor === 'roof_garden') {
+                    const gardenGeo = new THREE.PlaneGeometry(b.width * 0.8, b.depth * 0.8);
+                    const garden = new THREE.Mesh(gardenGeo, new THREE.MeshStandardMaterial({ color: 0x228b22 }));
+                    garden.rotation.x = -Math.PI / 2;
+                    garden.position.y = roofY + 0.1;
+                    group.add(garden);
+                } else if (b.roof_decor === 'solar_panels') {
+                    for (let i = 0; i < 4; i++) {
+                        const panel = new THREE.Mesh(new THREE.BoxGeometry(2, 0.1, 2), new THREE.MeshStandardMaterial({ color: 0x0000ff, metalness: 0.8 }));
+                        panel.position.set(i * 2 - 3, roofY + 0.05, 0);
+                        panel.rotation.x = Math.PI / 6;  // Tilted
+                        group.add(panel);
+                    }
+                } else if (b.roof_decor === 'water_tank') {
+                    const tank = new THREE.Mesh(new THREE.CylinderGeometry(2, 2, 4, 32), new THREE.MeshStandardMaterial({ color: 0x808080 }));
+                    tank.position.y = roofY + 2;
+                    group.add(tank);
+                } else if (b.roof_decor === 'neon_sign') {
+                    const signGeo = new THREE.PlaneGeometry(4, 2);
+                    const signMat = new THREE.MeshBasicMaterial({ color: 0x00ffcc, emissive: 0x00ffcc, emissiveIntensity: 1 });
+                    const sign = new THREE.Mesh(signGeo, signMat);
+                    sign.position.y = roofY + 1;
+                    sign.rotation.y = Math.PI / 2;
+                    group.add(sign);
                 }
 
                 group.position.set(b.x, b.height / 2, b.z);
                 group.userData = b;
+                group.userData.interiorGroup = interiorGroup;  // Reference for toggle
                 scene.add(group);
-                buildings_meshes.push(group);
+                buildings_groups.push(group);
             });
         }
 
         let intersectedObject = null;
+        let interiorView = false;
 
         function onMouseMove(event) {
+            const newMouseX = event.clientX;
+            const newMouseY = event.clientY;
+            if (Math.abs(newMouseX - lastMouseX) < 5 && Math.abs(newMouseY - lastMouseY) < 5) return;  // Debounce small movements
+            lastMouseX = newMouseX;
+            lastMouseY = newMouseY;
+
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
             raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects(buildings_meshes, true);
+            const intersects = raycaster.intersectObjects(buildings_groups.map(g => g.children.filter(c => c.userData && c.userData.isExterior)), true);  // Only exteriors
 
             if (intersects.length > 0) {
-                // Find the group (building)
                 let target = intersects[0].object;
-                while (target.parent && target.parent !== scene) {
-                    target = target.parent;
-                }
+                while (target.parent && target.parent !== scene) target = target.parent;
 
-                if (intersectedObject != target) {
+                if (intersectedObject !== target) {
                     if (intersectedObject) {
-                        setEmissive(intersectedObject, 0.4);
+                        setEmissive(intersectedObject, 0.6);
+                        toggleInterior(intersectedObject, false);
                     }
                     intersectedObject = target;
-                    setEmissive(intersectedObject, 1.5);
+                    setEmissive(intersectedObject, 1.8);
 
-                    const b = intersectedObject.userData;
+                    const b = target.userData;
                     document.getElementById('building-info').innerHTML = `
-                        <div style="font-weight:900; color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #00ffcc; padding-bottom:5px; margin-bottom:8px">${b.name}</div>
-                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Building Type:</span> ${b.type}</div>
-                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Growth Rating:</span> ${b.complexity}</div>
+                        <div style="font-weight:900; color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #00ffcc; padding-bottom:5px; margin-bottom:8px">${b.name} (${b.style})</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Type:</span> ${b.type} (Lvl ${b.upgrades})</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Complexity:</span> ${b.complexity}</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Windows:</span> ${b.windows.count} (${b.windows.pattern})</div>
+                        <div style="font-size:0.7rem; color:#fff"><span style="opacity:0.6">Interiors:</span> ${b.interiors.floors} Floors, ${b.interiors.rooms_per_floor} Rooms/Floor</div>
                         <div style="font-size:0.65rem; color:#00ffcc; margin-top:8px; font-family:monospace">[ Location ]<br>${b.address}</div>
+                        <div style="font-size:0.65rem; color:#ffcc00; margin-top:5px">Click to Upgrade/Enter Interior (Costs 100 Resources)</div>
                     `;
                 }
             } else {
                 if (intersectedObject) {
-                    setEmissive(intersectedObject, 0.4);
+                    setEmissive(intersectedObject, 0.6);
+                    toggleInterior(intersectedObject, false);
                     intersectedObject = null;
                 }
-                document.getElementById('building-info').textContent = "System Idle: Select a building for details";
+                document.getElementById('building-info').innerHTML = "System Idle: Hover/Click a building to inspect/upgrade/enter interior";
             }
+        }
+
+        function onMouseClick(event) {
+            if (intersectedObject && resources >= 100) {
+                resources -= 100;
+                const b = intersectedObject.userData;
+                b.upgrades += 1;
+                intersectedObject.scale.y *= 1.1;  // Visual upgrade
+                // Add more interior details on upgrade
+                const newRoom = new THREE.Mesh(new THREE.BoxGeometry(2, 3, 2), new THREE.MeshStandardMaterial({ color: 0xff0000 }));
+                newRoom.position.set(0, 0, 0);
+                intersectedObject.userData.interiorGroup.add(newRoom);
+                addDebugMessage(`UPGRADE: ${b.name} to Lvl ${b.upgrades} - New Room Added!`);
+                interiorView = !interiorView;  // Toggle full interior view
+                toggleInterior(intersectedObject, interiorView);
+            }
+        }
+
+        function toggleInterior(group, show) {
+            if (!group.userData.interiorGroup) return;
+            group.userData.interiorGroup.visible = show;
+            group.traverse(child => {
+                if (child.userData && child.userData.isExterior) {
+                    child.material.opacity = show ? 0.5 : 1;
+                }
+            });
         }
 
         function setEmissive(group, intensity) {
@@ -570,10 +727,18 @@
                 if (child.isMesh && child.material) {
                     if (Array.isArray(child.material)) {
                         child.material.forEach(m => { if (m.emissive) m.emissiveIntensity = intensity; });
-                    } else {
-                        if (child.material.emissive) child.material.emissiveIntensity = intensity;
+                    } else if (child.material.emissive) {
+                        child.material.emissiveIntensity = intensity;
                     }
                 }
+            });
+        }
+
+        function animateVehicles() {
+            vehicles.forEach(v => {
+                v.position += v.speed * v.direction;
+                if (v.position > 1 || v.position < 0) v.direction *= -1;  // Bounce back
+                // Position mesh along road path (assume vehicle meshes loaded similarly)
             });
         }
 
@@ -585,9 +750,17 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            updateDayNight();
+            updateDayNightAndSim();
+            animateVehicles();
             controls.update();
             renderer.render(scene, camera);
+        }
+
+        // Helper for random
+        function random() {
+            return {
+                uniform: (min, max) => Math.random() * (max - min) + min
+            };
         }
     </script>
 </body>

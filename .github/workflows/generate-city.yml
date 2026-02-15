@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '0 * * * *' # Standardized evolution (Every 1 hour)
+    - cron: '30 * * * *'  # Every 1 hour (IST-aligned: runs at :00 IST)
   workflow_dispatch:
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-            fetch-depth: 0
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -41,6 +41,8 @@ jobs:
           echo "STATS<<EOF" >> $GITHUB_ENV
           echo "$STATS" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
+          # Force a change detection by adding run ID
+          jq '.stats.cycle_id = "${{ github.run_id }}"' city.json > city_temp.json && mv city_temp.json city.json
 
       - name: Autonomous PR Flow
         env:
@@ -49,32 +51,33 @@ jobs:
           git config user.name "Autogit Evolution Bot"
           git config user.email "bot@autogit.local"
           
-          # Check for changes
-          if [[ -n "$(git status --porcelain)" ]]; then
-            BRANCH="evolution/cycle-${{ github.run_id }}"
-            git checkout -b $BRANCH
-            git add city.json
-            git commit -m "🏙️ Evolution Cycle: ${{ env.TIMESTAMP }}"
-            git push origin $BRANCH
-            
-            # Create PR
-            PR_URL=$(gh pr create \
-              --title "🧬 Autonomous Evolution Cycle: ${{ env.TIMESTAMP }}" \
-              --body "### Simulation Report
-              The city has pulsed. 🏙️
-              
-              **Metrics:**
-              ${{ env.STATS }}
-              
-              *Generated autonomously by the Autogit Evolution Engine.*" \
-              --base main \
-              --head $BRANCH)
-            
-            # Immediate Merge (Open and Close as requested)
-            gh pr merge $PR_URL --squash --delete-branch
+          BRANCH="evolution/cycle-${{ github.run_id }}"
+          git checkout -b $BRANCH
+          git add city.json
+          if git diff --cached --quiet; then
+            echo "No structural changes detected—skipping PR but logging cycle."
+            # Still commit for history
+            git commit -m "🏙️ Idle Evolution Cycle: ${{ env.TIMESTAMP }} (No Changes)"
           else
-            echo "No structural changes detected in this cycle."
+            git commit -m "🏙️ Evolution Cycle: ${{ env.TIMESTAMP }}"
           fi
+          git push origin $BRANCH
+          
+          # Create PR always for visibility
+          PR_URL=$(gh pr create \
+            --title "🧬 Autonomous Evolution Cycle: ${{ env.TIMESTAMP }}" \
+            --body "### Simulation Report
+            The city has pulsed. 🏙️
+            
+            **Metrics:**
+            ${{ env.STATS }}
+            
+            *Generated autonomously by the Autogit Evolution Engine.*" \
+            --base main \
+            --head $BRANCH)
+          
+          # Immediate Merge
+          gh pr merge $PR_URL --squash --delete-branch
 
       - name: Raise Issue on Failure
         if: failure()

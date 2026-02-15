@@ -42,7 +42,7 @@ def fetch_github_data(token):
         metrics = []
         for item in tree_data['tree']:
             if item['type'] == 'blob' and item['path'].endswith(('.py', '.js', '.html', '.css', '.c')):
-                # Use size/1000 as a proxy for complexity since we can't run radon without cloning
+                # Use size/500 as a proxy for complexity since we can't run radon without cloning
                 # This ensures the city "looks" right based on file volume
                 size_complexity = max(1, min(20, item.get('size', 0) // 500))
                 metrics.append({
@@ -57,7 +57,20 @@ def fetch_github_data(token):
     return all_nodes
 
 def run_radon():
-    """Fallback local analysis."""
+    """Fallback local analysis using radon for cyclomatic complexity."""
+    print("🔍 Scanning local codebase with radon...")
+    data = {}
+    for root, _, files in os.walk('.'):
+        for file in files:
+            if file.endswith('.py'):
+                path = os.path.join(root, file)
+                try:
+                    output = subprocess.check_output(['radon', 'cc', '-j', path])
+                    metrics = json.loads(output)
+                    data[path] = [m for m in metrics.values() if isinstance(m, list)][0]  # Flatten
+                except Exception as e:
+                    print(f"⚠️ Radon failed on {path}: {e}")
+    return data
 
 def get_address(file_path, x, z):
     """Generate a specific human-readable address."""
@@ -71,8 +84,8 @@ def get_address(file_path, x, z):
         "prime-spiral": "Ulam Plaza",
         "Quine-Garden": "Recursive Gardens",
         "game-of-life": "Conway Commons",
-        "CityBuilder": "Architecture Zone",
-        "procedural-city-builder": "Architecture Zone"
+        "CityBuilder": "Core Architecture Zone",
+        "procedural-city-builder": "Core Architecture Zone"
     }
     
     district = districts.get(project, f"{project.replace('-', ' ').title()} District")
@@ -84,13 +97,15 @@ def get_address(file_path, x, z):
     # Block mapping
     block = f"Block {chr(65 + (abs(int(x)) % 26))}"
     
-    return f"{block}, {street}, {district}"
+    return f"{district} // {street} // {block}"
 
 def generate_city(data):
-    """Generate city.json with buildings, gardens, and infrastructure."""
+    """Generate city.json with detailed buildings, gardens, and infrastructure."""
     buildings = []
     gardens = []
     roads = []
+    vehicles = []  # For traffic simulation
+    billboards = []  # For ads/granulation
     
     # Flatten nodes from multi-repo data
     nodes = []
@@ -111,114 +126,158 @@ def generate_city(data):
                     })
     
     if not nodes:
-        return {"buildings": [], "gardens": [], "roads": [], "stats": {}}
+        return {"buildings": [], "gardens": [], "roads": [], "vehicles": [], "billboards": [], "stats": {}}
     
     avg_complexity = sum(n["complexity"] for n in nodes) / len(nodes)
     
-    # Place buildings on a grid
-    cols = int(math.ceil(math.sqrt(len(nodes))))
-    spacing = 8.0 # Increased spacing for more granulation
+    # Group by district (repo)
+    districts = {}
+    for n in nodes:
+        repo = n["file"].split('/')[0]
+        if repo not in districts:
+            districts[repo] = []
+        districts[repo].append(n)
     
-    for i, n in enumerate(nodes):
-        row = i // cols
-        col = i % cols
+    # Spread districts across city
+    district_centers = [
+        {"x": -150, "z": -150}, {"x": 150, "z": -150}, {"x": -150, "z": 150}, {"x": 150, "z": 150},
+        {"x": 0, "z": 0}, {"x": -300, "z": 0}, {"x": 300, "z": 0}, {"x": 0, "z": -300}, {"x": 0, "z": 300}
+    ]
+    district_index = 0
+    
+    for repo, district_nodes in districts.items():
+        if district_index >= len(district_centers):
+            break
+        center = district_centers[district_index]
+        district_index += 1
         
-        x = col * spacing - (cols * spacing) / 2
-        z = row * spacing - (cols * spacing) / 2
+        cols = int(math.ceil(math.sqrt(len(district_nodes))))
+        spacing = 20.0  # Wider for SimCity feel
         
-        complexity = n["complexity"]
-        height = max(3.0, (complexity / avg_complexity) * 12.0)
-        
-        # Sim City Aesthetics & Granulation
-        roof_decor = None
-        landmark_names = {
-            "evolve.py": "Central Evolution Spire",
-            "index.html": "Metropolis Gateway",
-            "scaffold_projects.py": "The Architect's Foundry",
-            "generate_projects.py": "Expansion Pillar"
-        }
-        
-        display_name = landmark_names.get(n["file"].split('/')[-1], n["name"])
-        
-        if n["file"].split('/')[-1] in landmark_names:
-            color = "#ffffff" # Pure White Landmark
-            b_type = "Heritage Landmark"
-            style = "landmark"
-            roof_decor = "beacon"
-        elif complexity > 18:
-            color = "#ffdd44" # Gold/High Energy
-            b_type = "Power Station"
-            style = "industrial"
-            roof_decor = "cooling_tower"
-        elif n["type"] == "class":
-            color = "#4488ff" # Tech Blue
-            b_type = "Corporate Tower"
-            style = "modernist"
-            if height > 10:
-                roof_decor = "helipad"
-        elif complexity < 3:
-            color = "#44ffaa" # Teal/Connectivity
-            b_type = "Transmission Tower"
-            style = "utility"
-            roof_decor = "satellite_dish"
-        elif complexity > 8:
-            color = "#ffaa44" # Warning Zone
-            b_type = "Logic Processor"
-            style = "skyscraper"
-            roof_decor = "hvac_unit"
-        else:
-            color = "#888888" # Regular Node
-            b_type = "Data Unit"
-            style = "standard"
-            if random.random() < 0.3:
-                roof_decor = "small_antenna"
-
-        buildings.append({
-            "x": x,
-            "z": z,
-            "width": 4,
-            "height": height,
-            "depth": 4,
-            "color": color,
-            "style": style,
-            "roof_decor": roof_decor,
-            "name": display_name,
-            "type": b_type,
-            "complexity": complexity,
-            "file": n["file"],
-            "address": get_address(n["file"], x, z)
-        })
-
-        # Procedural Gardens with more detail
-        if random.random() < 0.25:
-            gardens.append({
-                "x": x + 5,
-                "z": z + 5,
-                "size": random.uniform(3, 5),
-                "foliage": random.randint(3, 8)
+        for i, n in enumerate(district_nodes):
+            row = i // cols
+            col = i % cols
+            
+            x = center["x"] + col * spacing - (cols * spacing) / 2 + random.uniform(-5, 5)  # Jitter for organic layout
+            z = center["z"] + row * spacing - (cols * spacing) / 2 + random.uniform(-5, 5)
+            
+            complexity = n["complexity"]
+            height = max(6.0, (complexity / avg_complexity) * 30.0)  # Taller, varied
+            
+            # Detailed styles
+            style_options = ["modern", "industrial", "cyberpunk", "art_deco", "brutalist", "futuristic"]
+            style = random.choice(style_options) if complexity > 5 else "standard"
+            
+            roof_decor = random.choice(["helipad", "antenna_array", "billboard", "roof_garden", "solar_panels", "water_tank", "neon_sign", None])
+            
+            color = "#ff4444" if complexity > 15 else "#4488ff" if n["type"] == "class" else "#888888"
+            
+            # Window details for granulation
+            windows = {
+                "count": random.randint(20, 100) * complexity,  # More windows on complex buildings
+                "pattern": random.choice(["grid", "random", "striped", "diagonal"]),
+                "lit_percent": random.uniform(0.4, 0.9)  # For night lights
+            }
+            
+            # New: Interiors - Simple data for floors/rooms
+            num_floors = max(1, int(height / 5))  # ~5 units per floor
+            interiors = {
+                "floors": num_floors,
+                "rooms_per_floor": random.randint(4, 12),
+                "room_types": random.sample(["office", "server_room", "lobby", "conference", "elevator"], k=random.randint(2, 5)),
+                "furniture_density": random.uniform(0.3, 0.8)  # For procedural furniture in JS
+            }
+            
+            buildings.append({
+                "x": x,
+                "z": z,
+                "width": random.uniform(8, 16),
+                "height": height,
+                "depth": random.uniform(8, 16),
+                "color": color,
+                "style": style,
+                "roof_decor": roof_decor,
+                "name": n["name"],
+                "type": "Skyscraper" if height > 20 else "Building",
+                "complexity": complexity,
+                "file": n["file"],
+                "address": get_address(n["file"], x, z),
+                "windows": windows,
+                "upgrades": random.randint(0, 3),  # For sim: Levels up over time
+                "interiors": interiors  # New field
             })
-
-    # Enhanced Road Grid with light posts info
-    for r in range(-15, 16):
-        if r % 4 == 0:
-            roads.append({"x": r * 10, "z": 0, "w": 3, "l": 400, "vertical": False, "lights": True})
-            roads.append({"x": 0, "z": r * 10, "w": 3, "l": 400, "vertical": True, "lights": True})
-
-    # Sim City Style Stats
-    from datetime import timedelta, timezone
-    ist_time = datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)
+            
+            # Gardens/Parks
+            if random.random() < 0.35:
+                gardens.append({
+                    "x": x + random.uniform(-15, 15),
+                    "z": z + random.uniform(-15, 15),
+                    "size": random.uniform(10, 30),
+                    "foliage": random.randint(15, 50),
+                    "type": random.choice(["park", "fountain", "statue", "plaza"])
+                })
+            
+            # Billboards for detail
+            if random.random() < 0.25 and complexity > 5:
+                billboards.append({
+                    "x": x + random.uniform(-10, 10),
+                    "z": z - 10,  # In front
+                    "text": f"{n['name']} Sector",
+                    "size": random.uniform(5, 10),
+                    "neon": random.choice([True, False])
+                })
     
+    # Roads: Connect districts with highways
+    road_width = 6
+    for i in range(len(district_centers) - 1):
+        start = district_centers[i]
+        end = district_centers[i+1]
+        dx = end["x"] - start["x"]
+        dz = end["z"] - start["z"]
+        length = math.sqrt(dx**2 + dz**2)
+        vertical = abs(dz) > abs(dx)
+        traffic = random.randint(10, 30)  # Busier roads
+        roads.append({
+            "x": start["x"],
+            "z": start["z"],
+            "w": road_width,
+            "l": length,
+            "vertical": vertical,
+            "lights": True,
+            "traffic": traffic,
+            "type": "highway" if length > 200 else "street"
+        })
+    
+    # Vehicles for traffic sim
+    for road_idx, road in enumerate(roads):
+        for _ in range(road["traffic"]):
+            vehicles.append({
+                "road_id": road_idx,
+                "position": random.uniform(0, 1),  # Fraction along road
+                "speed": random.uniform(0.02, 0.08),  # For animation
+                "type": random.choice(["car", "truck", "bus", "bike"]),
+                "direction": random.choice([1, -1])  # Bidirectional
+            })
+    
+    # Stats for game HUD
     stats = {
         "urban_density": f"{len(buildings)} structures",
-        "mainframe_health": "Stable" if avg_complexity < 7 else "Stress Detected",
-        "system_load": f"{int((avg_complexity / 20) * 100)}% Capacity",
-        "last_evolution": ist_time.strftime("%Y-%m-%d %H:%M") + " IST"
+        "district_count": len(districts),
+        "traffic_level": sum(r["traffic"] for r in roads),
+        "green_space": len(gardens),
+        "mainframe_health": "Stable" if avg_complexity < 10 else "High Activity",
+        "system_load": f"{int((avg_complexity / 20) * 100)}%",
+        "last_evolution": datetime.now().strftime("%Y-%m-%d %H:%M IST"),
+        "population": len(buildings) * random.randint(50, 200),  # Sim metric
+        "happiness": int(50 + (len(gardens) / max(1, len(buildings))) * 50)  # Based on green space
     }
 
     return {
         "buildings": buildings, 
         "gardens": gardens, 
-        "roads": roads, 
+        "roads": roads,
+        "vehicles": vehicles,
+        "billboards": billboards,
         "stats": stats
     }
 
