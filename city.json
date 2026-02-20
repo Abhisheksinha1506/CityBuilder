@@ -1,77 +1,73 @@
 {
   "buildings": [
     {
-      "x": -222.11561375469867,
-      "z": -223.47247503085867,
-      "width": 15.71545751512339,
+      "x": -215.77790499092046,
+      "z": -216.58995834904047,
+      "width": 13.148266685492853,
       "height": 6.0,
-      "depth": 15.198448552948783,
+      "depth": 9.088185616424902,
       "color": "#888888",
       "style": "standard",
-      "roof_decor": "billboard",
+      "roof_decor": "solar_panels",
       "name": "algorithm",
       "type": "Building",
       "complexity": 1,
       "file": "autonomous-zoo/projects/tier1-immediate/kolmogorov-compressor/algorithm.py",
-      "address": "Genome Sector // Mainframe Ave // Block O",
+      "address": "Genome Sector // Process Parkway // Block H",
       "windows": {
-        "count": 57,
+        "count": 59,
         "pattern": "striped",
-        "lit_percent": 0.8228189124456025
+        "lit_percent": 0.7179316826095881
       },
-      "upgrades": 2,
+      "upgrades": 1,
       "interiors": {
         "floors": 1,
-        "rooms_per_floor": 6,
+        "rooms_per_floor": 11,
         "room_types": [
-          "elevator",
-          "conference",
-          "server_room",
           "lobby",
           "office"
         ],
-        "furniture_density": 0.34723616081344283
+        "furniture_density": 0.5303707722960523
       }
     },
     {
-      "x": -197.6215074488758,
-      "z": -220.09391988270096,
-      "width": 12.256533711850002,
+      "x": -198.82876992935007,
+      "z": -217.0026053461625,
+      "width": 12.197339977298693,
       "height": 51.920529801324506,
-      "depth": 11.817406341490422,
+      "depth": 11.216971498294761,
       "color": "#4488ff",
-      "style": "futuristic",
-      "roof_decor": "solar_panels",
+      "style": "cyberpunk",
+      "roof_decor": "water_tank",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 14,
       "file": "autonomous-zoo/projects/tier1-immediate/kolmogorov-compressor/evolve.py",
-      "address": "Genome Sector // Data Drive // Block P",
+      "address": "Genome Sector // Kernel Street // Block Q",
       "windows": {
-        "count": 378,
+        "count": 1134,
         "pattern": "grid",
-        "lit_percent": 0.5752439226289372
+        "lit_percent": 0.692268578987689
       },
-      "upgrades": 1,
+      "upgrades": 0,
       "interiors": {
         "floors": 10,
-        "rooms_per_floor": 7,
+        "rooms_per_floor": 12,
         "room_types": [
-          "lobby",
+          "office",
           "conference",
           "server_room",
-          "elevator",
-          "office"
+          "lobby"
         ],
-        "furniture_density": 0.6713231905194174
+        "furniture_density": 0.7530345245305161
       }
     },
     {
-      "x": -177.90146835607078,
-      "z": -221.63544747994982,
-      "width": 10.913421120748719,
+      "x": -176.6432748991312,
+      "z": -215.94140855166975,
+      "width": 12.310447042326384,
       "height": 44.50331125827815,
-      "depth": 8.23181867894331,
+      "depth": 15.24310224621565,
       "color": "#4488ff",
       "style": "art_deco",
       "roof_decor": "antenna_array",
@@ -79,248 +75,243 @@
       "type": "Skyscraper",
       "complexity": 12,
       "file": "autonomous-zoo/projects/tier1-immediate/reaction-diffusion-spots/evolve.py",
-      "address": "Genome Sector // Kernel Street // Block V",
+      "address": "Genome Sector // Process Parkway // Block U",
       "windows": {
-        "count": 984,
-        "pattern": "striped",
-        "lit_percent": 0.8459711900235605
+        "count": 804,
+        "pattern": "grid",
+        "lit_percent": 0.7677000120173233
+      },
+      "upgrades": 0,
+      "interiors": {
+        "floors": 8,
+        "rooms_per_floor": 8,
+        "room_types": [
+          "elevator",
+          "lobby",
+          "conference"
+        ],
+        "furniture_density": 0.6087199561678153
+      }
+    },
+    {
+      "x": -163.70799405506116,
+      "z": -217.96104766015088,
+      "width": 15.58798942979122,
+      "height": 59.337748344370866,
+      "depth": 8.061660118201125,
+      "color": "#ff4444",
+      "style": "futuristic",
+      "roof_decor": "water_tank",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 16,
+      "file": "autonomous-zoo/projects/tier1-immediate/shannon-entropy-pruner/evolve.py",
+      "address": "Genome Sector // Bit Blvd // Block H",
+      "windows": {
+        "count": 736,
+        "pattern": "diagonal",
+        "lit_percent": 0.8720806145556953
+      },
+      "upgrades": 0,
+      "interiors": {
+        "floors": 11,
+        "rooms_per_floor": 8,
+        "room_types": [
+          "server_room",
+          "conference",
+          "office"
+        ],
+        "furniture_density": 0.5979384536768466
+      }
+    },
+    {
+      "x": -140.64847922562768,
+      "z": -219.455231285554,
+      "width": 12.928175928070377,
+      "height": 40.794701986754966,
+      "depth": 12.425934275799362,
+      "color": "#4488ff",
+      "style": "futuristic",
+      "roof_decor": "helipad",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 11,
+      "file": "autonomous-zoo/projects/tier1-immediate/strange-attractor-drifter/evolve.py",
+      "address": "Genome Sector // Bit Blvd // Block K",
+      "windows": {
+        "count": 891,
+        "pattern": "diagonal",
+        "lit_percent": 0.672505509614169
       },
       "upgrades": 1,
       "interiors": {
         "floors": 8,
         "rooms_per_floor": 5,
         "room_types": [
-          "conference",
           "lobby",
-          "office"
-        ],
-        "furniture_density": 0.6579889798247256
-      }
-    },
-    {
-      "x": -163.28685503109418,
-      "z": -221.30356442381543,
-      "width": 14.398889010691487,
-      "height": 59.337748344370866,
-      "depth": 11.563078752202928,
-      "color": "#ff4444",
-      "style": "brutalist",
-      "roof_decor": "roof_garden",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 16,
-      "file": "autonomous-zoo/projects/tier1-immediate/shannon-entropy-pruner/evolve.py",
-      "address": "Genome Sector // Silicon Way // Block H",
-      "windows": {
-        "count": 1600,
-        "pattern": "grid",
-        "lit_percent": 0.7998684768801656
-      },
-      "upgrades": 1,
-      "interiors": {
-        "floors": 11,
-        "rooms_per_floor": 7,
-        "room_types": [
-          "elevator",
-          "server_room"
-        ],
-        "furniture_density": 0.5393945429017668
-      }
-    },
-    {
-      "x": -135.52521444247336,
-      "z": -223.25310673690143,
-      "width": 12.265808559024329,
-      "height": 40.794701986754966,
-      "depth": 8.195435853250824,
-      "color": "#4488ff",
-      "style": "brutalist",
-      "roof_decor": "neon_sign",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 11,
-      "file": "autonomous-zoo/projects/tier1-immediate/strange-attractor-drifter/evolve.py",
-      "address": "Genome Sector // Bit Blvd // Block F",
-      "windows": {
-        "count": 1034,
-        "pattern": "diagonal",
-        "lit_percent": 0.747066987113052
-      },
-      "upgrades": 3,
-      "interiors": {
-        "floors": 8,
-        "rooms_per_floor": 7,
-        "room_types": [
-          "elevator",
           "office",
-          "lobby"
+          "conference",
+          "elevator"
         ],
-        "furniture_density": 0.5112296805322751
+        "furniture_density": 0.5259500570411579
       }
     },
     {
-      "x": -118.23250432791944,
-      "z": -222.48137153645504,
-      "width": 15.084788065457609,
+      "x": -122.46661074965809,
+      "z": -222.2453167734333,
+      "width": 12.084102255973304,
       "height": 40.794701986754966,
-      "depth": 12.994015259258674,
+      "depth": 14.481180968877648,
       "color": "#4488ff",
-      "style": "industrial",
-      "roof_decor": "neon_sign",
+      "style": "cyberpunk",
+      "roof_decor": "solar_panels",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 11,
       "file": "autonomous-zoo/projects/tier1-immediate/thermodynamic-phase-changes/evolve.py",
-      "address": "Genome Sector // Mainframe Ave // Block O",
+      "address": "Genome Sector // Data Drive // Block S",
       "windows": {
-        "count": 726,
-        "pattern": "diagonal",
-        "lit_percent": 0.4443771437567019
+        "count": 484,
+        "pattern": "grid",
+        "lit_percent": 0.5174087049922562
       },
-      "upgrades": 2,
+      "upgrades": 1,
       "interiors": {
         "floors": 8,
-        "rooms_per_floor": 10,
+        "rooms_per_floor": 5,
         "room_types": [
           "server_room",
-          "elevator",
-          "conference"
+          "lobby"
         ],
-        "furniture_density": 0.6820040082673204
+        "furniture_density": 0.5917041895245377
       }
     },
     {
-      "x": -100.53015855145969,
-      "z": -221.66797907739306,
-      "width": 15.825761222316176,
+      "x": -98.24683096533664,
+      "z": -221.31045045979107,
+      "width": 11.312627698588114,
       "height": 37.08609271523179,
-      "depth": 8.222893815083516,
+      "depth": 12.464454398520711,
       "color": "#4488ff",
-      "style": "industrial",
-      "roof_decor": "billboard",
+      "style": "futuristic",
+      "roof_decor": null,
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 10,
       "file": "autonomous-zoo/projects/tier2-mathematics/collatz-conjecture-explorer/evolve.py",
-      "address": "Genome Sector // Silicon Way // Block W",
+      "address": "Genome Sector // Logic Lane // Block U",
       "windows": {
-        "count": 980,
-        "pattern": "striped",
-        "lit_percent": 0.6008166034008952
+        "count": 580,
+        "pattern": "random",
+        "lit_percent": 0.7083209216428876
       },
-      "upgrades": 3,
+      "upgrades": 2,
       "interiors": {
         "floors": 7,
-        "rooms_per_floor": 11,
+        "rooms_per_floor": 4,
         "room_types": [
-          "lobby",
-          "conference",
-          "elevator",
-          "office"
+          "server_room",
+          "conference"
         ],
-        "furniture_density": 0.6703871771723549
+        "furniture_density": 0.5578121832922902
       }
     },
     {
-      "x": -217.41246640358332,
-      "z": -201.30650481971065,
-      "width": 14.421020670504335,
+      "x": -221.85423028564523,
+      "z": -201.6771112613835,
+      "width": 15.757201807842801,
       "height": 29.668874172185433,
-      "depth": 12.75110681180544,
+      "depth": 8.369908335558087,
       "color": "#4488ff",
-      "style": "art_deco",
-      "roof_decor": "antenna_array",
+      "style": "industrial",
+      "roof_decor": "helipad",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 8,
       "file": "autonomous-zoo/projects/tier2-mathematics/godel-number-encoder/evolve.py",
-      "address": "Genome Sector // Kernel Street // Block J",
+      "address": "Genome Sector // Process Parkway // Block N",
       "windows": {
-        "count": 528,
+        "count": 200,
         "pattern": "random",
-        "lit_percent": 0.6395711994794979
-      },
-      "upgrades": 2,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 8,
-        "room_types": [
-          "server_room",
-          "elevator",
-          "conference",
-          "lobby",
-          "office"
-        ],
-        "furniture_density": 0.46087309558113804
-      }
-    },
-    {
-      "x": -197.97408064926233,
-      "z": -196.40702084772587,
-      "width": 9.587369006946059,
-      "height": 25.960264900662253,
-      "depth": 11.626757853802951,
-      "color": "#4488ff",
-      "style": "futuristic",
-      "roof_decor": "roof_garden",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 7,
-      "file": "autonomous-zoo/projects/tier2-mathematics/knot-polynomial-calculator/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block P",
-      "windows": {
-        "count": 434,
-        "pattern": "striped",
-        "lit_percent": 0.8507906224802249
-      },
-      "upgrades": 0,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 4,
-        "room_types": [
-          "lobby",
-          "elevator"
-        ],
-        "furniture_density": 0.7213854091779197
-      }
-    },
-    {
-      "x": -175.53058063359313,
-      "z": -198.30919236772095,
-      "width": 14.263200431946043,
-      "height": 25.960264900662253,
-      "depth": 15.040804920702175,
-      "color": "#4488ff",
-      "style": "futuristic",
-      "roof_decor": "water_tank",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 7,
-      "file": "autonomous-zoo/projects/tier2-mathematics/p-adic-number-line/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block T",
-      "windows": {
-        "count": 252,
-        "pattern": "diagonal",
-        "lit_percent": 0.7963807227555528
+        "lit_percent": 0.5602684287812923
       },
       "upgrades": 3,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 11,
+        "rooms_per_floor": 4,
         "room_types": [
-          "elevator",
-          "lobby",
-          "conference"
+          "server_room",
+          "lobby"
         ],
-        "furniture_density": 0.3589751842918713
+        "furniture_density": 0.33350480074753774
       }
     },
     {
-      "x": -161.4212310131153,
-      "z": -197.17859516202677,
-      "width": 15.641152253123169,
+      "x": -201.58691341773235,
+      "z": -200.52695127781314,
+      "width": 8.077029304506341,
+      "height": 25.960264900662253,
+      "depth": 8.804470662126748,
+      "color": "#4488ff",
+      "style": "brutalist",
+      "roof_decor": null,
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 7,
+      "file": "autonomous-zoo/projects/tier2-mathematics/knot-polynomial-calculator/evolve.py",
+      "address": "Genome Sector // Data Drive // Block T",
+      "windows": {
+        "count": 546,
+        "pattern": "grid",
+        "lit_percent": 0.8274852794880478
+      },
+      "upgrades": 2,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 11,
+        "room_types": [
+          "lobby",
+          "elevator"
+        ],
+        "furniture_density": 0.6606105003912396
+      }
+    },
+    {
+      "x": -175.96516920789315,
+      "z": -204.97046447193165,
+      "width": 8.95576103263619,
+      "height": 25.960264900662253,
+      "depth": 13.153899786396366,
+      "color": "#4488ff",
+      "style": "brutalist",
+      "roof_decor": "helipad",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 7,
+      "file": "autonomous-zoo/projects/tier2-mathematics/p-adic-number-line/evolve.py",
+      "address": "Genome Sector // Mainframe Ave // Block T",
+      "windows": {
+        "count": 623,
+        "pattern": "grid",
+        "lit_percent": 0.650189425728126
+      },
+      "upgrades": 0,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 10,
+        "room_types": [
+          "lobby",
+          "elevator"
+        ],
+        "furniture_density": 0.6547167436539527
+      }
+    },
+    {
+      "x": -163.8044801941066,
+      "z": -197.527778022194,
+      "width": 10.298973428394941,
       "height": 40.794701986754966,
-      "depth": 14.96920637919149,
+      "depth": 9.88424600571252,
       "color": "#4488ff",
       "style": "cyberpunk",
       "roof_decor": "solar_panels",
@@ -328,944 +319,944 @@
       "type": "Skyscraper",
       "complexity": 11,
       "file": "autonomous-zoo/projects/tier2-mathematics/penrose-tiling/evolve.py",
-      "address": "Genome Sector // Silicon Way // Block F",
+      "address": "Genome Sector // Silicon Way // Block H",
       "windows": {
-        "count": 671,
+        "count": 924,
         "pattern": "grid",
-        "lit_percent": 0.8775849053075322
+        "lit_percent": 0.8032552843369972
       },
-      "upgrades": 0,
+      "upgrades": 1,
       "interiors": {
         "floors": 8,
-        "rooms_per_floor": 4,
+        "rooms_per_floor": 5,
         "room_types": [
           "office",
-          "lobby",
-          "elevator",
-          "server_room"
+          "conference"
         ],
-        "furniture_density": 0.31023525896037113
+        "furniture_density": 0.6474871978955614
       }
     },
     {
-      "x": -140.90254627135354,
-      "z": -195.96817861000739,
-      "width": 14.152469827151943,
+      "x": -139.7414656472851,
+      "z": -203.53318397654266,
+      "width": 15.198672091996805,
       "height": 29.668874172185433,
-      "depth": 12.89935222721671,
+      "depth": 8.589124572607549,
+      "color": "#4488ff",
+      "style": "futuristic",
+      "roof_decor": "billboard",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 8,
+      "file": "autonomous-zoo/projects/tier3-game-theory/ant-colony-forager/evolve.py",
+      "address": "Genome Sector // Silicon Way // Block J",
+      "windows": {
+        "count": 592,
+        "pattern": "diagonal",
+        "lit_percent": 0.5317055434242415
+      },
+      "upgrades": 3,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 12,
+        "room_types": [
+          "server_room",
+          "office"
+        ],
+        "furniture_density": 0.35662766016166497
+      }
+    },
+    {
+      "x": -120.77575916180405,
+      "z": -202.41488368238277,
+      "width": 10.605750272414035,
+      "height": 25.960264900662253,
+      "depth": 13.194124907341163,
+      "color": "#4488ff",
+      "style": "art_deco",
+      "roof_decor": "antenna_array",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 7,
+      "file": "autonomous-zoo/projects/tier3-game-theory/immune-system-sentinel/evolve.py",
+      "address": "Genome Sector // Bit Blvd // Block Q",
+      "windows": {
+        "count": 399,
+        "pattern": "diagonal",
+        "lit_percent": 0.8553602642703935
+      },
+      "upgrades": 1,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 7,
+        "room_types": [
+          "conference",
+          "elevator",
+          "office",
+          "server_room"
+        ],
+        "furniture_density": 0.3158995215581435
+      }
+    },
+    {
+      "x": -100.37013625685165,
+      "z": -201.12433608879238,
+      "width": 10.903314665743132,
+      "height": 33.37748344370861,
+      "depth": 11.925909545984272,
       "color": "#4488ff",
       "style": "modern",
       "roof_decor": "neon_sign",
       "name": "evolve",
       "type": "Skyscraper",
-      "complexity": 8,
-      "file": "autonomous-zoo/projects/tier3-game-theory/ant-colony-forager/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block K",
+      "complexity": 9,
+      "file": "autonomous-zoo/projects/tier3-game-theory/prisoners-dilemma/evolve.py",
+      "address": "Genome Sector // Bit Blvd // Block W",
       "windows": {
-        "count": 728,
-        "pattern": "grid",
-        "lit_percent": 0.5543708644870092
+        "count": 855,
+        "pattern": "diagonal",
+        "lit_percent": 0.5989346717438175
       },
-      "upgrades": 0,
+      "upgrades": 2,
       "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 4,
+        "floors": 6,
+        "rooms_per_floor": 5,
         "room_types": [
           "lobby",
-          "office",
-          "elevator",
-          "server_room",
-          "conference"
+          "conference",
+          "elevator"
         ],
-        "furniture_density": 0.434224276421651
+        "furniture_density": 0.3150554884571184
       }
     },
     {
-      "x": -124.42032438303352,
-      "z": -198.59009065002647,
-      "width": 14.301170700307713,
+      "x": -221.14265958255373,
+      "z": -178.89377758688113,
+      "width": 10.854290340712167,
       "height": 25.960264900662253,
-      "depth": 15.712267325731798,
+      "depth": 13.122665472129494,
       "color": "#4488ff",
-      "style": "cyberpunk",
+      "style": "brutalist",
       "roof_decor": "billboard",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 7,
-      "file": "autonomous-zoo/projects/tier3-game-theory/immune-system-sentinel/evolve.py",
-      "address": "Genome Sector // Silicon Way // Block U",
+      "file": "autonomous-zoo/projects/tier3-game-theory/resource-auction/evolve.py",
+      "address": "Genome Sector // Silicon Way // Block N",
       "windows": {
-        "count": 203,
-        "pattern": "striped",
-        "lit_percent": 0.7979091687861289
+        "count": 518,
+        "pattern": "random",
+        "lit_percent": 0.7088903788021604
       },
-      "upgrades": 1,
+      "upgrades": 0,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 12,
+        "rooms_per_floor": 5,
         "room_types": [
-          "server_room",
+          "conference",
+          "lobby",
           "elevator",
-          "lobby"
+          "office"
         ],
-        "furniture_density": 0.4929192990442033
+        "furniture_density": 0.5299449466361437
       }
     },
     {
-      "x": -102.59829168623294,
-      "z": -201.54587206423435,
-      "width": 10.180127868941087,
-      "height": 33.37748344370861,
-      "depth": 10.083533377045901,
+      "x": -204.97617313492208,
+      "z": -180.84858586116638,
+      "width": 10.28577608372736,
+      "height": 25.960264900662253,
+      "depth": 12.250163349402644,
       "color": "#4488ff",
-      "style": "industrial",
-      "roof_decor": "solar_panels",
+      "style": "futuristic",
+      "roof_decor": "neon_sign",
       "name": "evolve",
       "type": "Skyscraper",
-      "complexity": 9,
-      "file": "autonomous-zoo/projects/tier3-game-theory/prisoners-dilemma/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block Y",
+      "complexity": 7,
+      "file": "autonomous-zoo/projects/tier3-game-theory/small-world-networker/evolve.py",
+      "address": "Genome Sector // Bit Blvd // Block W",
       "windows": {
-        "count": 801,
-        "pattern": "diagonal",
-        "lit_percent": 0.4822703922209722
+        "count": 406,
+        "pattern": "striped",
+        "lit_percent": 0.42669010071904967
       },
-      "upgrades": 1,
+      "upgrades": 2,
       "interiors": {
-        "floors": 6,
-        "rooms_per_floor": 11,
+        "floors": 5,
+        "rooms_per_floor": 5,
         "room_types": [
-          "server_room",
-          "office",
-          "elevator"
+          "elevator",
+          "office"
         ],
-        "furniture_density": 0.5139133380831264
+        "furniture_density": 0.5880325477123818
       }
     },
     {
-      "x": -217.55631047353125,
-      "z": -177.34317204687582,
-      "width": 15.282114693390326,
-      "height": 25.960264900662253,
-      "depth": 14.509552585934063,
+      "x": -181.31818937388977,
+      "z": -184.26733412918236,
+      "width": 12.669082267066294,
+      "height": 29.668874172185433,
+      "depth": 9.214377339111525,
       "color": "#4488ff",
       "style": "futuristic",
       "roof_decor": "water_tank",
       "name": "evolve",
       "type": "Skyscraper",
-      "complexity": 7,
-      "file": "autonomous-zoo/projects/tier3-game-theory/resource-auction/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block J",
-      "windows": {
-        "count": 441,
-        "pattern": "diagonal",
-        "lit_percent": 0.40673829837528835
-      },
-      "upgrades": 3,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 12,
-        "room_types": [
-          "elevator",
-          "server_room"
-        ],
-        "furniture_density": 0.4221813506472213
-      }
-    },
-    {
-      "x": -195.86624771634172,
-      "z": -177.56076907822134,
-      "width": 15.312750393856154,
-      "height": 25.960264900662253,
-      "depth": 14.435224059562426,
-      "color": "#4488ff",
-      "style": "cyberpunk",
-      "roof_decor": "roof_garden",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 7,
-      "file": "autonomous-zoo/projects/tier3-game-theory/small-world-networker/evolve.py",
-      "address": "Genome Sector // Data Drive // Block N",
-      "windows": {
-        "count": 588,
-        "pattern": "grid",
-        "lit_percent": 0.46172221912909905
-      },
-      "upgrades": 1,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 4,
-        "room_types": [
-          "server_room",
-          "lobby"
-        ],
-        "furniture_density": 0.42486623833896087
-      }
-    },
-    {
-      "x": -176.19628004612107,
-      "z": -182.88315890476832,
-      "width": 15.333948707778234,
-      "height": 29.668874172185433,
-      "depth": 15.732260526600598,
-      "color": "#4488ff",
-      "style": "brutalist",
-      "roof_decor": "billboard",
-      "name": "evolve",
-      "type": "Skyscraper",
       "complexity": 8,
       "file": "autonomous-zoo/projects/tier4-artistic/buddhabrot-renderer/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block U",
+      "address": "Genome Sector // Data Drive // Block Z",
       "windows": {
-        "count": 264,
-        "pattern": "grid",
-        "lit_percent": 0.5257144900575241
-      },
-      "upgrades": 2,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 4,
-        "room_types": [
-          "elevator",
-          "lobby",
-          "server_room"
-        ],
-        "furniture_density": 0.332803100828315
-      }
-    },
-    {
-      "x": -156.11557666032024,
-      "z": -183.45677406306467,
-      "width": 11.87599258853466,
-      "height": 22.251655629139076,
-      "depth": 15.77269823872972,
-      "color": "#4488ff",
-      "style": "industrial",
-      "roof_decor": "roof_garden",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 6,
-      "file": "autonomous-zoo/projects/tier4-artistic/fractal-music-box/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block A",
-      "windows": {
-        "count": 144,
-        "pattern": "grid",
-        "lit_percent": 0.474839475697029
-      },
-      "upgrades": 1,
-      "interiors": {
-        "floors": 4,
-        "rooms_per_floor": 11,
-        "room_types": [
-          "server_room",
-          "lobby",
-          "elevator"
-        ],
-        "furniture_density": 0.5168060082626202
-      }
-    },
-    {
-      "x": -144.00857842386088,
-      "z": -182.13371622434082,
-      "width": 12.060192650466206,
-      "height": 25.960264900662253,
-      "depth": 9.8109075967619,
-      "color": "#4488ff",
-      "style": "brutalist",
-      "roof_decor": "neon_sign",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 7,
-      "file": "autonomous-zoo/projects/tier4-artistic/hilbert-curve-filler/evolve.py",
-      "address": "Genome Sector // Silicon Way // Block O",
-      "windows": {
-        "count": 196,
-        "pattern": "diagonal",
-        "lit_percent": 0.8493226792952657
-      },
-      "upgrades": 1,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 12,
-        "room_types": [
-          "server_room",
-          "office"
-        ],
-        "furniture_density": 0.7271400653044594
-      }
-    },
-    {
-      "x": -120.80737616908628,
-      "z": -177.17409449728015,
-      "width": 10.068429928534545,
-      "height": 25.960264900662253,
-      "depth": 15.50024687369045,
-      "color": "#4488ff",
-      "style": "industrial",
-      "roof_decor": "water_tank",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 7,
-      "file": "autonomous-zoo/projects/tier4-artistic/mandala-symmetry-generator/evolve.py",
-      "address": "Genome Sector // Kernel Street // Block Q",
-      "windows": {
-        "count": 441,
-        "pattern": "diagonal",
-        "lit_percent": 0.7287512276229491
+        "count": 344,
+        "pattern": "random",
+        "lit_percent": 0.40181576509973077
       },
       "upgrades": 2,
       "interiors": {
         "floors": 5,
         "rooms_per_floor": 9,
         "room_types": [
-          "elevator",
-          "office"
+          "office",
+          "server_room",
+          "conference"
         ],
-        "furniture_density": 0.4126176121910678
+        "furniture_density": 0.3586142896373649
       }
     },
     {
-      "x": -101.8209877687223,
-      "z": -179.13241161765555,
-      "width": 9.354112783111631,
-      "height": 25.960264900662253,
-      "depth": 8.234103894943772,
+      "x": -162.88069172446149,
+      "z": -176.25104842358553,
+      "width": 10.382182285773595,
+      "height": 22.251655629139076,
+      "depth": 14.581827363666015,
       "color": "#4488ff",
-      "style": "futuristic",
+      "style": "brutalist",
       "roof_decor": "solar_panels",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 6,
+      "file": "autonomous-zoo/projects/tier4-artistic/fractal-music-box/evolve.py",
+      "address": "Genome Sector // Bit Blvd // Block G",
+      "windows": {
+        "count": 528,
+        "pattern": "striped",
+        "lit_percent": 0.5995811770152172
+      },
+      "upgrades": 1,
+      "interiors": {
+        "floors": 4,
+        "rooms_per_floor": 6,
+        "room_types": [
+          "elevator",
+          "server_room",
+          "office",
+          "lobby"
+        ],
+        "furniture_density": 0.6669090117402819
+      }
+    },
+    {
+      "x": -135.79497580252834,
+      "z": -178.1455799762038,
+      "width": 14.67589716887569,
+      "height": 25.960264900662253,
+      "depth": 8.462225739050368,
+      "color": "#4488ff",
+      "style": "industrial",
+      "roof_decor": "billboard",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 7,
+      "file": "autonomous-zoo/projects/tier4-artistic/hilbert-curve-filler/evolve.py",
+      "address": "Genome Sector // Data Drive // Block F",
+      "windows": {
+        "count": 224,
+        "pattern": "diagonal",
+        "lit_percent": 0.43007997410553256
+      },
+      "upgrades": 0,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 7,
+        "room_types": [
+          "conference",
+          "elevator"
+        ],
+        "furniture_density": 0.3529377614927628
+      }
+    },
+    {
+      "x": -122.25191483120106,
+      "z": -181.24475604075778,
+      "width": 15.10964052012708,
+      "height": 25.960264900662253,
+      "depth": 12.668941901368388,
+      "color": "#4488ff",
+      "style": "industrial",
+      "roof_decor": "billboard",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 7,
+      "file": "autonomous-zoo/projects/tier4-artistic/mandala-symmetry-generator/evolve.py",
+      "address": "Genome Sector // Logic Lane // Block S",
+      "windows": {
+        "count": 602,
+        "pattern": "striped",
+        "lit_percent": 0.4856319207292034
+      },
+      "upgrades": 2,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 6,
+        "room_types": [
+          "office",
+          "server_room",
+          "conference"
+        ],
+        "furniture_density": 0.5268574143977425
+      }
+    },
+    {
+      "x": -102.54056044128384,
+      "z": -178.34299777021297,
+      "width": 10.388243937468893,
+      "height": 25.960264900662253,
+      "depth": 11.689131633136334,
+      "color": "#4488ff",
+      "style": "brutalist",
+      "roof_decor": "billboard",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 7,
       "file": "autonomous-zoo/projects/tier4-artistic/vienna-generator/evolve.py",
-      "address": "Genome Sector // Process Parkway // Block X",
+      "address": "Genome Sector // Logic Lane // Block Y",
       "windows": {
-        "count": 266,
-        "pattern": "grid",
-        "lit_percent": 0.8359356211180584
+        "count": 385,
+        "pattern": "diagonal",
+        "lit_percent": 0.7357895306308428
       },
       "upgrades": 1,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 5,
+        "rooms_per_floor": 9,
         "room_types": [
-          "lobby",
-          "conference"
+          "conference",
+          "elevator",
+          "office",
+          "lobby"
         ],
-        "furniture_density": 0.4578699275639846
+        "furniture_density": 0.44656828637621676
       }
     },
     {
-      "x": -219.53546566033833,
-      "z": -160.83527097822642,
-      "width": 8.448504937732366,
+      "x": -222.92004416943507,
+      "z": -161.00503643707574,
+      "width": 10.484407823758541,
       "height": 29.668874172185433,
-      "depth": 12.275224724662323,
+      "depth": 10.584065268300481,
       "color": "#4488ff",
-      "style": "art_deco",
-      "roof_decor": "water_tank",
+      "style": "industrial",
+      "roof_decor": "helipad",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 8,
       "file": "autonomous-zoo/projects/tier5-physics/fluid-dynamics-flow/evolve.py",
-      "address": "Genome Sector // Mainframe Ave // Block L",
+      "address": "Genome Sector // Process Parkway // Block O",
       "windows": {
-        "count": 616,
-        "pattern": "random",
-        "lit_percent": 0.6445375144625909
+        "count": 480,
+        "pattern": "grid",
+        "lit_percent": 0.4465694033354601
       },
-      "upgrades": 1,
+      "upgrades": 3,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 4,
+        "rooms_per_floor": 6,
         "room_types": [
-          "conference",
-          "elevator",
-          "server_room",
-          "lobby"
+          "office",
+          "lobby",
+          "server_room"
         ],
-        "furniture_density": 0.31366966485798964
+        "furniture_density": 0.36484778106288024
       }
     },
     {
-      "x": -201.54264239131282,
-      "z": -162.1380830190402,
-      "width": 10.489734418234605,
+      "x": -204.57085112344834,
+      "z": -159.86744863579543,
+      "width": 14.68215559641962,
       "height": 25.960264900662253,
-      "depth": 9.834373934665717,
+      "depth": 10.984210477386377,
+      "color": "#4488ff",
+      "style": "futuristic",
+      "roof_decor": "water_tank",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 7,
+      "file": "autonomous-zoo/projects/tier5-physics/gravitational-orbits/evolve.py",
+      "address": "Genome Sector // Logic Lane // Block W",
+      "windows": {
+        "count": 581,
+        "pattern": "random",
+        "lit_percent": 0.45378761934473644
+      },
+      "upgrades": 3,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 10,
+        "room_types": [
+          "lobby",
+          "conference",
+          "office",
+          "elevator"
+        ],
+        "furniture_density": 0.668369299849409
+      }
+    },
+    {
+      "x": -177.95120745933912,
+      "z": -156.73046085447288,
+      "width": 15.91573837339846,
+      "height": 25.960264900662253,
+      "depth": 11.973432936064023,
       "color": "#4488ff",
       "style": "brutalist",
       "roof_decor": "neon_sign",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 7,
-      "file": "autonomous-zoo/projects/tier5-physics/gravitational-orbits/evolve.py",
-      "address": "Genome Sector // Data Drive // Block T",
-      "windows": {
-        "count": 203,
-        "pattern": "random",
-        "lit_percent": 0.5926257503145722
-      },
-      "upgrades": 1,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 7,
-        "room_types": [
-          "elevator",
-          "lobby",
-          "server_room",
-          "office",
-          "conference"
-        ],
-        "furniture_density": 0.6225329274360353
-      }
-    },
-    {
-      "x": -184.26814157855094,
-      "z": -155.05712351613016,
-      "width": 8.431464125050308,
-      "height": 25.960264900662253,
-      "depth": 14.304188861958439,
-      "color": "#4488ff",
-      "style": "cyberpunk",
-      "roof_decor": "roof_garden",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 7,
       "file": "autonomous-zoo/projects/tier5-physics/neural-net-propagation/evolve.py",
-      "address": "Genome Sector // Mainframe Ave // Block C",
+      "address": "Genome Sector // Data Drive // Block V",
       "windows": {
-        "count": 238,
-        "pattern": "grid",
-        "lit_percent": 0.868373815170923
+        "count": 196,
+        "pattern": "striped",
+        "lit_percent": 0.6920277306929683
       },
-      "upgrades": 1,
+      "upgrades": 3,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 11,
+        "rooms_per_floor": 4,
         "room_types": [
-          "office",
           "conference",
-          "elevator"
+          "server_room",
+          "lobby",
+          "elevator",
+          "office"
         ],
-        "furniture_density": 0.7812859784132293
+        "furniture_density": 0.4335992550552991
       }
     },
     {
-      "x": -158.37316686028478,
-      "z": -155.28670658602024,
-      "width": 11.83585029110618,
+      "x": -156.44465163788036,
+      "z": -160.0327212715362,
+      "width": 11.939033015787391,
       "height": 25.960264900662253,
-      "depth": 9.975932628876855,
+      "depth": 10.998717204245203,
       "color": "#4488ff",
-      "style": "brutalist",
-      "roof_decor": "antenna_array",
+      "style": "art_deco",
+      "roof_decor": "solar_panels",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 7,
       "file": "autonomous-zoo/projects/tier5-physics/thermodynamic-equilibrium/evolve.py",
-      "address": "Genome Sector // Bit Blvd // Block C",
+      "address": "Genome Sector // Bit Blvd // Block A",
       "windows": {
-        "count": 560,
+        "count": 518,
         "pattern": "diagonal",
-        "lit_percent": 0.5345078817996628
+        "lit_percent": 0.8773881779488493
       },
-      "upgrades": 3,
+      "upgrades": 0,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 6,
+        "rooms_per_floor": 12,
         "room_types": [
-          "conference",
-          "lobby",
-          "office"
+          "office",
+          "elevator"
         ],
-        "furniture_density": 0.482745863871741
+        "furniture_density": 0.6229672570579838
       }
     },
     {
-      "x": -144.39330233408083,
-      "z": -162.42627811985648,
-      "width": 10.317926798259904,
+      "x": -140.20587102579006,
+      "z": -156.64939362361682,
+      "width": 12.293468113731887,
       "height": 25.960264900662253,
-      "depth": 12.166922087483881,
+      "depth": 8.228488872335701,
       "color": "#4488ff",
-      "style": "art_deco",
-      "roof_decor": "antenna_array",
+      "style": "futuristic",
+      "roof_decor": "water_tank",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 7,
       "file": "autonomous-zoo/projects/tier5-physics/wave-interference-patterns/evolve.py",
-      "address": "Genome Sector // Kernel Street // Block O",
+      "address": "Genome Sector // Data Drive // Block K",
       "windows": {
-        "count": 658,
-        "pattern": "random",
-        "lit_percent": 0.6047092309373566
+        "count": 175,
+        "pattern": "grid",
+        "lit_percent": 0.7180923024728914
       },
-      "upgrades": 3,
+      "upgrades": 1,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 6,
+        "rooms_per_floor": 12,
+        "room_types": [
+          "elevator",
+          "lobby",
+          "conference",
+          "server_room"
+        ],
+        "furniture_density": 0.636385915403183
+      }
+    },
+    {
+      "x": -121.73972559242837,
+      "z": -157.5290800445668,
+      "width": 11.997599729560497,
+      "height": 29.668874172185433,
+      "depth": 10.846667177449977,
+      "color": "#4488ff",
+      "style": "futuristic",
+      "roof_decor": "roof_garden",
+      "name": "evolve",
+      "type": "Skyscraper",
+      "complexity": 8,
+      "file": "autonomous-zoo/projects/tier6-computer-science/error-correcting-repo/evolve.py",
+      "address": "Genome Sector // Process Parkway // Block R",
+      "windows": {
+        "count": 336,
+        "pattern": "striped",
+        "lit_percent": 0.7796723180424958
+      },
+      "upgrades": 2,
+      "interiors": {
+        "floors": 5,
+        "rooms_per_floor": 11,
         "room_types": [
           "elevator",
           "lobby",
           "server_room",
           "conference"
         ],
-        "furniture_density": 0.49118369882623475
+        "furniture_density": 0.43450066645454455
       }
     },
     {
-      "x": -119.67177767194524,
-      "z": -162.41124647128422,
-      "width": 13.99152011991887,
-      "height": 29.668874172185433,
-      "depth": 12.608478789279541,
-      "color": "#4488ff",
-      "style": "brutalist",
-      "roof_decor": "helipad",
-      "name": "evolve",
-      "type": "Skyscraper",
-      "complexity": 8,
-      "file": "autonomous-zoo/projects/tier6-computer-science/error-correcting-repo/evolve.py",
-      "address": "Genome Sector // Process Parkway // Block P",
-      "windows": {
-        "count": 784,
-        "pattern": "diagonal",
-        "lit_percent": 0.4900949791820459
-      },
-      "upgrades": 0,
-      "interiors": {
-        "floors": 5,
-        "rooms_per_floor": 5,
-        "room_types": [
-          "lobby",
-          "elevator",
-          "conference"
-        ],
-        "furniture_density": 0.4732048821026019
-      }
-    },
-    {
-      "x": -95.74855378305973,
-      "z": -160.94185837172583,
-      "width": 15.326316509785396,
+      "x": -104.72291395571666,
+      "z": -159.48749401240232,
+      "width": 12.836564036250317,
       "height": 25.960264900662253,
-      "depth": 11.6520212251135,
+      "depth": 11.55143352444601,
       "color": "#4488ff",
-      "style": "art_deco",
+      "style": "futuristic",
       "roof_decor": "roof_garden",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 7,
       "file": "autonomous-zoo/projects/tier6-computer-science/random-walk-organizer/evolve.py",
-      "address": "Genome Sector // Mainframe Ave // Block R",
+      "address": "Genome Sector // Mainframe Ave // Block A",
       "windows": {
-        "count": 651,
-        "pattern": "random",
-        "lit_percent": 0.5551904804577419
+        "count": 672,
+        "pattern": "grid",
+        "lit_percent": 0.50080091071052
       },
-      "upgrades": 0,
+      "upgrades": 1,
       "interiors": {
         "floors": 5,
         "rooms_per_floor": 12,
         "room_types": [
-          "server_room",
           "office",
           "conference",
-          "lobby"
+          "lobby",
+          "server_room"
         ],
-        "furniture_density": 0.7075215530018081
+        "furniture_density": 0.3680376651812498
       }
     },
     {
-      "x": -223.15306224888707,
-      "z": -144.21678542070035,
-      "width": 11.76902189805609,
+      "x": -221.75175636688522,
+      "z": -136.52873454948678,
+      "width": 11.53041847330555,
       "height": 22.251655629139076,
-      "depth": 8.714260748324637,
+      "depth": 11.674811604726305,
       "color": "#4488ff",
-      "style": "futuristic",
+      "style": "art_deco",
       "roof_decor": "solar_panels",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 6,
       "file": "autonomous-zoo/projects/tier7-pure-math/continued-fraction-approximants/evolve.py",
-      "address": "Genome Sector // Silicon Way // Block P",
+      "address": "Genome Sector // Process Parkway // Block N",
       "windows": {
-        "count": 258,
-        "pattern": "random",
-        "lit_percent": 0.6268568889670108
+        "count": 354,
+        "pattern": "striped",
+        "lit_percent": 0.540715275352208
       },
-      "upgrades": 1,
+      "upgrades": 2,
       "interiors": {
         "floors": 4,
         "rooms_per_floor": 12,
         "room_types": [
-          "elevator",
           "conference",
-          "lobby",
-          "office",
-          "server_room"
+          "lobby"
         ],
-        "furniture_density": 0.7478892704224823
+        "furniture_density": 0.7407532242619475
       }
     },
     {
-      "x": -202.34673776107212,
-      "z": -136.8917114521844,
-      "width": 11.552052507255834,
+      "x": -203.31764224878663,
+      "z": -137.12322494836266,
+      "width": 9.461278384550884,
       "height": 22.251655629139076,
-      "depth": 11.920103346634846,
+      "depth": 11.261695770875068,
       "color": "#4488ff",
-      "style": "art_deco",
+      "style": "industrial",
       "roof_decor": "roof_garden",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 6,
       "file": "autonomous-zoo/projects/tier7-pure-math/galois-field-builder/evolve.py",
-      "address": "Genome Sector // Silicon Way // Block U",
+      "address": "Genome Sector // Kernel Street // Block V",
       "windows": {
-        "count": 174,
-        "pattern": "grid",
-        "lit_percent": 0.5370662730988074
+        "count": 576,
+        "pattern": "diagonal",
+        "lit_percent": 0.7456900113860275
       },
       "upgrades": 0,
       "interiors": {
         "floors": 4,
         "rooms_per_floor": 7,
         "room_types": [
-          "server_room",
-          "lobby",
-          "office",
           "elevator",
-          "conference"
+          "conference",
+          "lobby",
+          "server_room"
         ],
-        "furniture_density": 0.7137840196028368
+        "furniture_density": 0.3680265460641134
       }
     },
     {
-      "x": -176.34041037908074,
-      "z": -137.25067111148712,
-      "width": 9.003131338438584,
+      "x": -182.2814356161091,
+      "z": -136.83715267290862,
+      "width": 10.499278006771604,
       "height": 22.251655629139076,
-      "depth": 10.819035145778582,
+      "depth": 10.079938793881926,
       "color": "#4488ff",
-      "style": "futuristic",
-      "roof_decor": "solar_panels",
+      "style": "modern",
+      "roof_decor": "helipad",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 6,
       "file": "autonomous-zoo/projects/tier7-pure-math/metric-geometry/evolve.py",
-      "address": "Genome Sector // Logic Lane // Block U",
+      "address": "Genome Sector // Silicon Way // Block A",
       "windows": {
-        "count": 192,
-        "pattern": "striped",
-        "lit_percent": 0.5428740217847376
+        "count": 144,
+        "pattern": "diagonal",
+        "lit_percent": 0.5544928822161732
       },
       "upgrades": 1,
       "interiors": {
         "floors": 4,
-        "rooms_per_floor": 11,
+        "rooms_per_floor": 8,
         "room_types": [
+          "server_room",
           "office",
-          "elevator",
           "lobby",
-          "server_room"
+          "elevator",
+          "conference"
         ],
-        "furniture_density": 0.5861204080981722
+        "furniture_density": 0.7027452925799125
       }
     },
     {
-      "x": -163.15562703618497,
-      "z": -143.27652034814312,
-      "width": 11.76411651604483,
+      "x": -164.07502442220238,
+      "z": -136.0954276017697,
+      "width": 12.518022861505726,
       "height": 25.960264900662253,
-      "depth": 14.656086881294316,
+      "depth": 9.734557933113287,
       "color": "#4488ff",
-      "style": "brutalist",
+      "style": "modern",
       "roof_decor": "neon_sign",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 7,
       "file": "autonomous-zoo/projects/tier7-pure-math/partition-function-counter/evolve.py",
-      "address": "Genome Sector // Bit Blvd // Block H",
+      "address": "Genome Sector // Mainframe Ave // Block I",
       "windows": {
-        "count": 343,
-        "pattern": "random",
-        "lit_percent": 0.4412874993311898
+        "count": 399,
+        "pattern": "striped",
+        "lit_percent": 0.6102400449920043
       },
       "upgrades": 3,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 4,
+        "rooms_per_floor": 11,
         "room_types": [
           "lobby",
           "office",
-          "server_room",
-          "elevator"
+          "elevator",
+          "server_room"
         ],
-        "furniture_density": 0.5650610406207144
+        "furniture_density": 0.7338575027536896
       }
     },
     {
-      "x": -142.48436444158247,
-      "z": -135.41421230890248,
-      "width": 15.453512751782737,
+      "x": -139.11840455482417,
+      "z": -140.47066754413353,
+      "width": 8.505657194926611,
       "height": 18.543046357615896,
-      "depth": 10.86810270616146,
+      "depth": 10.38536704527843,
       "color": "#4488ff",
       "style": "standard",
-      "roof_decor": "water_tank",
+      "roof_decor": "roof_garden",
       "name": "evolve",
       "type": "Building",
       "complexity": 5,
       "file": "autonomous-zoo/projects/tier7-pure-math/zenos-paradox-divider/evolve.py",
-      "address": "Genome Sector // Mainframe Ave // Block M",
+      "address": "Genome Sector // Process Parkway // Block J",
       "windows": {
-        "count": 320,
-        "pattern": "grid",
-        "lit_percent": 0.44905865132245115
+        "count": 460,
+        "pattern": "random",
+        "lit_percent": 0.4861990354534538
       },
-      "upgrades": 0,
+      "upgrades": 2,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 8,
+        "rooms_per_floor": 5,
         "room_types": [
-          "lobby",
           "elevator",
-          "conference",
-          "office"
+          "office",
+          "server_room"
         ],
-        "furniture_density": 0.39849317824135677
+        "furniture_density": 0.6813074377468216
       }
     },
     {
-      "x": -116.80457121068301,
-      "z": -139.5557940356357,
-      "width": 14.764738365072976,
+      "x": -122.6394401089705,
+      "z": -144.6975683792881,
+      "width": 8.317405810336588,
       "height": 74.17218543046359,
-      "depth": 11.048636466977182,
+      "depth": 10.471852953979784,
       "color": "#ff4444",
-      "style": "art_deco",
-      "roof_decor": "antenna_array",
+      "style": "brutalist",
+      "roof_decor": "neon_sign",
       "name": "scaffold_projects",
       "type": "Skyscraper",
       "complexity": 20,
       "file": "autonomous-zoo/scaffold_projects.py",
-      "address": "Genome Sector // Silicon Way // Block M",
+      "address": "Genome Sector // Logic Lane // Block S",
       "windows": {
-        "count": 1300,
+        "count": 700,
         "pattern": "diagonal",
-        "lit_percent": 0.7977205329750499
+        "lit_percent": 0.7184282222246432
       },
-      "upgrades": 0,
+      "upgrades": 1,
       "interiors": {
         "floors": 14,
-        "rooms_per_floor": 9,
+        "rooms_per_floor": 8,
         "room_types": [
-          "office",
-          "server_room"
+          "conference",
+          "lobby"
         ],
-        "furniture_density": 0.771755806735403
+        "furniture_density": 0.6999839303096131
       }
     },
     {
-      "x": -104.67220878383435,
-      "z": -142.23226963580518,
-      "width": 13.839654817982208,
+      "x": -95.95994583350823,
+      "z": -139.16776058473644,
+      "width": 13.272361088614016,
       "height": 74.17218543046359,
-      "depth": 15.895764947359291,
+      "depth": 12.510341932018658,
       "color": "#ff4444",
       "style": "futuristic",
-      "roof_decor": "neon_sign",
+      "roof_decor": "solar_panels",
       "name": "layman_overhaul",
       "type": "Skyscraper",
       "complexity": 20,
       "file": "autonomous-zoo/scripts/layman_overhaul.py",
-      "address": "Genome Sector // Process Parkway // Block A",
+      "address": "Genome Sector // Logic Lane // Block R",
       "windows": {
-        "count": 1860,
-        "pattern": "diagonal",
-        "lit_percent": 0.5385632203779461
+        "count": 1460,
+        "pattern": "grid",
+        "lit_percent": 0.8787734933167685
       },
-      "upgrades": 2,
+      "upgrades": 1,
       "interiors": {
         "floors": 14,
-        "rooms_per_floor": 10,
+        "rooms_per_floor": 7,
         "room_types": [
-          "elevator",
           "office",
-          "lobby",
+          "elevator",
           "server_room",
+          "lobby",
           "conference"
         ],
-        "furniture_density": 0.4040422950584722
+        "furniture_density": 0.300749438955473
       }
     },
     {
-      "x": -217.91645938039275,
-      "z": -117.41904091835013,
-      "width": 8.507280138419691,
+      "x": -223.24191409870502,
+      "z": -121.62297065886595,
+      "width": 12.257408099296462,
       "height": 11.125827814569538,
-      "depth": 11.857030857427066,
+      "depth": 8.83930629912525,
       "color": "#888888",
       "style": "standard",
-      "roof_decor": "solar_panels",
+      "roof_decor": "roof_garden",
       "name": "social_sensor",
       "type": "Building",
       "complexity": 3,
       "file": "autonomous-zoo/scripts/social_sensor.py",
-      "address": "Genome Sector // Bit Blvd // Block J",
+      "address": "Genome Sector // Process Parkway // Block P",
       "windows": {
-        "count": 99,
-        "pattern": "diagonal",
-        "lit_percent": 0.888056083680463
+        "count": 222,
+        "pattern": "striped",
+        "lit_percent": 0.714490182398914
       },
-      "upgrades": 3,
+      "upgrades": 1,
       "interiors": {
         "floors": 2,
-        "rooms_per_floor": 5,
+        "rooms_per_floor": 6,
         "room_types": [
-          "server_room",
           "conference",
+          "server_room",
+          "lobby",
           "office",
-          "elevator",
-          "lobby"
+          "elevator"
         ],
-        "furniture_density": 0.36950495727848137
+        "furniture_density": 0.3141362383138443
       }
     },
     {
-      "x": -195.98103644388993,
-      "z": -115.26729571646814,
-      "width": 10.469792267292611,
+      "x": -204.7961878153399,
+      "z": -119.5154499883606,
+      "width": 14.45606033150708,
       "height": 18.543046357615896,
-      "depth": 10.637199787563596,
+      "depth": 12.893874904619148,
       "color": "#888888",
       "style": "standard",
-      "roof_decor": "roof_garden",
+      "roof_decor": "water_tank",
       "name": "update_catalog_analogy",
       "type": "Building",
       "complexity": 5,
       "file": "autonomous-zoo/scripts/update_catalog_analogy.py",
-      "address": "Genome Sector // Bit Blvd // Block N",
+      "address": "Genome Sector // Process Parkway // Block W",
       "windows": {
-        "count": 145,
-        "pattern": "diagonal",
-        "lit_percent": 0.5600849301506691
+        "count": 335,
+        "pattern": "striped",
+        "lit_percent": 0.5127772230519632
       },
-      "upgrades": 3,
+      "upgrades": 1,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 8,
+        "rooms_per_floor": 6,
         "room_types": [
-          "office",
-          "conference",
           "server_room",
-          "elevator"
+          "lobby",
+          "office"
         ],
-        "furniture_density": 0.7589594728925717
+        "furniture_density": 0.4124324794469685
       }
     },
     {
-      "x": 95.21505350909914,
-      "z": -196.88346418172756,
-      "width": 12.727533824512669,
+      "x": 103.22515397094026,
+      "z": -198.30882370655044,
+      "width": 13.87592367860882,
       "height": 74.17218543046359,
-      "depth": 13.7849060314449,
+      "depth": 14.457638373945207,
       "color": "#ff4444",
-      "style": "futuristic",
-      "roof_decor": "solar_panels",
+      "style": "art_deco",
+      "roof_decor": "water_tank",
       "name": "generate_projects",
       "type": "Skyscraper",
       "complexity": 20,
       "file": "autonomous-zoo-expansion/generate_projects.py",
-      "address": "Evolution Heights // Kernel Street // Block R",
+      "address": "Evolution Heights // Mainframe Ave // Block Z",
       "windows": {
-        "count": 1040,
-        "pattern": "striped",
-        "lit_percent": 0.5427154812647683
+        "count": 1880,
+        "pattern": "grid",
+        "lit_percent": 0.7326807216552476
       },
-      "upgrades": 0,
+      "upgrades": 2,
       "interiors": {
         "floors": 14,
         "rooms_per_floor": 11,
         "room_types": [
-          "conference",
+          "server_room",
           "lobby",
-          "server_room"
+          "conference",
+          "office",
+          "elevator"
         ],
-        "furniture_density": 0.4304336994251976
+        "furniture_density": 0.5755591462301981
       }
     },
     {
-      "x": 122.56692865727436,
-      "z": -200.70033306435587,
-      "width": 10.468241092720817,
+      "x": 115.9817521553953,
+      "z": -200.35235382981972,
+      "width": 13.937562622686265,
       "height": 29.668874172185433,
-      "depth": 8.06167143275894,
+      "depth": 15.605718535258834,
       "color": "#888888",
-      "style": "futuristic",
-      "roof_decor": "neon_sign",
+      "style": "brutalist",
+      "roof_decor": "roof_garden",
       "name": "generate_workflows",
       "type": "Skyscraper",
       "complexity": 8,
       "file": "autonomous-zoo-expansion/generate_workflows.py",
-      "address": "Evolution Heights // Mainframe Ave // Block S",
+      "address": "Evolution Heights // Kernel Street // Block L",
       "windows": {
-        "count": 784,
+        "count": 616,
         "pattern": "random",
-        "lit_percent": 0.6321239323349588
+        "lit_percent": 0.7962688167259585
       },
-      "upgrades": 0,
+      "upgrades": 2,
       "interiors": {
         "floors": 5,
-        "rooms_per_floor": 11,
+        "rooms_per_floor": 6,
         "room_types": [
-          "elevator",
+          "server_room",
           "conference",
-          "server_room"
+          "elevator",
+          "lobby",
+          "office"
         ],
-        "furniture_density": 0.5699403318380235
+        "furniture_density": 0.7183196039096629
       }
     },
     {
-      "x": 140.47258073085203,
-      "z": -196.73111008475584,
-      "width": 10.45098268303976,
+      "x": 138.62262219199042,
+      "z": -202.7459337598574,
+      "width": 9.886509132690657,
       "height": 18.543046357615896,
-      "depth": 11.328112378590951,
+      "depth": 12.49064019448444,
       "color": "#4488ff",
       "style": "standard",
-      "roof_decor": "roof_garden",
+      "roof_decor": "billboard",
       "name": "evolve",
       "type": "Building",
       "complexity": 5,
       "file": "autonomous-zoo-expansion/projects/tier10-biological/darwinian-file-selection/evolve.py",
-      "address": "Evolution Heights // Process Parkway // Block K",
+      "address": "Evolution Heights // Data Drive // Block I",
       "windows": {
-        "count": 160,
-        "pattern": "grid",
-        "lit_percent": 0.6456296675885732
+        "count": 195,
+        "pattern": "diagonal",
+        "lit_percent": 0.5293109463707364
       },
-      "upgrades": 3,
+      "upgrades": 2,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 9,
+        "rooms_per_floor": 4,
         "room_types": [
-          "elevator",
           "office",
-          "server_room",
-          "conference"
+          "elevator",
+          "server_room"
         ],
-        "furniture_density": 0.4784179416061484
+        "furniture_density": 0.699236191919018
       }
     },
     {
-      "x": 162.4979295498703,
-      "z": -201.78383237961629,
-      "width": 10.240147014267908,
+      "x": 163.00953923027978,
+      "z": -202.7408708486152,
+      "width": 11.481203350969341,
       "height": 18.543046357615896,
-      "depth": 10.21845845010687,
+      "depth": 11.029265776638791,
       "color": "#4488ff",
       "style": "standard",
       "roof_decor": "roof_garden",
@@ -1273,347 +1264,351 @@
       "type": "Building",
       "complexity": 5,
       "file": "autonomous-zoo-expansion/projects/tier10-biological/dna-encoded-repo/evolve.py",
-      "address": "Evolution Heights // Bit Blvd // Block G",
+      "address": "Evolution Heights // Mainframe Ave // Block H",
       "windows": {
-        "count": 185,
-        "pattern": "striped",
-        "lit_percent": 0.44829488822470065
-      },
-      "upgrades": 0,
-      "interiors": {
-        "floors": 3,
-        "rooms_per_floor": 7,
-        "room_types": [
-          "office",
-          "elevator",
-          "server_room",
-          "lobby",
-          "conference"
-        ],
-        "furniture_density": 0.5177865548065897
-      }
-    },
-    {
-      "x": 178.76430762743567,
-      "z": -204.92683418658135,
-      "width": 8.826868786759583,
-      "height": 18.543046357615896,
-      "depth": 13.8129374873816,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": "antenna_array",
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier10-biological/predator-prey-dynamics/evolve.py",
-      "address": "Evolution Heights // Mainframe Ave // Block W",
-      "windows": {
-        "count": 105,
-        "pattern": "random",
-        "lit_percent": 0.5055088428622172
-      },
-      "upgrades": 1,
-      "interiors": {
-        "floors": 3,
-        "rooms_per_floor": 12,
-        "room_types": [
-          "conference",
-          "office",
-          "lobby"
-        ],
-        "furniture_density": 0.37205447978848183
-      }
-    },
-    {
-      "x": 95.9686625118798,
-      "z": -177.6986621275773,
-      "width": 15.985920443420465,
-      "height": 18.543046357615896,
-      "depth": 9.74889804090342,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": "roof_garden",
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier10-biological/symbiosis-repo/evolve.py",
-      "address": "Evolution Heights // Mainframe Ave // Block R",
-      "windows": {
-        "count": 265,
-        "pattern": "diagonal",
-        "lit_percent": 0.4961449579355977
-      },
-      "upgrades": 0,
-      "interiors": {
-        "floors": 3,
-        "rooms_per_floor": 6,
-        "room_types": [
-          "conference",
-          "office",
-          "server_room",
-          "elevator"
-        ],
-        "furniture_density": 0.5245776206780208
-      }
-    },
-    {
-      "x": 119.00862163458248,
-      "z": -179.5854648330191,
-      "width": 9.657355399380918,
-      "height": 18.543046357615896,
-      "depth": 13.864708564420813,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": "water_tank",
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier11-graph/pagerank-file-importance/evolve.py",
-      "address": "Evolution Heights // Silicon Way // Block P",
-      "windows": {
-        "count": 285,
-        "pattern": "random",
-        "lit_percent": 0.5112046542519437
+        "count": 145,
+        "pattern": "grid",
+        "lit_percent": 0.6610901489310863
       },
       "upgrades": 2,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 12,
-        "room_types": [
-          "elevator",
-          "conference",
-          "office",
-          "lobby"
-        ],
-        "furniture_density": 0.3787421938113965
-      }
-    },
-    {
-      "x": 138.7711882730857,
-      "z": -175.14917909657166,
-      "width": 12.306517386555207,
-      "height": 18.543046357615896,
-      "depth": 14.154794624363152,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": "helipad",
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/fibonacci-file-growth/evolve.py",
-      "address": "Evolution Heights // Bit Blvd // Block I",
-      "windows": {
-        "count": 330,
-        "pattern": "grid",
-        "lit_percent": 0.6026966501354589
-      },
-      "upgrades": 1,
-      "interiors": {
-        "floors": 3,
-        "rooms_per_floor": 6,
-        "room_types": [
-          "conference",
-          "office"
-        ],
-        "furniture_density": 0.3013524513850487
-      }
-    },
-    {
-      "x": 160.88429787376663,
-      "z": -184.37258131856132,
-      "width": 10.864435119416386,
-      "height": 18.543046357615896,
-      "depth": 12.93094551909689,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": null,
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/graph-coloring-repo/evolve.py",
-      "address": "Evolution Heights // Silicon Way // Block E",
-      "windows": {
-        "count": 390,
-        "pattern": "diagonal",
-        "lit_percent": 0.5125308017249435
-      },
-      "upgrades": 0,
-      "interiors": {
-        "floors": 3,
         "rooms_per_floor": 8,
         "room_types": [
-          "server_room",
-          "lobby"
-        ],
-        "furniture_density": 0.42642168637732947
-      }
-    },
-    {
-      "x": 182.4049761081883,
-      "z": -180.28105335821516,
-      "width": 9.212552951983575,
-      "height": 18.543046357615896,
-      "depth": 15.381984434931296,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": "roof_garden",
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/modulo-mutation-engine/evolve.py",
-      "address": "Evolution Heights // Process Parkway // Block A",
-      "windows": {
-        "count": 485,
-        "pattern": "diagonal",
-        "lit_percent": 0.6019475701144501
-      },
-      "upgrades": 3,
-      "interiors": {
-        "floors": 3,
-        "rooms_per_floor": 10,
-        "room_types": [
           "conference",
-          "lobby",
           "office",
+          "lobby",
+          "server_room",
           "elevator"
         ],
-        "furniture_density": 0.30960157320702286
+        "furniture_density": 0.4259827595240253
       }
     },
     {
-      "x": 98.67383068384665,
-      "z": -161.86960626375742,
-      "width": 9.46131193555236,
+      "x": 182.5180001187624,
+      "z": -202.8169290998821,
+      "width": 12.33556678468591,
       "height": 18.543046357615896,
-      "depth": 14.975231738279717,
+      "depth": 15.365042657252616,
       "color": "#4488ff",
       "style": "standard",
       "roof_decor": "neon_sign",
       "name": "evolve",
       "type": "Building",
       "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/palindrome-commit-detector/evolve.py",
-      "address": "Evolution Heights // Mainframe Ave // Block U",
+      "file": "autonomous-zoo-expansion/projects/tier10-biological/predator-prey-dynamics/evolve.py",
+      "address": "Evolution Heights // Kernel Street // Block A",
       "windows": {
-        "count": 310,
-        "pattern": "diagonal",
-        "lit_percent": 0.7032482219695466
-      },
-      "upgrades": 2,
-      "interiors": {
-        "floors": 3,
-        "rooms_per_floor": 7,
-        "room_types": [
-          "elevator",
-          "server_room",
-          "lobby"
-        ],
-        "furniture_density": 0.6303724310148171
-      }
-    },
-    {
-      "x": 122.26529086586946,
-      "z": -155.50981255605694,
-      "width": 9.480389179172747,
-      "height": 18.543046357615896,
-      "depth": 8.0940263880258,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": "solar_panels",
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/prime-commit-filter/evolve.py",
-      "address": "Evolution Heights // Kernel Street // Block S",
-      "windows": {
-        "count": 190,
+        "count": 395,
         "pattern": "grid",
-        "lit_percent": 0.541011251899612
-      },
-      "upgrades": 3,
-      "interiors": {
-        "floors": 3,
-        "rooms_per_floor": 4,
-        "room_types": [
-          "server_room",
-          "conference",
-          "lobby"
-        ],
-        "furniture_density": 0.6068795974870971
-      }
-    },
-    {
-      "x": 136.94032891269202,
-      "z": -162.7844872299729,
-      "width": 13.46938459107796,
-      "height": 18.543046357615896,
-      "depth": 13.752918689288517,
-      "color": "#4488ff",
-      "style": "standard",
-      "roof_decor": "solar_panels",
-      "name": "evolve",
-      "type": "Building",
-      "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier9-physics/entropy-clock/evolve.py",
-      "address": "Evolution Heights // Logic Lane // Block G",
-      "windows": {
-        "count": 435,
-        "pattern": "grid",
-        "lit_percent": 0.5812089771585628
+        "lit_percent": 0.42361321027819304
       },
       "upgrades": 0,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 7,
+        "rooms_per_floor": 5,
         "room_types": [
+          "lobby",
           "office",
-          "server_room",
-          "elevator",
-          "conference",
-          "lobby"
+          "conference"
         ],
-        "furniture_density": 0.7028920177471805
+        "furniture_density": 0.33422651692023536
       }
     },
     {
-      "x": 158.91658640245043,
-      "z": -156.57259034916248,
-      "width": 8.669506025697281,
+      "x": 102.35701426121007,
+      "z": -180.78292537071624,
+      "width": 10.855472725513973,
       "height": 18.543046357615896,
-      "depth": 15.671281385365678,
+      "depth": 11.45896724117992,
       "color": "#4488ff",
       "style": "standard",
-      "roof_decor": "billboard",
+      "roof_decor": null,
       "name": "evolve",
       "type": "Building",
       "complexity": 5,
-      "file": "autonomous-zoo-expansion/projects/tier9-physics/fractal-directory-tree/evolve.py",
-      "address": "Evolution Heights // Silicon Way // Block C",
+      "file": "autonomous-zoo-expansion/projects/tier10-biological/symbiosis-repo/evolve.py",
+      "address": "Evolution Heights // Kernel Street // Block Y",
       "windows": {
-        "count": 475,
+        "count": 255,
         "pattern": "grid",
-        "lit_percent": 0.5997944103662627
+        "lit_percent": 0.7654134000485673
+      },
+      "upgrades": 1,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 4,
+        "room_types": [
+          "conference",
+          "elevator",
+          "server_room"
+        ],
+        "furniture_density": 0.5058494026889553
+      }
+    },
+    {
+      "x": 119.26444743423018,
+      "z": -184.79320212677223,
+      "width": 12.154449004747189,
+      "height": 18.543046357615896,
+      "depth": 15.554927305755793,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": "solar_panels",
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier11-graph/pagerank-file-importance/evolve.py",
+      "address": "Evolution Heights // Data Drive // Block P",
+      "windows": {
+        "count": 320,
+        "pattern": "striped",
+        "lit_percent": 0.5970139119238413
       },
       "upgrades": 3,
       "interiors": {
         "floors": 3,
         "rooms_per_floor": 6,
         "room_types": [
-          "server_room",
-          "lobby",
           "elevator",
           "conference",
-          "office"
+          "lobby"
         ],
-        "furniture_density": 0.761169456799796
+        "furniture_density": 0.4556325344469382
       }
     },
     {
-      "x": 183.64726348813508,
-      "z": -160.36379390725722,
-      "width": 9.714149249318371,
+      "x": 139.77335893770118,
+      "z": -178.53083445315977,
+      "width": 9.172396332300089,
       "height": 18.543046357615896,
-      "depth": 8.406566091679492,
+      "depth": 14.52962551649033,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": "neon_sign",
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/fibonacci-file-growth/evolve.py",
+      "address": "Evolution Heights // Mainframe Ave // Block J",
+      "windows": {
+        "count": 375,
+        "pattern": "random",
+        "lit_percent": 0.6082916982762578
+      },
+      "upgrades": 3,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 9,
+        "room_types": [
+          "lobby",
+          "elevator",
+          "server_room",
+          "office"
+        ],
+        "furniture_density": 0.4242126534172087
+      }
+    },
+    {
+      "x": 159.87816088516794,
+      "z": -176.78839277426272,
+      "width": 8.124868455070958,
+      "height": 18.543046357615896,
+      "depth": 12.30123353079291,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": "antenna_array",
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/graph-coloring-repo/evolve.py",
+      "address": "Evolution Heights // Silicon Way // Block D",
+      "windows": {
+        "count": 325,
+        "pattern": "diagonal",
+        "lit_percent": 0.5151682522826626
+      },
+      "upgrades": 2,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 9,
+        "room_types": [
+          "lobby",
+          "conference",
+          "elevator",
+          "office"
+        ],
+        "furniture_density": 0.517261309755924
+      }
+    },
+    {
+      "x": 180.13655193276233,
+      "z": -183.60199190079774,
+      "width": 12.01653831007633,
+      "height": 18.543046357615896,
+      "depth": 10.543567756715827,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": "billboard",
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/modulo-mutation-engine/evolve.py",
+      "address": "Evolution Heights // Bit Blvd // Block Y",
+      "windows": {
+        "count": 320,
+        "pattern": "diagonal",
+        "lit_percent": 0.755198970675121
+      },
+      "upgrades": 0,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 5,
+        "room_types": [
+          "conference",
+          "lobby",
+          "server_room",
+          "office",
+          "elevator"
+        ],
+        "furniture_density": 0.49753317065496827
+      }
+    },
+    {
+      "x": 96.16069532045225,
+      "z": -161.35999051407651,
+      "width": 14.659769854295028,
+      "height": 18.543046357615896,
+      "depth": 14.640227185653384,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": "helipad",
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/palindrome-commit-detector/evolve.py",
+      "address": "Evolution Heights // Data Drive // Block S",
+      "windows": {
+        "count": 360,
+        "pattern": "diagonal",
+        "lit_percent": 0.7602095742960095
+      },
+      "upgrades": 3,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 9,
+        "room_types": [
+          "server_room",
+          "elevator",
+          "lobby",
+          "office",
+          "conference"
+        ],
+        "furniture_density": 0.4899292249042305
+      }
+    },
+    {
+      "x": 116.32594314671151,
+      "z": -155.85846521102224,
+      "width": 13.119624098057606,
+      "height": 18.543046357615896,
+      "depth": 9.726747494959962,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": "roof_garden",
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier8-mathematical/prime-commit-filter/evolve.py",
+      "address": "Evolution Heights // Mainframe Ave // Block M",
+      "windows": {
+        "count": 245,
+        "pattern": "diagonal",
+        "lit_percent": 0.7233142926099314
+      },
+      "upgrades": 1,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 11,
+        "room_types": [
+          "server_room",
+          "conference",
+          "office"
+        ],
+        "furniture_density": 0.44214670342677653
+      }
+    },
+    {
+      "x": 139.80356195345422,
+      "z": -162.44081245221224,
+      "width": 15.593687222783899,
+      "height": 18.543046357615896,
+      "depth": 9.230176004552074,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": "helipad",
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier9-physics/entropy-clock/evolve.py",
+      "address": "Evolution Heights // Process Parkway // Block J",
+      "windows": {
+        "count": 480,
+        "pattern": "striped",
+        "lit_percent": 0.6600164573240812
+      },
+      "upgrades": 0,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 10,
+        "room_types": [
+          "server_room",
+          "elevator",
+          "conference",
+          "office",
+          "lobby"
+        ],
+        "furniture_density": 0.5246119939550955
+      }
+    },
+    {
+      "x": 159.21229618491998,
+      "z": -160.57389034853296,
+      "width": 9.966671148887357,
+      "height": 18.543046357615896,
+      "depth": 14.479268792336143,
+      "color": "#4488ff",
+      "style": "standard",
+      "roof_decor": null,
+      "name": "evolve",
+      "type": "Building",
+      "complexity": 5,
+      "file": "autonomous-zoo-expansion/projects/tier9-physics/fractal-directory-tree/evolve.py",
+      "address": "Evolution Heights // Logic Lane // Block D",
+      "windows": {
+        "count": 340,
+        "pattern": "diagonal",
+        "lit_percent": 0.6253318939089142
+      },
+      "upgrades": 1,
+      "interiors": {
+        "floors": 3,
+        "rooms_per_floor": 5,
+        "room_types": [
+          "elevator",
+          "lobby",
+          "conference",
+          "office"
+        ],
+        "furniture_density": 0.31775632046516955
+      }
+    },
+    {
+      "x": 176.1244824441564,
+      "z": -156.1266716078512,
+      "width": 10.188752876635451,
+      "height": 18.543046357615896,
+      "depth": 11.263020862454997,
       "color": "#4488ff",
       "style": "standard",
       "roof_decor": "neon_sign",
@@ -1621,286 +1616,254 @@
       "type": "Building",
       "complexity": 5,
       "file": "autonomous-zoo-expansion/projects/tier9-physics/ising-model/evolve.py",
-      "address": "Evolution Heights // Mainframe Ave // Block B",
+      "address": "Evolution Heights // Data Drive // Block U",
       "windows": {
-        "count": 500,
+        "count": 430,
         "pattern": "random",
-        "lit_percent": 0.47114581499206143
+        "lit_percent": 0.47784428562138737
       },
       "upgrades": 3,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 6,
+        "rooms_per_floor": 11,
         "room_types": [
-          "server_room",
-          "lobby",
           "conference",
+          "elevator",
           "office"
         ],
-        "furniture_density": 0.7931152232051912
+        "furniture_density": 0.44910552766863737
       }
     },
     {
-      "x": 102.11032467323201,
-      "z": -142.29557638469967,
-      "width": 8.847874961402653,
+      "x": 100.16893807965687,
+      "z": -138.9541865432754,
+      "width": 14.460018704527347,
       "height": 18.543046357615896,
-      "depth": 8.061181498191178,
+      "depth": 10.301138683273821,
       "color": "#4488ff",
       "style": "standard",
-      "roof_decor": "solar_panels",
+      "roof_decor": "water_tank",
       "name": "evolve",
       "type": "Building",
       "complexity": 5,
       "file": "autonomous-zoo-expansion/projects/tier9-physics/lorenz-attractor-drift/evolve.py",
-      "address": "Evolution Heights // Logic Lane // Block Y",
+      "address": "Evolution Heights // Data Drive // Block W",
       "windows": {
-        "count": 445,
-        "pattern": "striped",
-        "lit_percent": 0.5098585436608065
+        "count": 405,
+        "pattern": "diagonal",
+        "lit_percent": 0.5973399833225235
       },
       "upgrades": 3,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 11,
+        "rooms_per_floor": 4,
         "room_types": [
-          "conference",
+          "elevator",
+          "lobby",
           "server_room"
         ],
-        "furniture_density": 0.36648920191351136
+        "furniture_density": 0.33674647396720075
       }
     },
     {
-      "x": 116.19905888239262,
-      "z": -139.6227635643359,
-      "width": 10.256750882836352,
+      "x": 118.21215679373046,
+      "z": -140.99190338149722,
+      "width": 15.857865491138506,
       "height": 18.543046357615896,
-      "depth": 13.876602511859755,
+      "depth": 8.560338538061021,
       "color": "#4488ff",
       "style": "standard",
-      "roof_decor": "helipad",
+      "roof_decor": "neon_sign",
       "name": "evolve",
       "type": "Building",
       "complexity": 5,
       "file": "autonomous-zoo-expansion/projects/tier9-physics/pendulum-oscillator/evolve.py",
-      "address": "Evolution Heights // Logic Lane // Block M",
+      "address": "Evolution Heights // Kernel Street // Block O",
       "windows": {
-        "count": 370,
+        "count": 345,
         "pattern": "striped",
-        "lit_percent": 0.7181860679629234
+        "lit_percent": 0.7942389539424757
       },
-      "upgrades": 3,
+      "upgrades": 1,
       "interiors": {
         "floors": 3,
-        "rooms_per_floor": 8,
+        "rooms_per_floor": 4,
         "room_types": [
-          "office",
-          "lobby",
-          "conference"
+          "elevator",
+          "conference",
+          "server_room"
         ],
-        "furniture_density": 0.36969622789698375
+        "furniture_density": 0.36313615185223064
       }
     },
     {
-      "x": -168.13111039645506,
-      "z": 126.70344905327161,
-      "width": 10.615123252558615,
+      "x": -166.1065897517476,
+      "z": 128.09355141710648,
+      "width": 8.614816469067769,
       "height": 74.17218543046359,
-      "depth": 8.39711898176912,
+      "depth": 8.15633496614964,
       "color": "#ff4444",
-      "style": "art_deco",
-      "roof_decor": "solar_panels",
+      "style": "cyberpunk",
+      "roof_decor": "billboard",
       "name": "evolve",
       "type": "Skyscraper",
       "complexity": 20,
       "file": "CityBuilder/evolve.py",
-      "address": "Core Architecture Zone // Mainframe Ave // Block M",
+      "address": "Core Architecture Zone // Kernel Street // Block K",
       "windows": {
-        "count": 1900,
-        "pattern": "diagonal",
-        "lit_percent": 0.7544896815462525
+        "count": 1940,
+        "pattern": "grid",
+        "lit_percent": 0.7443752638671812
       },
-      "upgrades": 2,
-      "interiors": {
-        "floors": 14,
-        "rooms_per_floor": 6,
-        "room_types": [
-          "server_room",
-          "lobby"
-        ],
-        "furniture_density": 0.503956010893216
-      }
-    },
-    {
-      "x": -148.0591794756804,
-      "z": 130.4042095354569,
-      "width": 13.122400311074907,
-      "height": 74.17218543046359,
-      "depth": 15.031083223343845,
-      "color": "#ff4444",
-      "style": "brutalist",
-      "roof_decor": "solar_panels",
-      "name": "index",
-      "type": "Skyscraper",
-      "complexity": 20,
-      "file": "CityBuilder/index.html",
-      "address": "Core Architecture Zone // Data Drive // Block S",
-      "windows": {
-        "count": 1560,
-        "pattern": "diagonal",
-        "lit_percent": 0.43403454061196167
-      },
-      "upgrades": 2,
+      "upgrades": 0,
       "interiors": {
         "floors": 14,
         "rooms_per_floor": 11,
         "room_types": [
-          "conference",
+          "lobby",
+          "server_room",
+          "office",
+          "elevator",
+          "conference"
+        ],
+        "furniture_density": 0.5416384740108597
+      }
+    },
+    {
+      "x": -152.9677997536951,
+      "z": 129.4424015696841,
+      "width": 12.852332829522684,
+      "height": 74.17218543046359,
+      "depth": 8.388568901923076,
+      "color": "#ff4444",
+      "style": "industrial",
+      "roof_decor": "roof_garden",
+      "name": "index",
+      "type": "Skyscraper",
+      "complexity": 20,
+      "file": "CityBuilder/index.html",
+      "address": "Core Architecture Zone // Mainframe Ave // Block W",
+      "windows": {
+        "count": 1840,
+        "pattern": "random",
+        "lit_percent": 0.685980673541327
+      },
+      "upgrades": 1,
+      "interiors": {
+        "floors": 14,
+        "rooms_per_floor": 11,
+        "room_types": [
+          "elevator",
           "server_room"
         ],
-        "furniture_density": 0.3176515298529228
+        "furniture_density": 0.40068338244864926
       }
     }
   ],
   "gardens": [
     {
-      "x": -212.41461195308977,
-      "z": -228.6159881722053,
-      "size": 22.435421038443543,
-      "foliage": 29,
-      "type": "plaza"
-    },
-    {
-      "x": -134.69619392776835,
-      "z": -225.57311194283417,
-      "size": 10.440912920412977,
-      "foliage": 36,
-      "type": "plaza"
-    },
-    {
-      "x": -113.96755084761983,
-      "z": -216.4369183417132,
-      "size": 27.532472674801085,
-      "foliage": 41,
-      "type": "fountain"
-    },
-    {
-      "x": -87.28547274330766,
-      "z": -210.82034579985995,
-      "size": 28.175524443455277,
-      "foliage": 46,
+      "x": -220.8397842246271,
+      "z": -223.59802458818473,
+      "size": 19.896813219930138,
+      "foliage": 22,
       "type": "statue"
     },
     {
-      "x": -100.78747947944306,
-      "z": -193.58288045287318,
-      "size": 13.450558679573527,
-      "foliage": 42,
+      "x": -127.39185510407415,
+      "z": -221.26127752152505,
+      "size": 21.823659655429854,
+      "foliage": 40,
+      "type": "statue"
+    },
+    {
+      "x": -172.9569754254313,
+      "z": -190.449914607207,
+      "size": 27.172655574158526,
+      "foliage": 49,
       "type": "park"
     },
     {
-      "x": -167.01485387669385,
-      "z": -196.33611606292112,
-      "size": 27.594194580939813,
-      "foliage": 32,
-      "type": "statue"
-    },
-    {
-      "x": -154.14540453331338,
-      "z": -192.98144503806907,
-      "size": 20.475652565076885,
-      "foliage": 46,
+      "x": -123.77133505004753,
+      "z": -175.65899241002472,
+      "size": 20.131132882282095,
+      "foliage": 49,
       "type": "fountain"
     },
     {
-      "x": -124.2606032558351,
-      "z": -164.9882254511139,
-      "size": 29.947472597126993,
-      "foliage": 21,
-      "type": "statue"
+      "x": -209.5496275050808,
+      "z": -163.4556538014362,
+      "size": 11.098494578563018,
+      "foliage": 35,
+      "type": "fountain"
     },
     {
-      "x": -224.30279887018432,
-      "z": -151.55933044641708,
-      "size": 28.378324922706913,
-      "foliage": 30,
-      "type": "plaza"
-    },
-    {
-      "x": -209.4863060470958,
-      "z": -169.08960741697086,
-      "size": 19.307228090374917,
+      "x": -104.06685623714921,
+      "z": -161.99290453961183,
+      "size": 11.25860066677211,
       "foliage": 22,
       "type": "plaza"
     },
     {
-      "x": -155.68806798350897,
-      "z": -124.81162518726416,
-      "size": 11.001127163105274,
-      "foliage": 43,
-      "type": "plaza"
-    },
-    {
-      "x": -105.27602673285108,
-      "z": -133.13089310144156,
-      "size": 20.755955549863476,
-      "foliage": 45,
-      "type": "plaza"
-    },
-    {
-      "x": 141.97599112415688,
-      "z": -197.67248084431813,
-      "size": 27.539344369331822,
-      "foliage": 25,
-      "type": "fountain"
-    },
-    {
-      "x": 125.54881280014354,
-      "z": -177.54724293115794,
-      "size": 28.88391029976148,
-      "foliage": 29,
-      "type": "statue"
-    },
-    {
-      "x": 125.73462467057706,
-      "z": -176.95545234215967,
-      "size": 21.80827245389314,
-      "foliage": 28,
-      "type": "fountain"
-    },
-    {
-      "x": 90.05851190607706,
-      "z": -150.60758600619505,
-      "size": 26.715578221903808,
-      "foliage": 25,
-      "type": "fountain"
-    },
-    {
-      "x": 143.85326533719126,
-      "z": -172.22146470645552,
-      "size": 11.93643242797762,
-      "foliage": 45,
-      "type": "park"
-    },
-    {
-      "x": 87.53869461079735,
-      "z": -140.80498670780298,
-      "size": 23.31535568270086,
-      "foliage": 37,
-      "type": "statue"
-    },
-    {
-      "x": -155.4663451647775,
-      "z": 128.0641140524173,
-      "size": 28.57412963840272,
+      "x": -206.33633260357917,
+      "z": -147.3534214915537,
+      "size": 28.5265475831542,
       "foliage": 19,
+      "type": "fountain"
+    },
+    {
+      "x": -169.6766409339838,
+      "z": -145.99093364008073,
+      "size": 27.4851059750115,
+      "foliage": 31,
       "type": "statue"
     },
     {
-      "x": -146.52119272736948,
-      "z": 120.300633337033,
-      "size": 27.51712687592066,
-      "foliage": 43,
+      "x": -174.0356052059854,
+      "z": -140.91225789743459,
+      "size": 25.444386004607328,
+      "foliage": 41,
+      "type": "statue"
+    },
+    {
+      "x": -104.10784388945022,
+      "z": -126.36276283764595,
+      "size": 16.63883030722285,
+      "foliage": 18,
+      "type": "fountain"
+    },
+    {
+      "x": 88.32843093564188,
+      "z": -186.4549539464401,
+      "size": 14.542042657352859,
+      "foliage": 32,
+      "type": "fountain"
+    },
+    {
+      "x": 117.06020351619831,
+      "z": -172.0279606890459,
+      "size": 23.360650232282968,
+      "foliage": 32,
+      "type": "statue"
+    },
+    {
+      "x": 114.38081623430092,
+      "z": -163.4468024529202,
+      "size": 14.166027642930443,
+      "foliage": 28,
+      "type": "plaza"
+    },
+    {
+      "x": 107.72539771051242,
+      "z": -144.19990141788858,
+      "size": 21.7287282364373,
+      "foliage": 16,
+      "type": "statue"
+    },
+    {
+      "x": -156.82650601759858,
+      "z": 138.67017497763513,
+      "size": 22.731777097192357,
+      "foliage": 49,
       "type": "fountain"
     }
   ],
@@ -1914,7 +1877,7 @@
       "l": 300.0,
       "vertical": false,
       "lights": true,
-      "traffic": 12,
+      "traffic": 10,
       "type": "highway"
     },
     {
@@ -1926,7 +1889,7 @@
       "l": 424.26406871192853,
       "vertical": false,
       "lights": true,
-      "traffic": 25,
+      "traffic": 20,
       "type": "highway"
     },
     {
@@ -1938,7 +1901,7 @@
       "l": 300.0,
       "vertical": false,
       "lights": true,
-      "traffic": 17,
+      "traffic": 29,
       "type": "highway"
     },
     {
@@ -1950,7 +1913,7 @@
       "l": 212.13203435596427,
       "vertical": false,
       "lights": true,
-      "traffic": 18,
+      "traffic": 20,
       "type": "highway"
     },
     {
@@ -1962,7 +1925,7 @@
       "l": 300.0,
       "vertical": false,
       "lights": true,
-      "traffic": 17,
+      "traffic": 15,
       "type": "highway"
     },
     {
@@ -1974,7 +1937,7 @@
       "l": 600.0,
       "vertical": false,
       "lights": true,
-      "traffic": 28,
+      "traffic": 25,
       "type": "highway"
     },
     {
@@ -1986,7 +1949,7 @@
       "l": 424.26406871192853,
       "vertical": false,
       "lights": true,
-      "traffic": 21,
+      "traffic": 17,
       "type": "highway"
     },
     {
@@ -1998,1158 +1961,1186 @@
       "l": 600.0,
       "vertical": true,
       "lights": true,
-      "traffic": 14,
+      "traffic": 23,
       "type": "highway"
     }
   ],
   "vehicles": [
     {
       "road_id": 0,
-      "position": 0.034880574571997336,
-      "speed": 0.07586653018061941,
-      "type": "car",
+      "position": 0.2101046871153126,
+      "speed": 0.05893342196019552,
+      "type": "truck",
       "direction": -1
     },
     {
       "road_id": 0,
-      "position": 0.8505501830287661,
-      "speed": 0.0429485743323475,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 0,
-      "position": 0.920009504097847,
-      "speed": 0.030912724531135007,
+      "position": 0.5244528340644508,
+      "speed": 0.03474160946433883,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 0,
-      "position": 0.4846031645014859,
-      "speed": 0.07875977202949692,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 0,
-      "position": 0.9577417067313195,
-      "speed": 0.03726991471809915,
+      "position": 0.7336716561165033,
+      "speed": 0.02935565473865292,
       "type": "bike",
       "direction": -1
     },
     {
       "road_id": 0,
-      "position": 0.5734433116185053,
-      "speed": 0.046387845998742655,
+      "position": 0.5517970626569499,
+      "speed": 0.07749027724776847,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 0,
+      "position": 0.21960946613930887,
+      "speed": 0.02660453126182196,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 0,
-      "position": 0.6483356483078124,
-      "speed": 0.021508614121938857,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 0,
-      "position": 0.5925020559995987,
-      "speed": 0.0375303489674093,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 0,
-      "position": 0.7348741544799939,
-      "speed": 0.07072215927479332,
+      "position": 0.23911376307196874,
+      "speed": 0.050094961106135705,
       "type": "bike",
       "direction": -1
     },
     {
       "road_id": 0,
-      "position": 0.8748777510483939,
-      "speed": 0.0686671223655813,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 0,
-      "position": 0.06903867836519006,
-      "speed": 0.02700404694976409,
+      "position": 0.038992257464632196,
+      "speed": 0.037199435216299315,
       "type": "bike",
       "direction": -1
     },
     {
       "road_id": 0,
-      "position": 0.31026934966304065,
-      "speed": 0.06457398531102052,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.47946101511770045,
-      "speed": 0.07155030471507363,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.3948662980401293,
-      "speed": 0.025332163118693293,
-      "type": "bus",
-      "direction": -1
-    },
-    {
-      "road_id": 1,
-      "position": 0.7247285347121941,
-      "speed": 0.0486090653272139,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.6022669567318356,
-      "speed": 0.07845218478736198,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.27611864224350147,
-      "speed": 0.03282970128834746,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 1,
-      "position": 0.4604826202495911,
-      "speed": 0.06404994812099446,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 1,
-      "position": 0.15221335217444887,
-      "speed": 0.06294157582621539,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.5313010552642784,
-      "speed": 0.02153074371840236,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.9836568809078623,
-      "speed": 0.027588467664274963,
+      "position": 0.3919221613763446,
+      "speed": 0.06951090954751744,
       "type": "bike",
       "direction": -1
     },
     {
-      "road_id": 1,
-      "position": 0.9523728530353842,
-      "speed": 0.07970907387700148,
-      "type": "truck",
+      "road_id": 0,
+      "position": 0.15869576778989758,
+      "speed": 0.025202026281796908,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 0,
+      "position": 0.6521436780729459,
+      "speed": 0.07135798019506333,
+      "type": "car",
       "direction": 1
     },
     {
       "road_id": 1,
-      "position": 0.1680281615444248,
-      "speed": 0.026342537099244466,
+      "position": 0.49027983723806545,
+      "speed": 0.057520267956264956,
       "type": "bike",
       "direction": 1
     },
     {
       "road_id": 1,
-      "position": 0.3519077629089987,
-      "speed": 0.03489547705121081,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.8364569633824354,
-      "speed": 0.05202713501363661,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.2936813695511572,
-      "speed": 0.036863586369231,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 1,
-      "position": 0.7692393596055442,
-      "speed": 0.03821235636892414,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.08347136716834724,
-      "speed": 0.05850260248815939,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.8385026695274029,
-      "speed": 0.03841842900025444,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 1,
-      "position": 0.7818557881637855,
-      "speed": 0.048179296599231244,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.3876009219261979,
-      "speed": 0.03731398229840572,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.234937141290815,
-      "speed": 0.06747580480849587,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 1,
-      "position": 0.5928067963148858,
-      "speed": 0.03934340240595799,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 1,
-      "position": 0.8816591687647186,
-      "speed": 0.053791520995170414,
+      "position": 0.8771141408003902,
+      "speed": 0.028396986060585584,
       "type": "bus",
       "direction": 1
     },
     {
       "road_id": 1,
-      "position": 0.5802562559147916,
-      "speed": 0.03163879325003867,
+      "position": 0.14351485582422008,
+      "speed": 0.059916377157378395,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 1,
+      "position": 0.8474668935648048,
+      "speed": 0.07037913344082346,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.7123460572025334,
+      "speed": 0.026601962942798776,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 1,
+      "position": 0.3489192495547029,
+      "speed": 0.07708090618548678,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.953699635430427,
+      "speed": 0.07948812445995519,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.9488000650418484,
+      "speed": 0.06361115316201817,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 1,
+      "position": 0.6109630822518087,
+      "speed": 0.025425661755096488,
       "type": "bus",
       "direction": 1
     },
     {
       "road_id": 1,
-      "position": 0.7387641102962943,
-      "speed": 0.06914893616656985,
+      "position": 0.655521847193072,
+      "speed": 0.03355882984016379,
       "type": "truck",
       "direction": 1
     },
     {
       "road_id": 1,
-      "position": 0.3323372884636837,
-      "speed": 0.030583304710098888,
+      "position": 0.11355295411347421,
+      "speed": 0.04933757619516908,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 1,
+      "position": 0.13789383422197354,
+      "speed": 0.041836196262127326,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.8960697292274415,
+      "speed": 0.0249398944146463,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 1,
+      "position": 0.9075096080430304,
+      "speed": 0.04463599025552499,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.939837674938797,
+      "speed": 0.07428408713715152,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.5490994288090517,
+      "speed": 0.050763005037413905,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.20621792001208572,
+      "speed": 0.0728236589761099,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 1,
+      "position": 0.34711776367557,
+      "speed": 0.02186329331496258,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 1,
+      "position": 0.7222599815130037,
+      "speed": 0.07666246972045233,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 1,
+      "position": 0.44015212708923324,
+      "speed": 0.07861883653155878,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 2,
-      "position": 0.47271242626350995,
-      "speed": 0.029345404769344753,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 2,
-      "position": 0.4399313790676693,
-      "speed": 0.03351872891529888,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 2,
-      "position": 0.2913202456972257,
-      "speed": 0.036968976488656165,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 2,
-      "position": 0.6968128071864133,
-      "speed": 0.02460827238735805,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 2,
-      "position": 0.27656393373209986,
-      "speed": 0.0642868098780909,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 2,
-      "position": 0.09920751299396413,
-      "speed": 0.06647196180119097,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 2,
-      "position": 0.04685740094656132,
-      "speed": 0.02975528909800077,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 2,
-      "position": 0.6491646797581175,
-      "speed": 0.02597930590194514,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 2,
-      "position": 0.49011715648806986,
-      "speed": 0.0754187297060041,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 2,
-      "position": 0.6807014959948408,
-      "speed": 0.04289952707562172,
+      "position": 0.6005157555002275,
+      "speed": 0.07157377447928324,
       "type": "truck",
       "direction": 1
     },
     {
       "road_id": 2,
-      "position": 0.9951827589553728,
-      "speed": 0.05283095293170213,
-      "type": "bus",
-      "direction": -1
-    },
-    {
-      "road_id": 2,
-      "position": 0.22330170239446478,
-      "speed": 0.06914159832601462,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 2,
-      "position": 0.1308223699332608,
-      "speed": 0.06854848150124629,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 2,
-      "position": 0.5430772186838202,
-      "speed": 0.023314327243604743,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 2,
-      "position": 0.019591090032120784,
-      "speed": 0.06919006648939219,
+      "position": 0.8012366929631156,
+      "speed": 0.04038488983185483,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 2,
-      "position": 0.05777725848548021,
-      "speed": 0.07183249234759312,
+      "position": 0.49512168381892774,
+      "speed": 0.05986676597996442,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.7039570391040885,
+      "speed": 0.025238000344285617,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.09109764106914742,
+      "speed": 0.06842083611287686,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.5782962706508589,
+      "speed": 0.022941246355827755,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.8483747534952857,
+      "speed": 0.05803618072615595,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.08876900341862959,
+      "speed": 0.027401988688075425,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 2,
-      "position": 0.03094058319082793,
-      "speed": 0.027140603666821476,
+      "position": 0.7372154504004482,
+      "speed": 0.052908864715328296,
       "type": "truck",
       "direction": 1
     },
     {
-      "road_id": 3,
-      "position": 0.2439605528931078,
-      "speed": 0.033361294498101705,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 3,
-      "position": 0.5373160207651801,
-      "speed": 0.046003099818970036,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 3,
-      "position": 0.29676581590021434,
-      "speed": 0.07372218475049726,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 3,
-      "position": 0.23448875156137772,
-      "speed": 0.049696190863152384,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 3,
-      "position": 0.6578659088676938,
-      "speed": 0.040273880433651064,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 3,
-      "position": 0.47564892068224984,
-      "speed": 0.07550332391272241,
+      "road_id": 2,
+      "position": 0.03557390978112318,
+      "speed": 0.042734672195150245,
       "type": "car",
       "direction": -1
     },
     {
+      "road_id": 2,
+      "position": 0.9992774576356112,
+      "speed": 0.06248637528351919,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.8903792797055351,
+      "speed": 0.03138645476403123,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.590400185125437,
+      "speed": 0.03190719423291373,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.5676081688399849,
+      "speed": 0.044442966368781915,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.5869093553332552,
+      "speed": 0.06908671030093581,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.7163897510899244,
+      "speed": 0.06268037952253863,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.5399036594825133,
+      "speed": 0.0593037254401404,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.3633445285211885,
+      "speed": 0.07720235023231894,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.3116104066391512,
+      "speed": 0.06983321811610388,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.17724254084217428,
+      "speed": 0.07821310755548021,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.6753109009541508,
+      "speed": 0.055166408877296194,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.2749812881064846,
+      "speed": 0.07067527883736503,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.9976586743208333,
+      "speed": 0.059303228843579275,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.8015696360860006,
+      "speed": 0.030980694055287764,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.7142884111323938,
+      "speed": 0.0643775389013184,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.3727668126099841,
+      "speed": 0.028075448010553092,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 2,
+      "position": 0.508768222315329,
+      "speed": 0.02533232472964967,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.6108694164254619,
+      "speed": 0.05054850541857174,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 2,
+      "position": 0.8532513959869419,
+      "speed": 0.039711205950333346,
+      "type": "truck",
+      "direction": 1
+    },
+    {
       "road_id": 3,
-      "position": 0.5543549199106043,
-      "speed": 0.02946771117286704,
+      "position": 0.4980349513484187,
+      "speed": 0.05019794386987281,
       "type": "bike",
       "direction": -1
     },
     {
       "road_id": 3,
-      "position": 0.3225072865496713,
-      "speed": 0.07390760135135627,
+      "position": 0.15343891951698618,
+      "speed": 0.04636181141061736,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 3,
+      "position": 0.1833480703261855,
+      "speed": 0.07483324024123196,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 3,
+      "position": 0.6286789367909522,
+      "speed": 0.022402351737307397,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 3,
+      "position": 0.8279805475658504,
+      "speed": 0.07010987210616954,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 3,
+      "position": 0.35243137455378015,
+      "speed": 0.05411879539735602,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 3,
+      "position": 0.37286482402270993,
+      "speed": 0.05470697508718192,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 3,
-      "position": 0.7618626505675833,
-      "speed": 0.07426967112434098,
+      "position": 0.618420595348791,
+      "speed": 0.042443451251983344,
       "type": "bus",
-      "direction": -1
-    },
-    {
-      "road_id": 3,
-      "position": 0.5023325167958516,
-      "speed": 0.02909280673669818,
-      "type": "bike",
       "direction": 1
     },
     {
       "road_id": 3,
-      "position": 0.19261054137545897,
-      "speed": 0.021107686265668425,
+      "position": 0.18855448382394568,
+      "speed": 0.038634297304351556,
       "type": "car",
       "direction": -1
     },
     {
       "road_id": 3,
-      "position": 0.9869644381220284,
-      "speed": 0.0333671091497597,
-      "type": "car",
+      "position": 0.8606073271361526,
+      "speed": 0.05437077424915403,
+      "type": "bike",
       "direction": 1
     },
     {
       "road_id": 3,
-      "position": 0.7156154485731154,
-      "speed": 0.05832773431281739,
-      "type": "car",
+      "position": 0.1659050522225476,
+      "speed": 0.06863099645596016,
+      "type": "truck",
       "direction": -1
     },
     {
       "road_id": 3,
-      "position": 0.04514899924413995,
-      "speed": 0.03557150582023464,
-      "type": "car",
+      "position": 0.18722072905902354,
+      "speed": 0.05645930861579222,
+      "type": "bus",
       "direction": 1
     },
     {
       "road_id": 3,
-      "position": 0.38992825276262344,
-      "speed": 0.07891385774542979,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 3,
-      "position": 0.5787612730421857,
-      "speed": 0.02849431108397177,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 3,
-      "position": 0.21704698153973845,
-      "speed": 0.031903940674133664,
+      "position": 0.7772077629847847,
+      "speed": 0.07984716119547398,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 3,
-      "position": 0.35947261418308396,
-      "speed": 0.05960666243700402,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 4,
-      "position": 0.22091606754021587,
-      "speed": 0.0446845565973371,
+      "position": 0.7290554700151174,
+      "speed": 0.027179912605339872,
       "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 4,
-      "position": 0.019420713937283174,
-      "speed": 0.04454803899104497,
-      "type": "truck",
       "direction": -1
     },
     {
-      "road_id": 4,
-      "position": 0.008356978816287608,
-      "speed": 0.07464262670807231,
+      "road_id": 3,
+      "position": 0.2038651830639282,
+      "speed": 0.05968376189570175,
       "type": "bus",
       "direction": -1
     },
     {
-      "road_id": 4,
-      "position": 0.36146510682560906,
-      "speed": 0.07628912771212917,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 4,
-      "position": 0.3447315597162681,
-      "speed": 0.06523479607010615,
+      "road_id": 3,
+      "position": 0.4234216987362289,
+      "speed": 0.05073735881297554,
       "type": "bike",
       "direction": 1
     },
     {
-      "road_id": 4,
-      "position": 0.3106206162829773,
-      "speed": 0.048321714157032444,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 4,
-      "position": 0.7626802779324607,
-      "speed": 0.04099561904438857,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 4,
-      "position": 0.6915555621159765,
-      "speed": 0.07649812375719514,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 4,
-      "position": 0.5730197697768475,
-      "speed": 0.03275307321191443,
+      "road_id": 3,
+      "position": 0.6838676118181916,
+      "speed": 0.04967255012311857,
       "type": "truck",
       "direction": 1
     },
     {
-      "road_id": 4,
-      "position": 0.38283452294083686,
-      "speed": 0.023988314128489722,
-      "type": "bus",
+      "road_id": 3,
+      "position": 0.42771260411460177,
+      "speed": 0.033096259279849743,
+      "type": "truck",
       "direction": -1
     },
     {
-      "road_id": 4,
-      "position": 0.25082659243358896,
-      "speed": 0.056285703674938514,
+      "road_id": 3,
+      "position": 0.07610084115445026,
+      "speed": 0.056892226985194694,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 3,
+      "position": 0.40406266322786755,
+      "speed": 0.033840047778075776,
       "type": "truck",
       "direction": 1
     },
     {
       "road_id": 4,
-      "position": 0.41467470296745623,
-      "speed": 0.03426961794328184,
+      "position": 0.6075878283985338,
+      "speed": 0.02010024673855244,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 4,
+      "position": 0.8726050895746622,
+      "speed": 0.06377721905010314,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 4,
+      "position": 0.18809821948664163,
+      "speed": 0.05613456051323608,
       "type": "car",
       "direction": -1
     },
     {
       "road_id": 4,
-      "position": 0.7078180607480792,
-      "speed": 0.06503970347502644,
+      "position": 0.660041801417624,
+      "speed": 0.04759660126010824,
       "type": "truck",
       "direction": 1
     },
     {
       "road_id": 4,
-      "position": 0.9418714909591417,
-      "speed": 0.03235373053082749,
+      "position": 0.1507301424531442,
+      "speed": 0.025434477556056573,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 4,
+      "position": 0.04543600075715759,
+      "speed": 0.043950358977027704,
       "type": "bus",
       "direction": 1
     },
     {
       "road_id": 4,
-      "position": 0.9982946110857606,
-      "speed": 0.03511843960912095,
+      "position": 0.8497489977327879,
+      "speed": 0.03560982696277261,
       "type": "car",
       "direction": -1
     },
     {
       "road_id": 4,
-      "position": 0.6004011406203563,
-      "speed": 0.025219635633341952,
+      "position": 0.4196210801646273,
+      "speed": 0.04298060382557277,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 4,
+      "position": 0.1446709967943044,
+      "speed": 0.05920577389924242,
       "type": "truck",
       "direction": 1
     },
     {
       "road_id": 4,
-      "position": 0.9044718837904359,
-      "speed": 0.07488660763251606,
-      "type": "truck",
+      "position": 0.3366220256762692,
+      "speed": 0.0282003451500965,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 4,
+      "position": 0.880782431316336,
+      "speed": 0.06474225533460395,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 4,
+      "position": 0.478972463260133,
+      "speed": 0.06551710178651432,
+      "type": "bus",
       "direction": 1
     },
     {
-      "road_id": 5,
-      "position": 0.2408427993131177,
-      "speed": 0.054099321117843505,
-      "type": "car",
+      "road_id": 4,
+      "position": 0.5165942942609609,
+      "speed": 0.07497169456436548,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 4,
+      "position": 0.05151446667524273,
+      "speed": 0.05084422637229243,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 4,
+      "position": 0.7410967078225686,
+      "speed": 0.02390896607794835,
+      "type": "bike",
       "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.46275503334725576,
-      "speed": 0.020177061041591688,
+      "position": 0.7070289467864594,
+      "speed": 0.05524196375845597,
       "type": "bike",
       "direction": 1
     },
     {
       "road_id": 5,
-      "position": 0.9646550970050883,
-      "speed": 0.046785258125951974,
+      "position": 0.8920027886360099,
+      "speed": 0.02333642991951448,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 5,
+      "position": 0.5782433202968646,
+      "speed": 0.023576478998854806,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.8282938943586227,
-      "speed": 0.04781376086831157,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.6871720809769903,
-      "speed": 0.07095677843498616,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.5879612436057995,
-      "speed": 0.04950521210389378,
+      "position": 0.6780778177856943,
+      "speed": 0.03283390476510974,
       "type": "bike",
       "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.5665119581239044,
-      "speed": 0.04512062648315163,
+      "position": 0.6798341187235094,
+      "speed": 0.061494318897919995,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 5,
-      "position": 0.8781357569321337,
-      "speed": 0.06990880828756167,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.115781287327961,
-      "speed": 0.02233145618734263,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.8039998785655434,
-      "speed": 0.04579379178437859,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.9407422019478671,
-      "speed": 0.051095930279877896,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.17075979853745182,
-      "speed": 0.06448129883511447,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.0007701407313528419,
-      "speed": 0.06357434313170003,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 5,
-      "position": 0.693053992120605,
-      "speed": 0.04131498064270337,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.5293599608096486,
-      "speed": 0.06964884320058609,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 5,
-      "position": 0.7945276977583756,
-      "speed": 0.036482704526253226,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.47295521340742996,
-      "speed": 0.0706475020091724,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.6468949672416434,
-      "speed": 0.03440174890214036,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.8618087945988577,
-      "speed": 0.02016915732788193,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.6870869668167363,
-      "speed": 0.061203512567137464,
+      "position": 0.8990981928727279,
+      "speed": 0.023466577842424136,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.6733502780196902,
-      "speed": 0.04321696611258427,
+      "position": 0.5674256933937228,
+      "speed": 0.04665939664532459,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 5,
+      "position": 0.9288977516858475,
+      "speed": 0.033239776530747715,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 5,
+      "position": 0.0007981178045081139,
+      "speed": 0.05218855082151064,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 5,
+      "position": 0.11545108066748955,
+      "speed": 0.06733556925227158,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 5,
+      "position": 0.29700593364694916,
+      "speed": 0.04307681301754613,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 5,
+      "position": 0.2531682072261151,
+      "speed": 0.030907054555738677,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 5,
+      "position": 0.6992235950733126,
+      "speed": 0.03044671190876807,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 5,
+      "position": 0.40784133525359834,
+      "speed": 0.03769370997226287,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 5,
+      "position": 0.8096724467544187,
+      "speed": 0.031237817780560805,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 5,
-      "position": 0.6988504676403514,
-      "speed": 0.04049934696805804,
+      "position": 0.8805707271812084,
+      "speed": 0.07651297473883802,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 5,
+      "position": 0.8868417255610729,
+      "speed": 0.0407151751590944,
       "type": "truck",
       "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.6142005069618844,
-      "speed": 0.043990315342640855,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 5,
-      "position": 0.14114161346158505,
-      "speed": 0.06560929201923714,
-      "type": "bike",
+      "position": 0.6606267013885713,
+      "speed": 0.07653504693991497,
+      "type": "bus",
       "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.3097482893540331,
-      "speed": 0.06997085355144624,
+      "position": 0.6791054641332502,
+      "speed": 0.030846517491264172,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 5,
+      "position": 0.859463103831761,
+      "speed": 0.021811058923598407,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 5,
+      "position": 0.1554655576973576,
+      "speed": 0.044733500520620015,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 5,
+      "position": 0.5753317718487395,
+      "speed": 0.027003405433912317,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 5,
-      "position": 0.565165264232131,
-      "speed": 0.03466365007505303,
+      "position": 0.6596847967709711,
+      "speed": 0.02649259258160802,
       "type": "bike",
-      "direction": 1
+      "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.9680711562292882,
-      "speed": 0.044628270096792086,
-      "type": "bike",
-      "direction": 1
+      "position": 0.49294580290866186,
+      "speed": 0.07555491279267966,
+      "type": "bus",
+      "direction": -1
     },
     {
       "road_id": 5,
-      "position": 0.5055519054104223,
-      "speed": 0.044862831017896246,
-      "type": "bus",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.779108946331451,
-      "speed": 0.0771949064186851,
-      "type": "bike",
-      "direction": 1
-    },
-    {
-      "road_id": 6,
-      "position": 0.5326754490131954,
-      "speed": 0.059874228084838665,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.3312059081786023,
-      "speed": 0.04449251296127425,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 6,
-      "position": 0.9095748241203904,
-      "speed": 0.05504385177360065,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 6,
-      "position": 0.9410395004148027,
-      "speed": 0.03252548125260597,
-      "type": "car",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.20968804305234623,
-      "speed": 0.05829520817968986,
-      "type": "bus",
-      "direction": 1
-    },
-    {
-      "road_id": 6,
-      "position": 0.5108663580177117,
-      "speed": 0.056797110722469804,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.24383494541978523,
-      "speed": 0.020168097370343165,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.09974032829145851,
-      "speed": 0.04287239209459538,
-      "type": "bus",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.8517031519723525,
-      "speed": 0.03981377829230965,
+      "position": 0.7918570537184877,
+      "speed": 0.02064032783907748,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 6,
-      "position": 0.5415845185668637,
-      "speed": 0.0479020462109338,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.5010973575312542,
-      "speed": 0.024808346030810068,
-      "type": "bike",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.2507783687900813,
-      "speed": 0.030218227057563232,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 6,
-      "position": 0.5620755472764919,
-      "speed": 0.037829726576602725,
+      "position": 0.15614165013908943,
+      "speed": 0.06728455997872161,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 6,
-      "position": 0.5301067072751122,
-      "speed": 0.05787774555150932,
+      "position": 0.8269300665590101,
+      "speed": 0.06775630465764772,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 6,
+      "position": 0.8720203050263339,
+      "speed": 0.02186670371760192,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 6,
+      "position": 0.12156558369930126,
+      "speed": 0.034204587167758274,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 6,
+      "position": 0.8901636314424152,
+      "speed": 0.06425396653999899,
+      "type": "car",
+      "direction": -1
+    },
+    {
+      "road_id": 6,
+      "position": 0.7619813700897006,
+      "speed": 0.07916415928738336,
+      "type": "truck",
+      "direction": 1
+    },
+    {
+      "road_id": 6,
+      "position": 0.6684495279664424,
+      "speed": 0.043733263101673706,
       "type": "bike",
       "direction": -1
     },
     {
       "road_id": 6,
-      "position": 0.6608950935743478,
-      "speed": 0.02747775860353467,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 6,
-      "position": 0.4635945843557475,
-      "speed": 0.028321903995365008,
-      "type": "truck",
+      "position": 0.2689379703547027,
+      "speed": 0.062397798431055626,
+      "type": "car",
       "direction": 1
     },
     {
       "road_id": 6,
-      "position": 0.6034315488171721,
-      "speed": 0.036350531402959185,
-      "type": "truck",
+      "position": 0.4851039855502556,
+      "speed": 0.03267543933205297,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 6,
+      "position": 0.9123043124373488,
+      "speed": 0.07945779152594548,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 6,
+      "position": 0.891794562947968,
+      "speed": 0.07292817108779717,
+      "type": "bike",
       "direction": 1
     },
     {
       "road_id": 6,
-      "position": 0.016185331609952613,
-      "speed": 0.07024489655203914,
+      "position": 0.525755398886018,
+      "speed": 0.06796924847079697,
       "type": "truck",
       "direction": -1
     },
     {
       "road_id": 6,
-      "position": 0.40814061058723416,
-      "speed": 0.03550838278512197,
-      "type": "truck",
+      "position": 0.0038328980288038217,
+      "speed": 0.046841608125828334,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 6,
+      "position": 0.9473158975124174,
+      "speed": 0.04597762482565311,
+      "type": "car",
+      "direction": 1
+    },
+    {
+      "road_id": 6,
+      "position": 0.46715910147468287,
+      "speed": 0.07377998133777397,
+      "type": "car",
       "direction": -1
     },
     {
       "road_id": 6,
-      "position": 0.7173323519725934,
-      "speed": 0.024162088352528567,
-      "type": "truck",
+      "position": 0.9573600797332499,
+      "speed": 0.042712461795403764,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 6,
+      "position": 0.4859515954759459,
+      "speed": 0.03815525237418296,
+      "type": "bike",
       "direction": 1
     },
     {
       "road_id": 7,
-      "position": 0.16096827345191422,
-      "speed": 0.0755712103162491,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 7,
-      "position": 0.13285931501213566,
-      "speed": 0.029716553306238836,
-      "type": "truck",
-      "direction": 1
-    },
-    {
-      "road_id": 7,
-      "position": 0.8218340003073306,
-      "speed": 0.07747833615007353,
+      "position": 0.9715124694761037,
+      "speed": 0.0412731489175248,
       "type": "bus",
       "direction": -1
     },
     {
       "road_id": 7,
-      "position": 0.23359074135119573,
-      "speed": 0.07468743314426815,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 7,
-      "position": 0.6955498454401174,
-      "speed": 0.02361610807402431,
-      "type": "truck",
-      "direction": -1
-    },
-    {
-      "road_id": 7,
-      "position": 0.035904734612003275,
-      "speed": 0.04242845347629405,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 7,
-      "position": 0.37131388993942327,
-      "speed": 0.07364738764906169,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 7,
-      "position": 0.13401837087382185,
-      "speed": 0.05187268151620504,
-      "type": "car",
-      "direction": 1
-    },
-    {
-      "road_id": 7,
-      "position": 0.21528055026990345,
-      "speed": 0.04277336601970176,
+      "position": 0.034781168669228535,
+      "speed": 0.05950923943152975,
       "type": "car",
       "direction": -1
     },
     {
       "road_id": 7,
-      "position": 0.13247447071235519,
-      "speed": 0.07521887365059882,
-      "type": "truck",
+      "position": 0.7062058589871588,
+      "speed": 0.07650348918049621,
+      "type": "car",
       "direction": 1
     },
     {
       "road_id": 7,
-      "position": 0.46558815400242004,
-      "speed": 0.02217451737378712,
+      "position": 0.9750794395093978,
+      "speed": 0.06278956255909324,
       "type": "bike",
       "direction": -1
     },
     {
       "road_id": 7,
-      "position": 0.5883796434466274,
-      "speed": 0.02293257921446235,
+      "position": 0.8106328885028546,
+      "speed": 0.03882624977764816,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 7,
+      "position": 0.16181049514585333,
+      "speed": 0.028130164403915598,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.24480132797651954,
+      "speed": 0.04322090296581543,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.015368888885752052,
+      "speed": 0.049873502364089516,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.2699466326131428,
+      "speed": 0.02199810441119569,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.8773510034253801,
+      "speed": 0.022395838314382188,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 7,
-      "position": 0.13658680909379606,
-      "speed": 0.06588782332062444,
+      "position": 0.15705820051848718,
+      "speed": 0.030775977802848322,
       "type": "car",
       "direction": 1
     },
     {
       "road_id": 7,
-      "position": 0.022681420665240926,
-      "speed": 0.033333846934454396,
+      "position": 0.008097037734495549,
+      "speed": 0.02000111613237923,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 7,
+      "position": 0.428237950143991,
+      "speed": 0.04928949189062344,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.20823017609644412,
+      "speed": 0.02258694523112874,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 7,
+      "position": 0.9824603831615327,
+      "speed": 0.03289932762934049,
+      "type": "truck",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.8294588502014383,
+      "speed": 0.03251958249565696,
+      "type": "bike",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.8681220004659359,
+      "speed": 0.037887434909355096,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 7,
+      "position": 0.21550391734102803,
+      "speed": 0.06387770266706667,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 7,
+      "position": 0.34528796010834717,
+      "speed": 0.07465729130914059,
+      "type": "bus",
+      "direction": 1
+    },
+    {
+      "road_id": 7,
+      "position": 0.855264364014967,
+      "speed": 0.037305145129085365,
+      "type": "bike",
+      "direction": 1
+    },
+    {
+      "road_id": 7,
+      "position": 0.9162705500590574,
+      "speed": 0.024866051994548638,
       "type": "car",
       "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.8402479509104964,
+      "speed": 0.02344727926609106,
+      "type": "bus",
+      "direction": -1
+    },
+    {
+      "road_id": 7,
+      "position": 0.316256922809267,
+      "speed": 0.05515196057712361,
+      "type": "car",
+      "direction": 1
     }
   ],
   "billboards": [
     {
-      "x": -163.95705121818975,
-      "z": -231.30356442381543,
+      "x": -202.02875167157768,
+      "z": -227.0026053461625,
       "text": "evolve Sector",
-      "size": 9.123022818674752,
-      "neon": true
-    },
-    {
-      "x": -125.32585359613633,
-      "z": -232.48137153645504,
-      "text": "evolve Sector",
-      "size": 7.720224531829125,
-      "neon": true
-    },
-    {
-      "x": -148.85987799516082,
-      "z": -205.96817861000739,
-      "text": "evolve Sector",
-      "size": 7.457845319174051,
-      "neon": true
-    },
-    {
-      "x": -187.7515359201874,
-      "z": -187.56076907822134,
-      "text": "evolve Sector",
-      "size": 8.652586233767064,
-      "neon": true
-    },
-    {
-      "x": -164.17396464634982,
-      "z": -165.28670658602024,
-      "text": "evolve Sector",
-      "size": 6.214812988447926,
-      "neon": true
-    },
-    {
-      "x": -87.42674266081579,
-      "z": -170.94185837172583,
-      "text": "evolve Sector",
-      "size": 6.687031918172789,
+      "size": 5.894826520232284,
       "neon": false
     },
     {
-      "x": -231.85606410850278,
-      "z": -154.21678542070035,
+      "x": -183.89461228174622,
+      "z": -225.94140855166975,
       "text": "evolve Sector",
-      "size": 8.156980958654334,
+      "size": 9.437680310320236,
+      "neon": true
+    },
+    {
+      "x": -136.65547038917754,
+      "z": -229.455231285554,
+      "text": "evolve Sector",
+      "size": 5.536427087206459,
       "neon": false
     },
     {
-      "x": -195.66234297707368,
-      "z": -146.8917114521844,
+      "x": -116.64182375405917,
+      "z": -232.2453167734333,
       "text": "evolve Sector",
-      "size": 5.605233675113641,
+      "size": 7.533251701726353,
+      "neon": true
+    },
+    {
+      "x": -216.98906037841994,
+      "z": -188.89377758688113,
+      "text": "evolve Sector",
+      "size": 7.839169136550894,
+      "neon": true
+    },
+    {
+      "x": -186.21252872699114,
+      "z": -194.26733412918236,
+      "text": "evolve Sector",
+      "size": 9.65253977178813,
       "neon": false
     },
     {
-      "x": -186.06826573644253,
-      "z": -147.25067111148712,
-      "text": "evolve Sector",
-      "size": 7.660759328616134,
-      "neon": false
-    },
-    {
-      "x": -176.75209615034225,
-      "z": 116.70344905327161,
-      "text": "evolve Sector",
-      "size": 8.481619123113765,
+      "x": -153.52956163403647,
+      "z": 119.44240156968411,
+      "text": "index Sector",
+      "size": 8.3513079249534,
       "neon": true
     }
   ],
   "stats": {
     "urban_density": "56 structures",
     "district_count": 3,
-    "traffic_level": 152,
-    "green_space": 20,
+    "traffic_level": 159,
+    "green_space": 15,
     "mainframe_health": "Stable",
     "system_load": "40%",
-    "last_evolution": "2026-02-20 05:04 IST",
-    "population": 6048,
-    "happiness": 67,
-    "cycle_id": "22212075902"
+    "last_evolution": "2026-02-20 06:13 IST",
+    "population": 8512,
+    "happiness": 63,
+    "cycle_id": "22213577815"
   }
 }
